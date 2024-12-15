@@ -1,0 +1,97 @@
+package com.guidal.data.db
+
+import android.util.Log
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
+// TODO KDoc
+internal class Callback() : RoomDatabase.Callback() {
+    @OptIn(DelicateCoroutinesApi::class)
+    override fun onCreate(db: SupportSQLiteDatabase) {
+        super.onCreate(db)
+        GlobalScope.launch {
+            insertInitialData(db)
+        }
+    }
+
+    private fun insertInitialData(db: SupportSQLiteDatabase) {
+        try {
+            // Initial gender values
+            // Check if gender data already exists to prevent duplicate inserts
+            val cursor0 = db.query("SELECT COUNT(*) FROM gender")
+            cursor0.moveToFirst()
+            val count0 = cursor0.getInt(0)
+            cursor0.close()
+
+            if (count0 == 0) {
+                // Insert initial gender table values
+                db.execSQL("""
+                    INSERT INTO gender (id, name) 
+                    VALUES 
+                        (0, 'Other'),
+                        (1, 'Male'),
+                        (2, 'Female')
+                """)
+            }
+
+            // Initial country values
+            // Check if country data already exists to prevent duplicate inserts
+            val cursor1 = db.query("SELECT COUNT(*) FROM country")
+            cursor1.moveToFirst()
+            val count1 = cursor1.getInt(0)
+            cursor1.close()
+
+            if (count1 == 0) {
+                // Insert initial country table values
+                db.execSQL("""
+                    INSERT INTO country (id, name) 
+                    VALUES 
+                        (0, 'Other'),
+                        (1, 'Lithuania'),
+                        (2, 'Greece')
+                """)
+            }
+
+            // Initial role values
+            // Check if role data already exists to prevent duplicate inserts
+            val cursor2 = db.query("SELECT COUNT(*) FROM role")
+            cursor2.moveToFirst()
+            val count2 = cursor2.getInt(0)
+            cursor2.close()
+
+            if (count2 == 0) {
+                // Insert initial role table values
+                db.execSQL("""
+                    INSERT INTO role (id, name) 
+                    VALUES 
+                        (0, 'Guest'),
+                        (1, 'User'),
+                        (2, 'Administrator')
+                """)
+            }
+
+            // Initial user values
+            // Check if user data already exists to prevent duplicate insert
+            val cursor3 = db.query("SELECT COUNT(*) FROM user WHERE email = 'guest@guidal.eu'")
+            cursor3.moveToFirst()
+            val count3 = cursor3.getInt(0)
+            cursor3.close()
+
+            if (count3 == 0) {
+                // Insert initial guest user using SQL
+                db.execSQL("""
+                    INSERT INTO user (id, name, surname, email, gender_id, country_id, password, role_id) 
+                    VALUES 
+                        ('00000000-0000-0000-0000-000000000000', 'Guest', '', 'guest@guidal.eu', 0, 0, 'donotshare', 0),
+                        ('99999999-9999-9999-9999-999999999999', 'Guidal', 'Patras', 'admin@guidal.eu', 1, 2, 'seriouslydonotshare', 2)
+                """)
+            }
+
+        } catch (e: Exception) {
+            Log.e("Callback", "Error inserting initial data", e)
+        }
+    }
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Universal Colors -->
+    <color name="primary">#FFFFBF00</color>
+    <color name="onPrimary">#FFF6F6F6</color>
+    <color name="error">#FFFF2727</color>
+    <color name="onError">#FFF6F6F6</color>
+
+    <!-- Light Theme Colors -->
+    <color name="lightThemeSurfaceDim">#FFEBECF0</color>
+    <color name="lightThemeSurface">#FFF7F8FA</color>
+    <color name="lightThemeSurfaceBright">#FFFFFFFF</color>
+    <color name="lightThemeOnSurface">#FF404040</color>
+    <color name="lightThemeOnSurfaceVariant">#FFD8D8D8</color>
+
+    <!-- Dark Theme Colors -->
+    <color name="darkThemeSurfaceDim">#FF2B2B2B</color>
+    <color name="darkThemeSurface">#FF1F1F1F</color>
+    <color name="darkThemeSurfaceBright">#FF181818</color>
+    <color name="darkThemeOnSurface">#FFF6F6F6</color>
+    <color name="darkThemeOnSurfaceVariant">#FF757575</color>
+</resources>
