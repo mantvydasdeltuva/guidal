@@ -89,15 +89,11 @@ fun AuthenticationScreen(
                 snackbar = { data -> Snackbar(data) }
             )
         },
-        contentWindowInsets = WindowInsets(0, 0, 0, 0),
-        modifier = modifier
-            .systemBarsPadding()
     ) { innerPadding ->
         Box(
             modifier = modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .consumeWindowInsets(innerPadding)
         ) {
             Column(
                 modifier = Modifier

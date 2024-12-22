@@ -107,16 +107,12 @@ fun SignupScreen(
                 snackbar = { data -> Snackbar(data) }
             )
         },
-        contentWindowInsets = WindowInsets(0, 0, 0, 0),
-        modifier = modifier
-            .systemBarsPadding()
     ) { innerPadding ->
         // Scrollable screen
         Column(
             modifier = modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .consumeWindowInsets(innerPadding)
                 .imePadding()
                 .padding(horizontal = 20.dp)
                 .verticalScroll(scrollState)
