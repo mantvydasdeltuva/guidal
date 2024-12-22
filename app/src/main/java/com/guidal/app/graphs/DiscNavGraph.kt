@@ -8,17 +8,17 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.guidal.feature.home.main.MainScreen
+import com.guidal.feature.discover.main.MainScreen
 
 // TODO KDoc
 // TODO Android test
-internal fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
+internal fun NavGraphBuilder.discoverNavigationGraph(navController: NavController) {
     navigation(
-        route = Graph.HOME,
-        startDestination = Route.HOME
+        route = Graph.DISCOVER,
+        startDestination = Route.DISCOVER
     ) {
         composable(
-            route = Route.HOME,
+            route = Route.DISCOVER,
             enterTransition = {
                 val initialRoute = this.initialState.destination.route
                 when (initialRoute) {

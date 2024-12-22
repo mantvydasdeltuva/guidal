@@ -48,6 +48,8 @@ dependencies {
     implementation(projects.data)
     implementation(project(":feature:authentication"))
     implementation(project(":feature:home"))
+    implementation(project(":feature:discover"))
+    implementation(project(":feature:menu"))
 
     // Compose BOM Handles Compose Dependencies Versions
     implementation(platform(libs.androidx.compose.bom))
