@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt.android)
@@ -7,17 +7,14 @@ plugins {
 }
 
 android {
-    namespace = "com.guidal.app"
+    namespace = "com.guidal.feature.menu"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.guidal.app"
         minSdk = 26
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -45,11 +42,8 @@ dependencies {
 
     // Modules
     implementation(project(":core:ui"))
+    implementation(project(":core:utils"))
     implementation(projects.data)
-    implementation(project(":feature:authentication"))
-    implementation(project(":feature:home"))
-    implementation(project(":feature:discover"))
-    implementation(project(":feature:menu"))
 
     // Compose BOM Handles Compose Dependencies Versions
     implementation(platform(libs.androidx.compose.bom))
@@ -67,6 +61,7 @@ dependencies {
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     // Other
     implementation(libs.androidx.core.ktx)

@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.guidal.home"
+    namespace = "com.guidal.feature.home"
     compileSdk = 35
 
     defaultConfig {
