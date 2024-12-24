@@ -85,7 +85,13 @@ internal fun NavGraphBuilder.menuNavigationGraph(navController: NavController) {
             MainScreen(
                 toProfile = {
                     navController.navigate(Route.PROFILE)
-                }
+                },
+
+                // TODO Implement navigation to (settings, privacy, about, support)
+                toSettings = {},
+                toPrivacy = {},
+                toAbout = {},
+                toSupport = {}
             )
         }
         composable(
