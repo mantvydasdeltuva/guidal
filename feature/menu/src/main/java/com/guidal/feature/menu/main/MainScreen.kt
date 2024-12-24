@@ -14,9 +14,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.guidal.core.ui.R
+import com.guidal.feature.menu.R
 import com.guidal.core.ui.components.MenuButton
 import com.guidal.core.ui.components.Scaffold
 import com.guidal.core.ui.components.TopAppBar
@@ -53,6 +54,7 @@ fun MainScreen(
     Scaffold(
         topBar = {
             TopAppBar(
+                // TODO: Extract string resource from title
                 title = "Welcome, ${user.value?.name}${user.value?.surname?.takeIf { it.isNotEmpty() }?.let { " $it" } ?: ""}!",
                 navigationIcon = UiModelTopAppBarIcon(
                     icon = GuidalIcons.Default.Guidal,
@@ -75,7 +77,7 @@ fun MainScreen(
 
             // Profile
             MenuButton(
-                label = "Profile",
+                label = stringResource(R.string.main_menu_button_label_profile),
                 onClick = {
                     mainViewModel.onNavigation()
                     toProfile()
@@ -86,13 +88,13 @@ fun MainScreen(
                 ),
                 trailingIcon = UiModelMenuButtonIcon(
                     imageVector = GuidalIcons.Default.ChevronForward,
-                    size = dimensionResource(R.dimen.icon_size_12)
+                    size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_12)
                 )
             )
 
             // Settings
             MenuButton(
-                label = "Settings",
+                label = stringResource(R.string.main_menu_button_label_settings),
                 onClick = {
                     mainViewModel.onNavigation()
                     toSettings()
@@ -103,13 +105,13 @@ fun MainScreen(
                 ),
                 trailingIcon = UiModelMenuButtonIcon(
                     imageVector = GuidalIcons.Default.ChevronForward,
-                    size = dimensionResource(R.dimen.icon_size_12)
+                    size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_12)
                 )
             )
 
             // Privacy
             MenuButton(
-                label = "Privacy",
+                label = stringResource(R.string.main_menu_button_label_privacy),
                 onClick = {
                     mainViewModel.onNavigation()
                     toPrivacy()
@@ -120,13 +122,13 @@ fun MainScreen(
                 ),
                 trailingIcon = UiModelMenuButtonIcon(
                     imageVector = GuidalIcons.Default.ChevronForward,
-                    size = dimensionResource(R.dimen.icon_size_12)
+                    size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_12)
                 )
             )
 
             // About
             MenuButton(
-                label = "About",
+                label = stringResource(R.string.main_menu_button_label_about),
                 onClick = {
                     mainViewModel.onNavigation()
                     toAbout()
@@ -137,13 +139,13 @@ fun MainScreen(
                 ),
                 trailingIcon = UiModelMenuButtonIcon(
                     imageVector = GuidalIcons.Default.ChevronForward,
-                    size = dimensionResource(R.dimen.icon_size_12)
+                    size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_12)
                 )
             )
 
             // Support
             MenuButton(
-                label = "Support",
+                label = stringResource(R.string.main_menu_button_label_support),
                 onClick = {
                     mainViewModel.onNavigation()
                     toSupport()
@@ -154,7 +156,7 @@ fun MainScreen(
                 ),
                 trailingIcon = UiModelMenuButtonIcon(
                     imageVector = GuidalIcons.Default.ChevronForward,
-                    size = dimensionResource(R.dimen.icon_size_12)
+                    size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_12)
                 )
             )
         }
