@@ -40,7 +40,11 @@ object GuidalIcons {
         val Home: ImageVector,
         val Discover: ImageVector,
         val Menu: ImageVector,
-        val Person: ImageVector
+        val Profile: ImageVector,
+        val Settings: ImageVector,
+        val Privacy: ImageVector,
+        val About: ImageVector,
+        val Support: ImageVector
     )
 
     lateinit var Default: DefaultIcons
@@ -65,7 +69,11 @@ object GuidalIcons {
             Home = ImageVector.vectorResource(R.drawable.home_outlined_icon),
             Discover = ImageVector.vectorResource(R.drawable.discover_outlined_icon),
             Menu = ImageVector.vectorResource(R.drawable.menu_outlined_icon),
-            Person = ImageVector.vectorResource(R.drawable.person_outlined_icon)
+            Profile = ImageVector.vectorResource(R.drawable.profile_outlined_icon),
+            Settings = ImageVector.vectorResource(R.drawable.settings_outlined_icon),
+            Privacy = ImageVector.vectorResource(R.drawable.privacy_outlined_icon),
+            About = ImageVector.vectorResource(R.drawable.about_outlined_icon),
+            Support = ImageVector.vectorResource(R.drawable.support_outlined_icon)
         )
     }
 }
