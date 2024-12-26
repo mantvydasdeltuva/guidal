@@ -53,7 +53,7 @@ object GuidalIcons {
         val Redirect: ImageVector
     )
 
-    data class LanguageIcons(
+    data class CountryIcons(
         val Other: ImageVector,
         val Greece: ImageVector,
         val Lithuania: ImageVector
@@ -67,7 +67,7 @@ object GuidalIcons {
 
     lateinit var Default: DefaultIcons
     lateinit var Outlined: OutlinedIcons
-    lateinit var Language: LanguageIcons
+    lateinit var Country: CountryIcons
     lateinit var Gender: GenderIcons
 
     @Composable
@@ -102,7 +102,7 @@ object GuidalIcons {
             Redirect = ImageVector.vectorResource(R.drawable.redirect_outlined_icon)
         )
 
-        Language = LanguageIcons(
+        Country = CountryIcons(
             Other = ImageVector.vectorResource(R.drawable.language_other_icon),
             Greece = ImageVector.vectorResource(R.drawable.language_greece_icon),
             Lithuania = ImageVector.vectorResource(R.drawable.language_lithuania_icon)
