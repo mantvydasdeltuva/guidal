@@ -9,37 +9,39 @@ import com.guidal.data.db.models.UserModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.util.UUID
+import javax.inject.Inject
 
 // TODO KDoc when finalized
 // TODO (Unit?Android) test
+class DataStoreUtils @Inject constructor(
+    private val context: Context
+) {
+    private val Context.userDataStore by preferencesDataStore(name = "user_prefs")
 
-val Context.dataStore by preferencesDataStore(name = "user_prefs")
+    private val USER_ID_KEY = stringPreferencesKey("user_id")
+    private val USER_NAME_KEY = stringPreferencesKey("user_name")
+    private val USER_SURNAME_KEY = stringPreferencesKey("user_surname")
+    private val USER_EMAIL_KEY = stringPreferencesKey("user_email")
+    private val USER_GENDER_KEY = stringPreferencesKey("user_gender")
+    private val USER_COUNTRY_KEY = stringPreferencesKey("user_country")
+    private val USER_PASSWORD_KEY = stringPreferencesKey("user_password")
+    private val USER_ROLE_KEY = stringPreferencesKey("user_role")
 
-val USER_ID_KEY = stringPreferencesKey("user_id")
-val USER_NAME_KEY = stringPreferencesKey("user_name")
-val USER_SURNAME_KEY = stringPreferencesKey("user_surname")
-val USER_EMAIL_KEY = stringPreferencesKey("user_email")
-val USER_GENDER_KEY = stringPreferencesKey("user_gender")
-val USER_COUNTRY_KEY = stringPreferencesKey("user_country")
-val USER_PASSWORD_KEY = stringPreferencesKey("user_password")
-val USER_ROLE_KEY = stringPreferencesKey("user_role")
-
-suspend fun saveUserToDataStore(context: Context, user: UserModel) {
-    context.dataStore.edit { preferences ->
-        preferences[USER_ID_KEY] = user.id.toString().orDefault("")
-        preferences[USER_NAME_KEY] = user.name
-        preferences[USER_SURNAME_KEY] = user.surname.orDefault("")
-        preferences[USER_EMAIL_KEY] = user.email
-        preferences[USER_GENDER_KEY] = user.gender.orDefault("")
-        preferences[USER_COUNTRY_KEY] = user.country.orDefault("")
-        preferences[USER_PASSWORD_KEY] = user.password
-        preferences[USER_ROLE_KEY] = user.role.orDefault("")
+    suspend fun saveUser(user: UserModel) {
+        context.userDataStore.edit { preferences ->
+            preferences[USER_ID_KEY] = user.id.toString().orDefault("")
+            preferences[USER_NAME_KEY] = user.name
+            preferences[USER_SURNAME_KEY] = user.surname.orDefault("")
+            preferences[USER_EMAIL_KEY] = user.email
+            preferences[USER_GENDER_KEY] = user.gender.orDefault("")
+            preferences[USER_COUNTRY_KEY] = user.country.orDefault("")
+            preferences[USER_PASSWORD_KEY] = user.password
+            preferences[USER_ROLE_KEY] = user.role.orDefault("")
+        }
     }
-}
 
-fun getUserFromDataStore(context: Context): Flow<UserModel> {
-    return context.dataStore.data
-        .map { preferences ->
+    fun getUser(): Flow<UserModel?> {
+        return context.userDataStore.data.map { preferences ->
             val id = UUID.fromString(preferences[USER_ID_KEY] ?: "")
             val name = preferences[USER_NAME_KEY] ?: ""
             val surname = preferences[USER_SURNAME_KEY] ?: ""
@@ -50,4 +52,5 @@ fun getUserFromDataStore(context: Context): Flow<UserModel> {
             val role = preferences[USER_ROLE_KEY] ?: ""
             UserModel(id, name, surname, email, gender, country, password, role)
         }
+    }
 }

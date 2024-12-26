@@ -1,5 +1,7 @@
 package com.guidal.data.di
 
+import android.app.Application
+import com.guidal.data.utils.DataStoreUtils
 import com.guidal.data.utils.DatabaseOperationUtils
 import dagger.Module
 import dagger.Provides
@@ -19,5 +21,16 @@ internal object UtilsModule {
     @Singleton
     internal fun provideDatabaseOperationUtils(): DatabaseOperationUtils {
         return DatabaseOperationUtils()
+    }
+
+
+    /*
+     *  Data store
+     */
+
+    @Provides
+    @Singleton
+    internal fun provideDataStoreUtils(context: Application): DataStoreUtils {
+        return DataStoreUtils(context)
     }
 }
