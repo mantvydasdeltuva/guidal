@@ -5,13 +5,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
@@ -31,7 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -52,7 +48,6 @@ import com.guidal.core.ui.components.TopAppBar
 import com.guidal.core.ui.models.UiModelTopAppBarIcon
 import com.guidal.core.ui.theme.GuidalIcons
 import com.guidal.core.ui.theme.GuidalTheme
-import com.guidal.data.utils.saveUserToDataStore
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -75,8 +70,6 @@ fun LoginScreen(
     val passwordFocusRequester = remember { FocusRequester() }
     val buttonBringIntoViewRequester = remember { BringIntoViewRequester() }
 
-    val context = LocalContext.current
-
     // Checks
     LaunchedEffect(uiState) {
         when (val state = uiState) {
@@ -84,7 +77,6 @@ fun LoginScreen(
                 snackbarHostState.showSnackbar(state.message, withDismissAction = true)
             }
             is LoginUiState.Success -> {
-                saveUserToDataStore(context, state.user)
                 toHome()
             }
             else -> {}
