@@ -1,7 +1,14 @@
 package com.guidal.core.ui.components
 
+import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -14,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
@@ -34,43 +42,56 @@ fun BottomAppBar(
     onItemClick: (index: Int) -> Unit = {},
 ) {
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = Modifier.fillMaxWidth()
     ) {
-        // Top border
         HorizontalDivider()
         NavigationBar(
             containerColor = MaterialTheme.colorScheme.surfaceBright,
             contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = modifier
-                .padding(top = 2.dp) // For top border
+                .padding(top = 2.dp)
+                .height(65.dp)
+
         ) {
             items.forEachIndexed { index, item ->
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            imageVector = if (selectedItemIndex == index) item.selectedIcon else item.unselectedIcon,
-                            contentDescription = item.label,
-                            modifier = Modifier.size(dimensionResource(R.dimen.icon_size_24))
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = LocalIndication.current,
+                            onClick = { onItemClick(index) }
                         )
-                    },
-                    colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = MaterialTheme.colorScheme.primary,
-                        selectedTextColor = MaterialTheme.colorScheme.primary,
-                        indicatorColor = Color.Transparent,
-                        disabledIconColor = MaterialTheme.colorScheme.primary,
-                        disabledTextColor = MaterialTheme.colorScheme.primary
-                    ),
-                    label = {
-                        Text(
-                            text = item.label,
-                            style = MaterialTheme.typography.labelLarge
+                        .background(
+                            Color.Transparent,
                         )
-                    },
-                    selected = selectedItemIndex == index,
-                    enabled = item.enabled,
-                    onClick = { onItemClick(index) }
-                )
+                        .padding(top = 10.dp)
+                ) {
+                    Icon(
+                        imageVector = if (selectedItemIndex == index)
+                            item.selectedIcon
+                        else
+                            item.unselectedIcon,
+                        contentDescription = item.label,
+                        modifier = Modifier
+                            .size(dimensionResource(R.dimen.icon_size_20)),
+                        tint = if (selectedItemIndex == index)
+                            MaterialTheme.colorScheme.primary
+                        else
+                            MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        text = item.label,
+                        style = MaterialTheme.typography.labelLarge,
+                        modifier = Modifier.padding(top = 5.dp),
+                        color = if (selectedItemIndex == index)
+                            MaterialTheme.colorScheme.primary
+                        else
+                            MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
         }
     }

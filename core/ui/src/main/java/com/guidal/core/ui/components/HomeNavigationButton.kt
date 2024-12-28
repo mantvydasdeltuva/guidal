@@ -45,64 +45,60 @@ fun HomeNavigationButton(
 
     Column(
         modifier = modifier
+            .fillMaxWidth()
             .width(150.dp)
-            .height(150.dp)
-            .background(
-                if (interactionSource.collectIsPressedAsState().value && enabled)
-                    MaterialTheme.colorScheme.surface
-                else MaterialTheme.colorScheme.surfaceBright
-            )
-            .clickable(
-                interactionSource = interactionSource,
+            .clickable(interactionSource = interactionSource,
                 indication = null,
                 role = Role.Button,
-                onClick = { if (enabled) onClick() }
+                onClick = { if (enabled) onClick() })
+            .background(
+                MaterialTheme.colorScheme.surfaceBright
             )
+            .padding(all = 10.dp),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f),
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            sectionIcon?.let {
-                Box(
-                    modifier = Modifier
-                        .size(80.dp)
-                        .border(
-                            width = 1.dp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            shape = RoundedCornerShape(16.dp)
-                        )
-                        .padding(16.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = it.imageVector,
-                        contentDescription = it.contentDescription,
-                        tint = it.tint ?: MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(32.dp)
+        sectionIcon?.let {
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        shape = RoundedCornerShape(16.dp)
                     )
-                }
+                    .background(
+                        if (interactionSource.collectIsPressedAsState().value && enabled) MaterialTheme.colorScheme.surface
+                        else MaterialTheme.colorScheme.surfaceBright,
+                        shape = RoundedCornerShape(16.dp)
+                    )
+                    .padding(16.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = it.imageVector,
+                    contentDescription = it.contentDescription,
+                    tint = it.tint ?: MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.size(32.dp)
+                )
             }
-
-            Text(
-                text = label,
-                color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.titleSmall,
-                modifier = Modifier
-                    .padding(top = 8.dp) // Adjust spacing between icon and label
-            )
-
-            Text(
-                text = type,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier
-                    .padding(top = 4.dp)
-            )
         }
+
+        // Label
+        Text(
+            text = label,
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.titleSmall,
+            modifier = Modifier.padding(top = 8.dp) // Adjust spacing between icon and label
+        )
+
+        // Type
+        Text(
+            text = type,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier.padding(top = 4.dp)
+        )
     }
 }
 
@@ -115,8 +111,7 @@ private fun PreviewHomeNavigationButton() {
             type = "Post",
             onClick = {},
             sectionIcon = UiModelMenuButtonIcon(
-                imageVector = GuidalIcons.Outlined.Profile,
-                size = dimensionResource(R.dimen.icon_size_24)
+                imageVector = GuidalIcons.Outlined.Profile
             ),
         )
     }
