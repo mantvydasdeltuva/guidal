@@ -8,11 +8,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -24,8 +22,6 @@ import com.guidal.core.ui.components.TopAppBar
 import com.guidal.core.ui.models.UiModelMenuButtonIcon
 import com.guidal.core.ui.models.UiModelTopAppBarIcon
 import com.guidal.core.ui.theme.GuidalIcons
-import com.guidal.data.db.models.UserModel
-import com.guidal.data.utils.getUserFromDataStore
 
 @Composable
 fun MainScreen(
@@ -39,10 +35,6 @@ fun MainScreen(
     val mainViewModel: MainViewModel = viewModel()
     val uiState by mainViewModel.uiState.collectAsState()
 
-    // User context
-    val context = LocalContext.current
-    val user: State<UserModel?> = getUserFromDataStore(context).collectAsState(null)
-
     // Component related
     val scrollState = rememberScrollState()
 
@@ -54,8 +46,9 @@ fun MainScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                // TODO: Extract string resource from title
-                title = "Welcome, ${user.value?.name}${user.value?.surname?.takeIf { it.isNotEmpty() }?.let { " $it" } ?: ""}!",
+                // TODO: Fix me! Use UserModel in uiState and DataStoreUtils in viewModel
+//                title = "Welcome, ${user.value?.name}${user.value?.surname?.takeIf { it.isNotEmpty() }?.let { " $it" } ?: ""}!",
+                title = "Welcome!",
                 navigationIcon = UiModelTopAppBarIcon(
                     icon = GuidalIcons.Default.Guidal,
                     onClick = { },

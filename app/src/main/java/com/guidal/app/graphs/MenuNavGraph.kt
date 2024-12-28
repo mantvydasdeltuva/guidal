@@ -120,7 +120,14 @@ internal fun NavGraphBuilder.menuNavigationGraph(navController: NavController) {
             ProfileScreen(
                 toBack = {
                     navController.popBackStack()
-                }
+                },
+
+                // TODO Implement navigation to (name&surname, email, password, gender, country)
+                toNameSurname = {},
+                toEmail = {},
+                toPassword = {},
+                toGender = {},
+                toCountry = {}
             )
         }
     }

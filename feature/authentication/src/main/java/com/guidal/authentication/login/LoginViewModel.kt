@@ -3,6 +3,7 @@ package com.guidal.authentication.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.guidal.data.db.repositories.UserRepository
+import com.guidal.data.utils.DataStoreUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +15,8 @@ import javax.inject.Inject
 // TODO Extract string resources
 @HiltViewModel
 internal class LoginViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val dataStoreUtils: DataStoreUtils
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<LoginUiState>(
         value = LoginUiState.Idle()
@@ -55,7 +57,9 @@ internal class LoginViewModel @Inject constructor(
                 password = _uiState.value.password
             ).onSuccess { user ->
                 _uiState.update {
-                    it.transformTo<LoginUiState.Success>(user = user)
+                    it.transformTo<LoginUiState.Success>(user = user).also { state ->
+                        dataStoreUtils.saveUser(state.user)
+                    }
                 }
             }.onFailure { exception ->
                 _uiState.update {

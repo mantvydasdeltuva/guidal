@@ -53,11 +53,31 @@ object GuidalIcons {
         val Privacy: ImageVector,
         val About: ImageVector,
         val Support: ImageVector,
-        val Favorite: ImageVector
+        val Favorite: ImageVector,
+        val Id: ImageVector,
+        val Email: ImageVector,
+        val Password: ImageVector,
+        val Delete: ImageVector,
+        val Edit: ImageVector,
+        val Redirect: ImageVector
+    )
+
+    data class CountryIcons(
+        val Other: ImageVector,
+        val Greece: ImageVector,
+        val Lithuania: ImageVector
+    )
+
+    data class GenderIcons(
+        val Other: ImageVector,
+        val Man: ImageVector,
+        val Woman: ImageVector
     )
 
     lateinit var Default: DefaultIcons
     lateinit var Outlined: OutlinedIcons
+    lateinit var Country: CountryIcons
+    lateinit var Gender: GenderIcons
 
     @Composable
     internal fun Preload() {
@@ -92,6 +112,24 @@ object GuidalIcons {
             About = ImageVector.vectorResource(R.drawable.about_outlined_icon),
             Support = ImageVector.vectorResource(R.drawable.support_outlined_icon),
             Favorite = ImageVector.vectorResource(R.drawable.favorite_outlined_icon),
+            Id = ImageVector.vectorResource(R.drawable.id_outlined_icon),
+            Email = ImageVector.vectorResource(R.drawable.email_outlined_icon),
+            Password = ImageVector.vectorResource(R.drawable.password_outlined_icon),
+            Delete = ImageVector.vectorResource(R.drawable.delete_outlined_icon),
+            Edit = ImageVector.vectorResource(R.drawable.edit_outlined_icon),
+            Redirect = ImageVector.vectorResource(R.drawable.redirect_outlined_icon)
+        )
+
+        Country = CountryIcons(
+            Other = ImageVector.vectorResource(R.drawable.language_other_icon),
+            Greece = ImageVector.vectorResource(R.drawable.language_greece_icon),
+            Lithuania = ImageVector.vectorResource(R.drawable.language_lithuania_icon)
+        )
+
+        Gender = GenderIcons(
+            Other = ImageVector.vectorResource(R.drawable.gender_other_icon),
+            Man = ImageVector.vectorResource(R.drawable.gender_man_icon),
+            Woman = ImageVector.vectorResource(R.drawable.gender_woman_icon)
         )
     }
 }
