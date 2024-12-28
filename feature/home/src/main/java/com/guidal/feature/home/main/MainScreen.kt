@@ -23,6 +23,10 @@ import com.guidal.core.ui.models.UiModelTopAppBarIcon
 import com.guidal.core.ui.theme.GuidalIcons
 import com.guidal.data.db.models.UserModel
 import com.guidal.data.utils.getUserFromDataStore
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.util.Locale
 
 @Composable
 fun MainScreen(
@@ -31,6 +35,7 @@ fun MainScreen(
     val context = LocalContext.current
     val user: State<UserModel?> = getUserFromDataStore(context).collectAsState(null)
 
+    // TODO: Move to UI state and view model
     val buttons = listOf(
         HomeNavigationButtonModel("Transportation", "Post", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Default.Commute)),
         HomeNavigationButtonModel("Shops", "Post", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Default.Shop)),
@@ -66,21 +71,23 @@ fun MainScreen(
                 .padding(horizontal = 10.dp)
         ) {
 
-            // TODO: REMOVE LATER
-            // User Info Section
-            if (user.value != null) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 20.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        style = MaterialTheme.typography.titleMedium,
-                        text = "Welcome, ${user.value!!.name}!"
-                    )
-                }
+            // TODO: REMOVE AFTER WEATHER IMPLEMENTATION
+            // Date section
+            val currentDate = LocalDate.now()
+            val dayOfWeek = currentDate.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault())
+            val formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.titleMedium,
+                    text = "$dayOfWeek, $formattedDate" // Example: "Monday, 2024-12-29"
+                )
             }
 
             // Buttons Grid Section

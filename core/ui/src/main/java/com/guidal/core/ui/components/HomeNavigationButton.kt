@@ -8,10 +8,7 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -27,7 +24,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.guidal.core.ui.R
 import com.guidal.core.ui.models.UiModelMenuButtonIcon
 import com.guidal.core.ui.theme.GuidalIcons
 import com.guidal.core.ui.theme.GuidalTheme
@@ -79,7 +75,7 @@ fun HomeNavigationButton(
                     imageVector = it.imageVector,
                     contentDescription = it.contentDescription,
                     tint = it.tint ?: MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.size(32.dp)
+                    modifier = Modifier.size(dimensionResource(com.guidal.core.ui.R.dimen.icon_size_40))
                 )
             }
         }
@@ -111,7 +107,7 @@ private fun PreviewHomeNavigationButton() {
             type = "Post",
             onClick = {},
             sectionIcon = UiModelMenuButtonIcon(
-                imageVector = GuidalIcons.Outlined.Profile
+                imageVector = GuidalIcons.Default.Commute
             ),
         )
     }
