@@ -33,7 +33,15 @@ object GuidalIcons {
         val ChevronForward: ImageVector,
         val Search: ImageVector,
         val ArrowBack: ImageVector,
-        val ArrowForward: ImageVector
+        val ArrowForward: ImageVector,
+        val Museum: ImageVector,
+        val Beach: ImageVector,
+        val Commute: ImageVector,
+        val Hiking: ImageVector,
+        val NightLife: ImageVector,
+        val Restaurant: ImageVector,
+        val Shop: ImageVector,
+        val CircledStar: ImageVector
     )
 
     data class OutlinedIcons(
@@ -44,7 +52,8 @@ object GuidalIcons {
         val Settings: ImageVector,
         val Privacy: ImageVector,
         val About: ImageVector,
-        val Support: ImageVector
+        val Support: ImageVector,
+        val Favorite: ImageVector
     )
 
     lateinit var Default: DefaultIcons
@@ -62,7 +71,15 @@ object GuidalIcons {
             ChevronForward = ImageVector.vectorResource(R.drawable.chevron_forward_icon),
             Search = ImageVector.vectorResource(R.drawable.search_icon),
             ArrowBack = ImageVector.vectorResource(R.drawable.arrow_back_icon),
-            ArrowForward = ImageVector.vectorResource(R.drawable.arrow_forward_icon)
+            ArrowForward = ImageVector.vectorResource(R.drawable.arrow_forward_icon),
+            Museum = ImageVector.vectorResource(R.drawable.museum_icon),
+            Beach = ImageVector.vectorResource(R.drawable.beach_icon),
+            Commute = ImageVector.vectorResource(R.drawable.commute_icon),
+            Hiking = ImageVector.vectorResource(R.drawable.hiking_icon),
+            NightLife = ImageVector.vectorResource(R.drawable.nightlife_icon),
+            Restaurant = ImageVector.vectorResource(R.drawable.restaurant_icon),
+            Shop = ImageVector.vectorResource(R.drawable.shop_icon),
+            CircledStar = ImageVector.vectorResource(R.drawable.circled_star_icon)
         )
 
         Outlined = OutlinedIcons(
@@ -73,7 +90,8 @@ object GuidalIcons {
             Settings = ImageVector.vectorResource(R.drawable.settings_outlined_icon),
             Privacy = ImageVector.vectorResource(R.drawable.privacy_outlined_icon),
             About = ImageVector.vectorResource(R.drawable.about_outlined_icon),
-            Support = ImageVector.vectorResource(R.drawable.support_outlined_icon)
+            Support = ImageVector.vectorResource(R.drawable.support_outlined_icon),
+            Favorite = ImageVector.vectorResource(R.drawable.favorite_outlined_icon),
         )
     }
 }

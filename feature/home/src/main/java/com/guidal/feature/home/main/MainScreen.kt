@@ -32,15 +32,15 @@ fun MainScreen(
     val user: State<UserModel?> = getUserFromDataStore(context).collectAsState(null)
 
     val buttons = listOf(
-        HomeNavigationButtonModel("Transportation", "Post", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Outlined.Profile)),
-        HomeNavigationButtonModel("Shops", "Post", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Outlined.Profile)),
-        HomeNavigationButtonModel("Trails", "Post", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Outlined.Profile)),
-        HomeNavigationButtonModel("Must Visit", "Category", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Outlined.Profile)),
-        HomeNavigationButtonModel("Sightseeing", "Category", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Outlined.Profile)),
-        HomeNavigationButtonModel("Restaurants", "Category", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Outlined.Profile)),
-        HomeNavigationButtonModel("Beaches", "Category", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Outlined.Profile)),
-        HomeNavigationButtonModel("Night Life", "Category", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Outlined.Profile)),
-        HomeNavigationButtonModel("Favorites", "Category", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Outlined.Profile))
+        HomeNavigationButtonModel("Transportation", "Post", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Default.Commute)),
+        HomeNavigationButtonModel("Shops", "Post", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Default.Shop)),
+        HomeNavigationButtonModel("Trails", "Post", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Default.Hiking)),
+        HomeNavigationButtonModel("Must Visit", "Category", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Default.CircledStar)),
+        HomeNavigationButtonModel("Sightseeing", "Category", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Default.Museum)),
+        HomeNavigationButtonModel("Restaurants", "Category", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Default.Restaurant)),
+        HomeNavigationButtonModel("Beaches", "Category", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Default.Beach)),
+        HomeNavigationButtonModel("Night Life", "Category", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Default.NightLife)),
+        HomeNavigationButtonModel("Favorites", "Category", onClick = {}, sectionIcon = UiModelMenuButtonIcon(imageVector = GuidalIcons.Outlined.Favorite))
     )
 
     Scaffold(
