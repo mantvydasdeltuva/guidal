@@ -8,6 +8,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.guidal.feature.menu.main.MainScreen
+import com.guidal.feature.menu.privacy.PrivacyScreen
 import com.guidal.feature.menu.profile.ProfileScreen
 
 // TODO KDoc
@@ -86,10 +87,12 @@ internal fun NavGraphBuilder.menuNavigationGraph(navController: NavController) {
                 toProfile = {
                     navController.navigate(Route.PROFILE)
                 },
+                toPrivacy = {
+                    navController.navigate(Route.PRIVACY)
+                },
 
-                // TODO Implement navigation to (settings, privacy, about, support)
+                // TODO Implement navigation to (settings, about, support)
                 toSettings = {},
-                toPrivacy = {},
                 toAbout = {},
                 toSupport = {}
             )
@@ -128,6 +131,35 @@ internal fun NavGraphBuilder.menuNavigationGraph(navController: NavController) {
                 toPassword = {},
                 toGender = {},
                 toCountry = {}
+            )
+        }
+        composable(
+            route = Route.PRIVACY,
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Start,
+                    animationSpec = tween(
+                        delayMillis = 100,
+                        durationMillis = 300,
+                        easing = LinearEasing
+                    )
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.End,
+                    animationSpec = tween(
+                        delayMillis = 100,
+                        durationMillis = 300,
+                        easing = LinearEasing
+                    )
+                )
+            }
+        ) {
+            PrivacyScreen(
+                toBack = {
+                    navController.popBackStack()
+                }
             )
         }
     }
