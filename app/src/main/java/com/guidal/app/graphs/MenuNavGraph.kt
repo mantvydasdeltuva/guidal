@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.guidal.feature.menu.about.AboutScreen
 import com.guidal.feature.menu.main.MainScreen
 import com.guidal.feature.menu.profile.ProfileScreen
 
@@ -86,11 +87,13 @@ internal fun NavGraphBuilder.menuNavigationGraph(navController: NavController) {
                 toProfile = {
                     navController.navigate(Route.PROFILE)
                 },
+                toAbout = {
+                    navController.navigate(Route.ABOUT)
+                },
 
-                // TODO Implement navigation to (settings, privacy, about, support)
+                // TODO Implement navigation to (settings, privacy, support)
                 toSettings = {},
                 toPrivacy = {},
-                toAbout = {},
                 toSupport = {}
             )
         }
@@ -128,6 +131,35 @@ internal fun NavGraphBuilder.menuNavigationGraph(navController: NavController) {
                 toPassword = {},
                 toGender = {},
                 toCountry = {}
+            )
+        }
+        composable(
+            route = Route.ABOUT,
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Start,
+                    animationSpec = tween(
+                        delayMillis = 100,
+                        durationMillis = 300,
+                        easing = LinearEasing
+                    )
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.End,
+                    animationSpec = tween(
+                        delayMillis = 100,
+                        durationMillis = 300,
+                        easing = LinearEasing
+                    )
+                )
+            }
+        ) {
+            AboutScreen(
+                toBack = {
+                    navController.popBackStack()
+                }
             )
         }
     }
