@@ -24,4 +24,5 @@
     <string name="signup_text_field_surname_supporting_text">Provide your family name.</string>
     <string name="signup_text_field_name_supporting_text">Enter your first name.</string>
     <string name="login_text_field_email_supporting_text">Use the email associated with your account.</string>
+    <string name="login_display_city_country">Patras, Greece</string>
 </resources>

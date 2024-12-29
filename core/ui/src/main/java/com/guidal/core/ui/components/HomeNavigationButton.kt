@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -35,14 +34,13 @@ fun HomeNavigationButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    sectionIcon: UiModelMenuButtonIcon? = null,
+    sectionIcon: UiModelMenuButtonIcon,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .width(150.dp)
             .clickable(interactionSource = interactionSource,
                 indication = null,
                 role = Role.Button,
@@ -54,13 +52,13 @@ fun HomeNavigationButton(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        sectionIcon?.let {
+        sectionIcon.let {
             Box(
                 modifier = Modifier
                     .size(80.dp)
                     .border(
                         width = 1.dp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = MaterialTheme.colorScheme.surfaceDim,
                         shape = RoundedCornerShape(16.dp)
                     )
                     .background(
@@ -84,7 +82,7 @@ fun HomeNavigationButton(
         Text(
             text = label,
             color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.titleSmall,
+            style = MaterialTheme.typography.labelMedium,
             modifier = Modifier.padding(top = 8.dp) // Adjust spacing between icon and label
         )
 
@@ -92,7 +90,7 @@ fun HomeNavigationButton(
         Text(
             text = type,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.padding(top = 4.dp)
         )
     }
@@ -107,7 +105,7 @@ private fun PreviewHomeNavigationButton() {
             type = "Post",
             onClick = {},
             sectionIcon = UiModelMenuButtonIcon(
-                imageVector = GuidalIcons.Default.Commute
+                imageVector = GuidalIcons.Category.Commute
             ),
         )
     }

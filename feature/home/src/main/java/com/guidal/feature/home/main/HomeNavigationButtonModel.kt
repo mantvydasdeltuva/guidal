@@ -7,5 +7,5 @@ data class HomeNavigationButtonModel(
     val type: String,
     val onClick: () -> Unit,
     val enabled: Boolean = true,
-    val sectionIcon: UiModelMenuButtonIcon? = null
+    val sectionIcon: UiModelMenuButtonIcon
 )
