@@ -113,7 +113,7 @@ fun AuthenticationScreen(
                         modifier = Modifier.size(120.dp)
                     )
                     Text(
-                        text = stringResource(com.guidal.authentication.R.string.login_display_city_country),
+                        text = stringResource(com.guidal.authentication.R.string.authentication_display_city_country),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.labelLarge,
                     )
