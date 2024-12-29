@@ -50,9 +50,7 @@ fun ProfileScreen(
                     onClick = { toBack() },
                     color = MaterialTheme.colorScheme.onSurface,
                     size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_16)
-                ),
-                modifier = Modifier
-                    .padding(horizontal = 4.dp)
+                )
             )
         },
         modifier = modifier
