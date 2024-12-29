@@ -26,6 +26,7 @@ object GuidalIcons {
     data class DefaultIcons(
         val Guidal: ImageVector,
         val GuidalLogo: ImageVector,
+        val GuidalInline: ImageVector,
         val Google: ImageVector,
         val Home: ImageVector,
         val Discover: ImageVector,
@@ -75,6 +76,7 @@ object GuidalIcons {
         Default = DefaultIcons(
             Guidal = ImageVector.vectorResource(R.drawable.guidal_icon),
             GuidalLogo = ImageVector.vectorResource(R.drawable.guidal_logo_icon),
+            GuidalInline = ImageVector.vectorResource(R.drawable.guidal_inline_icon),
             Google = ImageVector.vectorResource(R.drawable.google_logo_icon),
             Home = ImageVector.vectorResource(R.drawable.home_icon),
             Discover = ImageVector.vectorResource(R.drawable.discover_icon),
