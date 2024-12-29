@@ -43,6 +43,14 @@ fun AboutScreen(
     // Component related
     val scrollState = rememberScrollState()
 
+    // Urls
+    // TODO Change string values to appropriate links
+    val urlSocialMedia = stringResource(R.string.about_menu_button_url_social_media)
+    val urlPrivacyPolicy = stringResource(R.string.about_menu_button_url_privacy_policy)
+    val urlToS = stringResource(R.string.about_menu_button_url_tos)
+    val urlLicenses = stringResource(R.string.about_menu_button_url_licenses)
+    val urlRateApp = stringResource(R.string.about_menu_button_url_rate_app)
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -71,8 +79,7 @@ fun AboutScreen(
             MenuButton(
                 label = stringResource(R.string.about_menu_button_label_social_media),
                 onClick = {
-                    // TODO Change to Social Media link
-                    aboutViewModel.toExternalLink("https://github.com/mantvydasdeltuva/guidal")
+                    aboutViewModel.toExternalLink(urlSocialMedia)
                 },
                 enabled = !uiState.isNavigating && uiState !is AboutUiState.Loading,
                 trailingIcon = UiModelMenuButtonIcon(
@@ -85,8 +92,7 @@ fun AboutScreen(
             MenuButton(
                 label = stringResource(R.string.about_menu_button_label_privacy_policy),
                 onClick = {
-                    // TODO Change to Privacy Policy link
-                    aboutViewModel.toExternalLink("https://github.com/mantvydasdeltuva/guidal")
+                    aboutViewModel.toExternalLink(urlPrivacyPolicy)
                 },
                 enabled = !uiState.isNavigating && uiState !is AboutUiState.Loading,
                 trailingIcon = UiModelMenuButtonIcon(
@@ -99,8 +105,7 @@ fun AboutScreen(
             MenuButton(
                 label = stringResource(R.string.about_menu_button_label_tos),
                 onClick = {
-                    // TODO Change to ToS link
-                    aboutViewModel.toExternalLink("https://github.com/mantvydasdeltuva/guidal")
+                    aboutViewModel.toExternalLink(urlToS)
                 },
                 enabled = !uiState.isNavigating && uiState !is AboutUiState.Loading,
                 trailingIcon = UiModelMenuButtonIcon(
@@ -113,8 +118,7 @@ fun AboutScreen(
             MenuButton(
                 label = stringResource(R.string.about_menu_button_label_licenses),
                 onClick = {
-                    // TODO Change to Licenses link
-                    aboutViewModel.toExternalLink("https://github.com/mantvydasdeltuva/guidal")
+                    aboutViewModel.toExternalLink(urlLicenses)
                 },
                 enabled = !uiState.isNavigating && uiState !is AboutUiState.Loading,
                 trailingIcon = UiModelMenuButtonIcon(
@@ -127,8 +131,7 @@ fun AboutScreen(
             MenuButton(
                 label = stringResource(R.string.about_menu_button_label_rate_app),
                 onClick = {
-                    // TODO Change to Google Play application link
-                    aboutViewModel.toExternalLink("https://github.com/mantvydasdeltuva/guidal")
+                    aboutViewModel.toExternalLink(urlRateApp)
                 },
                 enabled = !uiState.isNavigating && uiState !is AboutUiState.Loading,
                 trailingIcon = UiModelMenuButtonIcon(

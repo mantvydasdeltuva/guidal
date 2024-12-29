@@ -12,4 +12,10 @@
     <string name="about_menu_button_label_licenses">Licenses</string>
     <string name="about_menu_button_label_rate_app">Rate App</string>
     <string name="about_menu_button_label_guidal_version">Guidal version</string>
+    <string name="about_menu_button_url_social_media">https://github.com/mantvydasdeltuva/guidal</string>
+    <string name="about_menu_button_url_privacy_policy">https://github.com/mantvydasdeltuva/guidal</string>
+    <string name="about_menu_button_url_tos">https://github.com/mantvydasdeltuva/guidal</string>
+    <string name="about_menu_button_url_licenses">https://github.com/mantvydasdeltuva/guidal</string>
+    <string name="about_menu_button_url_rate_app">https://github.com/mantvydasdeltuva/guidal</string>
+    <string name="about_chooser_title">Open with</string>
 </resources>
