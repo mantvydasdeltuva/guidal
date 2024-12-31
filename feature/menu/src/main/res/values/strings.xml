@@ -18,4 +18,9 @@
     <string name="about_menu_button_url_licenses">https://github.com/mantvydasdeltuva/guidal</string>
     <string name="about_menu_button_url_rate_app">https://github.com/mantvydasdeltuva/guidal</string>
     <string name="about_chooser_title">Open with</string>
+    <string name="privacy_title">Privacy</string>
+    <string name="privacy_location_permission_label">Location</string>
+    <string name="privacy_location_permission_description">By enabling location sharing, you consent to the collection, storage, and use of your device’s location data as described in our Privacy Policy. This may include accessing real-time or historical location information to provide location-based features, personalized recommendations, navigation assistance, and to improve overall service performance.</string>
+    <string name="privacy_collection_permission_label">Data Collection</string>
+    <string name="privacy_collection_permission_description">By agreeing to data collection, you consent to the collection, storage, and processing of your personal and usage data as described in our Privacy Policy. This may include information such as your name, contact details, device information, and application interactions, which are used to improve our services, provide personalized experiences, and analyze performance.</string>
 </resources>

@@ -52,9 +52,7 @@ fun MainScreen(
                     onClick = { },
                     color = MaterialTheme.colorScheme.primary,
                     isEnabled = false
-                ),
-                modifier = Modifier
-                    .padding(horizontal = 4.dp)
+                )
             )
         },
         modifier = modifier

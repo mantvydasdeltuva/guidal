@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.guidal.feature.menu.about.AboutScreen
 import com.guidal.feature.menu.main.MainScreen
+import com.guidal.feature.menu.privacy.PrivacyScreen
 import com.guidal.feature.menu.profile.ProfileScreen
 
 // TODO KDoc
@@ -87,13 +88,15 @@ internal fun NavGraphBuilder.menuNavigationGraph(navController: NavController) {
                 toProfile = {
                     navController.navigate(Route.PROFILE)
                 },
+                toPrivacy = {
+                    navController.navigate(Route.PRIVACY)
+                },
                 toAbout = {
                     navController.navigate(Route.ABOUT)
                 },
 
-                // TODO Implement navigation to (settings, privacy, support)
+                // TODO Implement navigation to (settings, support)
                 toSettings = {},
-                toPrivacy = {},
                 toSupport = {}
             )
         }
@@ -157,6 +160,35 @@ internal fun NavGraphBuilder.menuNavigationGraph(navController: NavController) {
             }
         ) {
             AboutScreen(
+                toBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        composable(
+            route = Route.PRIVACY,
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Start,
+                    animationSpec = tween(
+                        delayMillis = 100,
+                        durationMillis = 300,
+                        easing = LinearEasing
+                    )
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.End,
+                    animationSpec = tween(
+                        delayMillis = 100,
+                        durationMillis = 300,
+                        easing = LinearEasing
+                    )
+                )
+            }
+        ) {
+            PrivacyScreen(
                 toBack = {
                     navController.popBackStack()
                 }
