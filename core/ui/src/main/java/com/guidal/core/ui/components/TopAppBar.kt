@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -55,7 +56,8 @@ fun TopAppBar(
             // Optional
             modifier = Modifier
                 .fillMaxWidth()
-                .height(72.dp),
+                .height(72.dp)
+                .padding(horizontal = 4.dp),
             navigationIcon = {
                 if (navigationIcon != null) {
                     Row(

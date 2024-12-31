@@ -45,7 +45,7 @@ fun MenuButton(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .height(48.dp)
+            .height(54.dp)
             .background(
                 if (interactionSource.collectIsPressedAsState().value && enabled)
                     MaterialTheme.colorScheme.surface
@@ -97,7 +97,6 @@ fun MenuButton(
 
         HorizontalDivider(
             modifier = Modifier
-                .height(1.dp)
                 .padding(horizontal = 20.dp)
         )
     }
