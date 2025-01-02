@@ -9,7 +9,10 @@ import com.guidal.data.db.daos.GenderDao
 import com.guidal.data.db.daos.RoleDao
 import com.guidal.data.db.daos.UserDao
 import com.guidal.data.db.Database
+import com.guidal.data.db.daos.CategoryDao
 import com.guidal.data.db.migrations.MigrationsRegistry
+import com.guidal.data.db.repositories.CategoryRepository
+import com.guidal.data.db.repositories.CategoryRepositoryImpl
 import com.guidal.data.db.repositories.UserRepository
 import com.guidal.data.db.repositories.UserRepositoryImpl
 import com.guidal.data.utils.DatabaseOperationUtils
@@ -104,5 +107,24 @@ internal object DatabaseModule {
     @Singleton
     fun provideRoleDao(database: Database): RoleDao {
         return database.roleDao()
+    }
+
+    /*
+     *  Category table
+     */
+
+    @Provides
+    @Singleton
+    fun provideCategoryRepository(
+        categoryDao: CategoryDao,
+        databaseOperationUtils: DatabaseOperationUtils
+    ): CategoryRepository {
+        return CategoryRepositoryImpl(categoryDao, databaseOperationUtils)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCategoryDao(database: Database): CategoryDao {
+        return database.categoryDao()
     }
 }
