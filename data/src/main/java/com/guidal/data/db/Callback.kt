@@ -90,6 +90,46 @@ internal class Callback() : RoomDatabase.Callback() {
                 """)
             }
 
+            // Initial category_type values
+            // Check if category_type data already exists to prevent duplicate insert
+            val cursor4 = db.query("SELECT COUNT(*) FROM category_type")
+            cursor4.moveToFirst()
+            val count4 = cursor4.getInt(0)
+            cursor4.close()
+
+            if (count4 == 0) {
+                // Insert initial category_type table values
+                db.execSQL("""
+                    INSERT INTO category_type (id, name) 
+                    VALUES 
+                        (1, 'Post'),
+                        (2, 'Location')
+                """)
+            }
+
+            // Initial category values
+            // Check if category data already exists to prevent duplicate insert
+            val cursor5 = db.query("SELECT COUNT(*) FROM category")
+            cursor5.moveToFirst()
+            val count5 = cursor5.getInt(0)
+            cursor5.close()
+
+            if (count5 == 0) {
+                // Insert initial category table values
+                db.execSQL("""
+                    INSERT INTO category (name, type_id) 
+                    VALUES 
+                        ('Transportation', 1),
+                        ('Shops', 1),
+                        ('Trails', 1),
+                        ('Must Visit', 2),
+                        ('Sightseeing', 2),
+                        ('Restaurants', 2),
+                        ('Beaches', 2),
+                        ('Night Life', 2),
+                        ('Favorites', 2)
+                """)
+            }
         } catch (e: Exception) {
             Log.e("Callback", "Error inserting initial data", e)
         }
