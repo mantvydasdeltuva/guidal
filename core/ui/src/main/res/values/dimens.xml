@@ -12,4 +12,5 @@
     <dimen name="icon_size_36">36dp</dimen>
     <dimen name="icon_size_40">40dp</dimen>
     <dimen name="icon_size_48">48dp</dimen>
+    <dimen name="icon_size_72">72dp</dimen>
 </resources>
