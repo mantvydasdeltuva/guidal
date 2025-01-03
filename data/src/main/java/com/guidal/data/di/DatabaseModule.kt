@@ -3,6 +3,7 @@ package com.guidal.data.di
 import android.app.Application
 import androidx.room.Room
 import androidx.room.migration.Migration
+import com.guidal.data.api.services.OpenWeatherMapService
 import com.guidal.data.db.Callback
 import com.guidal.data.db.daos.CountryDao
 import com.guidal.data.db.daos.GenderDao
@@ -10,9 +11,12 @@ import com.guidal.data.db.daos.RoleDao
 import com.guidal.data.db.daos.UserDao
 import com.guidal.data.db.Database
 import com.guidal.data.db.daos.CategoryDao
+import com.guidal.data.db.daos.ForecastDao
 import com.guidal.data.db.migrations.MigrationsRegistry
 import com.guidal.data.db.repositories.CategoryRepository
 import com.guidal.data.db.repositories.CategoryRepositoryImpl
+import com.guidal.data.db.repositories.ForecastRepository
+import com.guidal.data.db.repositories.ForecastRepositoryImpl
 import com.guidal.data.db.repositories.UserRepository
 import com.guidal.data.db.repositories.UserRepositoryImpl
 import com.guidal.data.utils.DatabaseOperationUtils
@@ -126,5 +130,25 @@ internal object DatabaseModule {
     @Singleton
     fun provideCategoryDao(database: Database): CategoryDao {
         return database.categoryDao()
+    }
+
+    /*
+     *  Forecast table
+     */
+
+    @Provides
+    @Singleton
+    fun provideForecastRepository(
+        forecastDao: ForecastDao,
+        openWeatherMapService: OpenWeatherMapService,
+        databaseOperationUtils: DatabaseOperationUtils
+    ): ForecastRepository {
+        return ForecastRepositoryImpl(forecastDao, openWeatherMapService, databaseOperationUtils)
+    }
+
+    @Provides
+    @Singleton
+    fun provideForecastDao(database: Database): ForecastDao {
+        return database.forecastDao()
     }
 }
