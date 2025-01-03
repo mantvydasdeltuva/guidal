@@ -11,7 +11,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -23,8 +22,8 @@ import com.guidal.core.ui.components.TopAppBar
 import com.guidal.core.ui.components.WeatherWidget
 import com.guidal.core.ui.models.UiModelMenuButtonIcon
 import com.guidal.core.ui.models.UiModelTopAppBarIcon
-import com.guidal.core.ui.models.UiModelWeatherWidgetItem
-import com.guidal.core.ui.models.WeatherType
+import com.guidal.core.ui.skeletons.HomeNavigationButtonSkeleton
+import com.guidal.core.ui.skeletons.WeatherWidgetSkeleton
 import com.guidal.core.ui.theme.GuidalIcons
 import com.guidal.feature.home.R
 
@@ -50,7 +49,8 @@ fun MainScreen(
                     UiModelTopAppBarIcon(
                         icon = GuidalIcons.Default.Search,
                         onClick = { mainViewModel.updateSearchState() },
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = MaterialTheme.colorScheme.onSurface,
+                        isEnabled = !uiState.isNavigating
                     )
                 )
             )
@@ -62,75 +62,54 @@ fun MainScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
+            when (val state = uiState) {
+                is MainUiState.Loading -> {
+                    WeatherWidgetSkeleton()
 
-            if (uiState.isSearchEnabled) {
-                // TODO Search category suggestions
-            } else {
-                WeatherWidget(
-                    // TODO move to ui state and viewmodel for fetching
-                    items = listOf(
-                        UiModelWeatherWidgetItem(
-                            day = "Sun",
-                            value = 16,
-                            type = WeatherType.Rainy
-                        ),
-                        UiModelWeatherWidgetItem(
-                            day = "Mon",
-                            value = 13,
-                            type = WeatherType.Rainy
-                        ),
-                        UiModelWeatherWidgetItem(
-                            day = "Tue",
-                            value = 25,
-                            type = WeatherType.Sunny
-                        ),
-                        UiModelWeatherWidgetItem(
-                            day = "Wed",
-                            value = 21,
-                            type = WeatherType.PartlyCloudy
-                        ),
-                        UiModelWeatherWidgetItem(
-                            day = "Thu",
-                            value = 22,
-                            type = WeatherType.Sunny
-                        ),
-                        UiModelWeatherWidgetItem(
-                            day = "Fri",
-                            value = 15,
-                            type = WeatherType.Cloudy
-                        ),
-                        UiModelWeatherWidgetItem(
-                            day = "Sat",
-                            value = 18,
-                            type = WeatherType.Thunder
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(3),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(top = 20.dp),
+                    ) {
+                        items(9) {
+                            HomeNavigationButtonSkeleton()
+                        }
+                    }
+                }
+                else -> {
+                    if (state.isSearchEnabled) {
+                        // TODO Search category suggestions
+                    } else {
+                        WeatherWidget(
+                            items = state.forecast,
+                            onClick = {
+                                mainViewModel.onNavigation()
+                                toWeather()
+                            },
+                            enabled = !uiState.isNavigating
                         )
-                    ),
-                    onClick = {
-                        // TODO Implement navigation block and weather screen
-//                    toWeather()
-                    },
-                    // TODO Implement navigation block
-                    enabled = true
-                )
 
-                // Buttons Grid Section
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(3), // 3 buttons per row
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = 20.dp),
-                ) {
-                    items(uiState.categories) { category ->
-                        HomeNavigationButton(
-                            label = category.name,
-                            type = category.type,
-                            onClick = {}, // TODO Implement onclick mapping, similar to icon mapping
-                            sectionIcon = UiModelMenuButtonIcon(
-                                imageVector = getCategoryIcon(category.name)
-                            ),
+                        // Buttons Grid Section
+                        LazyVerticalGrid(
+                            columns = GridCells.Fixed(3),
                             modifier = Modifier
-                                .fillMaxWidth()
-                        )
+                                .fillMaxSize()
+                                .padding(top = 20.dp),
+                        ) {
+                            items(state.categories) { category ->
+                                HomeNavigationButton(
+                                    label = category.name,
+                                    type = category.type,
+                                    onClick = {}, // TODO Implement onclick mapping, similar to icon mapping
+                                    sectionIcon = UiModelMenuButtonIcon(
+                                        imageVector = getCategoryIcon(category.name)
+                                    ),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                )
+                            }
+                        }
                     }
                 }
             }
