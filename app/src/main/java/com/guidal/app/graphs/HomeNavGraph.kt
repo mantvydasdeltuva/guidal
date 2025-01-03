@@ -96,7 +96,12 @@ internal fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
                 }
             },
         ) {
-            MainScreen()
+            MainScreen(
+                toWeather = {
+                    // TODO Implement
+//                    navController.navigate(Route.WEATHER)
+                }
+            )
         }
     }
 }

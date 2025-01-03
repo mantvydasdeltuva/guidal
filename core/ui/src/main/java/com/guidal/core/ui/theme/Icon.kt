@@ -79,11 +79,21 @@ object GuidalIcons {
         val Woman: ImageVector
     )
 
+    data class WeatherIcons(
+        val Sunny: ImageVector,
+        val Cloudy: ImageVector,
+        val PartlyCloudy: ImageVector,
+        val Rainy: ImageVector,
+        val Thunder: ImageVector,
+        val Snowy: ImageVector
+    )
+
     lateinit var Default: DefaultIcons
     lateinit var Outlined: OutlinedIcons
     lateinit var Category: CategoryIcons
     lateinit var Country: CountryIcons
     lateinit var Gender: GenderIcons
+    lateinit var Weather: WeatherIcons
 
     @Composable
     internal fun Preload() {
@@ -142,6 +152,15 @@ object GuidalIcons {
             Other = ImageVector.vectorResource(R.drawable.gender_other_icon),
             Man = ImageVector.vectorResource(R.drawable.gender_man_icon),
             Woman = ImageVector.vectorResource(R.drawable.gender_woman_icon)
+        )
+
+        Weather = WeatherIcons(
+            Sunny = ImageVector.vectorResource(R.drawable.weather_sunny_icon),
+            Cloudy = ImageVector.vectorResource(R.drawable.weather_cloudy_icon),
+            PartlyCloudy = ImageVector.vectorResource(R.drawable.weather_partlycloudy_icon),
+            Rainy = ImageVector.vectorResource(R.drawable.weather_rainy_icon),
+            Thunder = ImageVector.vectorResource(R.drawable.weather_thunder_icon),
+            Snowy = ImageVector.vectorResource(R.drawable.weather_snowy_icon)
         )
     }
 }

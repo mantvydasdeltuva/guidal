@@ -1,3 +1,10 @@
+import java.util.Properties
+
+// load the values from .properties file
+val keystoreFile = project.rootProject.file("local.properties")
+val properties = Properties()
+properties.load(keystoreFile.inputStream())
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -7,7 +14,7 @@ plugins {
 }
 
 android {
-    namespace = "com.guidal.data"
+    namespace = "com.guidal.core.network"
     compileSdk = 35
 
     defaultConfig {
@@ -24,6 +31,18 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField(
+                "String",
+                "OPENWEATHERMAP_API_KEY",
+                properties.getProperty("OPENWEATHERMAP_API_KEY")
+            )
+        }
+        debug {
+            buildConfigField(
+                "String",
+                "OPENWEATHERMAP_API_KEY",
+                properties.getProperty("OPENWEATHERMAP_API_KEY")
+            )
         }
     }
     compileOptions {
@@ -33,32 +52,23 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_21.toString()
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
 
-    // Modules
-    implementation(project(":core:utils"))
-    implementation(project(":core:network"))
-
-    // Room
-    implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
-
-    // DataStore
-    implementation(libs.androidx.datastore.preferences)
-
-    // Hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
-
-    // ktor
+    // Ktor
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.okhttp)
     implementation(libs.ktor.client.logging)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
 
     // Other
     implementation(libs.androidx.core.ktx)
