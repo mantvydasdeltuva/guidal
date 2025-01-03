@@ -84,7 +84,8 @@ object GuidalIcons {
         val Cloudy: ImageVector,
         val PartlyCloudy: ImageVector,
         val Rainy: ImageVector,
-        val Thunder: ImageVector
+        val Thunder: ImageVector,
+        val Snowy: ImageVector
     )
 
     lateinit var Default: DefaultIcons
@@ -158,7 +159,8 @@ object GuidalIcons {
             Cloudy = ImageVector.vectorResource(R.drawable.weather_cloudy_icon),
             PartlyCloudy = ImageVector.vectorResource(R.drawable.weather_partlycloudy_icon),
             Rainy = ImageVector.vectorResource(R.drawable.weather_rainy_icon),
-            Thunder = ImageVector.vectorResource(R.drawable.weather_thunder_icon)
+            Thunder = ImageVector.vectorResource(R.drawable.weather_thunder_icon),
+            Snowy = ImageVector.vectorResource(R.drawable.weather_snowy_icon)
         )
     }
 }
