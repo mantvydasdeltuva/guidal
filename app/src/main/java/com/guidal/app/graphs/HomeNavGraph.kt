@@ -1,5 +1,6 @@
 package com.guidal.app.graphs
 
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -9,6 +10,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.guidal.feature.home.main.MainScreen
+import com.guidal.feature.home.post.PostScreen
+import com.guidal.feature.menu.profile.ProfileScreen
 
 // TODO KDoc
 // TODO Android test
@@ -96,7 +99,47 @@ internal fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
                 }
             },
         ) {
-            MainScreen()
+            MainScreen(
+                toTransportation = {
+                    navController.navigate(
+                        Route.POST.replace("{type}", "transportation"))
+                },
+                toShops = {
+                    navController.navigate(
+                        Route.POST.replace("{type}", "shops"))
+                },
+                toTrails = {
+                    navController.navigate(
+                        Route.POST.replace("{type}", "trails"))
+                },
+            )
+        }
+        composable(
+            route = Route.POST,
+            enterTransition = {
+                fadeIn(
+                    animationSpec = tween(
+                        durationMillis = 200,
+                        easing = LinearEasing
+                    )
+                )
+            },
+            popExitTransition = {
+                fadeOut(
+                    animationSpec = tween(
+                        durationMillis = 200,
+                        easing = LinearEasing
+                    )
+                )
+            }
+        ) { backStackEntry ->
+            val postType = backStackEntry.arguments?.getString("type") ?: ""
+            PostScreen(
+                postType = postType,
+                toBack = {
+                    navController.popBackStack()
+                },
+            )
         }
     }
 }

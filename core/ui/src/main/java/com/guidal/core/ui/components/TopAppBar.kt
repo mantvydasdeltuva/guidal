@@ -56,8 +56,7 @@ fun TopAppBar(
             // Optional
             modifier = Modifier
                 .fillMaxWidth()
-                .height(72.dp)
-                .padding(horizontal = 4.dp),
+                .height(72.dp),
             navigationIcon = {
                 if (navigationIcon != null) {
                     Row(

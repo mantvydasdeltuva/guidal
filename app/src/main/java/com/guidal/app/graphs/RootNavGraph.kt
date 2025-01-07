@@ -152,6 +152,7 @@ internal object Route {
     const val PROFILE = "menu/profile"
     const val ABOUT = "menu/about"
     const val PRIVACY = "menu/privacy"
+    const val POST = "home/post/{type}"
 }
 
 internal object GraphRoutes {

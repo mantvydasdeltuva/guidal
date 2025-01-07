@@ -32,6 +32,9 @@ import java.util.Locale
 
 @Composable
 fun MainScreen(
+    toTransportation: () -> Unit,
+    toShops: () -> Unit,
+    toTrails: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val mainViewModel: MainViewModel = hiltViewModel()
@@ -97,7 +100,11 @@ fun MainScreen(
                         HomeNavigationButton(
                             label = category.name,
                             type = category.type,
-                            onClick = {}, // TODO Implement onclick mapping, similar to icon mapping
+                            onClick = getNavigationType(
+                                category.name,
+                                toTransportation,
+                                toShops,
+                                toTrails),
                             sectionIcon = UiModelMenuButtonIcon(
                                 imageVector = getCategoryIcon(category.name)
                             ),
@@ -124,4 +131,18 @@ private fun getCategoryIcon(name: String): ImageVector {
         "Favorites" to GuidalIcons.Category.Favorite
     )
     return categoryIconMap[name] ?: GuidalIcons.Default.Guidal
+}
+
+private fun getNavigationType(
+    name: String,
+    toTransportation: () -> Unit,
+    toShops: () -> Unit,
+    toTrails: () -> Unit
+): () -> Unit {
+    val navigationMap = mapOf(
+        "Transportation" to toTransportation,
+        "Shops" to toShops,
+        "Trails" to toTrails,
+    )
+    return navigationMap[name] ?: {}
 }
