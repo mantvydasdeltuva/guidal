@@ -123,7 +123,7 @@ fun PrivacyScreen(
                 )
 
                 HorizontalDivider(
-                    modifier = Modifier.padding(top = 8.dp)
+                    modifier = Modifier.padding(top = 18.dp, bottom = 2.dp)
                 )
             }
 
@@ -166,7 +166,7 @@ fun PrivacyScreen(
                 )
 
                 HorizontalDivider(
-                    modifier = Modifier.padding(top = 8.dp)
+                    modifier = Modifier.padding(top = 18.dp, bottom = 2.dp)
                 )
             }
         }
