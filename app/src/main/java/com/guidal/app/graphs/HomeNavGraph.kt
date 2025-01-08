@@ -9,6 +9,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.guidal.feature.home.main.MainScreen
+import com.guidal.feature.home.post.PostScreen
 
 // TODO KDoc
 // TODO Android test
@@ -100,7 +101,38 @@ internal fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
                 toWeather = {
                     // TODO Implement
 //                    navController.navigate(Route.WEATHER)
+                },
+                toPost = { id ->
+                    navController.navigate(
+                        Route.POST.replace("{id}", id.toString())
+                    )
                 }
+            )
+        }
+        composable(
+            route = Route.POST,
+            enterTransition = {
+                fadeIn(
+                    animationSpec = tween(
+                        durationMillis = 200,
+                        easing = LinearEasing
+                    )
+                )
+            },
+            popExitTransition = {
+                fadeOut(
+                    animationSpec = tween(
+                        durationMillis = 200,
+                        easing = LinearEasing
+                    )
+                )
+            }
+        ) { backStackEntry ->
+            PostScreen(
+                id = backStackEntry.arguments?.getString("id")?.toInt() ?: 0,
+                toBack = {
+                    navController.popBackStack()
+                },
             )
         }
     }
