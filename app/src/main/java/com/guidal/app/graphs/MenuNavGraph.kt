@@ -11,6 +11,7 @@ import com.guidal.feature.menu.about.AboutScreen
 import com.guidal.feature.menu.main.MainScreen
 import com.guidal.feature.menu.privacy.PrivacyScreen
 import com.guidal.feature.menu.profile.ProfileScreen
+import com.guidal.feature.menu.settings.SettingsScreen
 import com.guidal.feature.menu.support.SupportScreen
 
 // TODO KDoc
@@ -89,15 +90,15 @@ internal fun NavGraphBuilder.menuNavigationGraph(navController: NavController) {
                 toProfile = {
                     navController.navigate(Route.PROFILE)
                 },
+                toSettings = {
+                    navController.navigate(Route.SETTINGS)
+                },
                 toPrivacy = {
                     navController.navigate(Route.PRIVACY)
                 },
                 toAbout = {
                     navController.navigate(Route.ABOUT)
                 },
-
-                // TODO Implement navigation to (settings)
-                toSettings = {},
                 toSupport = {
                     navController.navigate(Route.SUPPORT)
                 }
@@ -140,7 +141,7 @@ internal fun NavGraphBuilder.menuNavigationGraph(navController: NavController) {
             )
         }
         composable(
-            route = Route.ABOUT,
+            route = Route.SETTINGS,
             enterTransition = {
                 slideIntoContainer(
                     towards = AnimatedContentTransitionScope.SlideDirection.Start,
@@ -162,10 +163,14 @@ internal fun NavGraphBuilder.menuNavigationGraph(navController: NavController) {
                 )
             }
         ) {
-            AboutScreen(
+            SettingsScreen(
                 toBack = {
                     navController.popBackStack()
-                }
+                },
+
+                // TODO: Implement navigation to (Language, Appearance)
+                toLanguage = {},
+                toAppearance = {}
             )
         }
         composable(
@@ -192,6 +197,35 @@ internal fun NavGraphBuilder.menuNavigationGraph(navController: NavController) {
             }
         ) {
             PrivacyScreen(
+                toBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        composable(
+            route = Route.ABOUT,
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Start,
+                    animationSpec = tween(
+                        delayMillis = 100,
+                        durationMillis = 300,
+                        easing = LinearEasing
+                    )
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.End,
+                    animationSpec = tween(
+                        delayMillis = 100,
+                        durationMillis = 300,
+                        easing = LinearEasing
+                    )
+                )
+            }
+        ) {
+            AboutScreen(
                 toBack = {
                     navController.popBackStack()
                 }
