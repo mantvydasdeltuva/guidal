@@ -18,6 +18,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -98,6 +99,7 @@ fun PrivacyScreen(
                     )
                     Switch(
                         checked = uiState.isLocationEnabled,
+                        modifier = Modifier.graphicsLayer(scaleX = 0.8f, scaleY = 0.8f),
                         onCheckedChange = { checked ->
                             if (checked) {
                                 requestLocationPermissionLauncher.launch(
@@ -147,6 +149,7 @@ fun PrivacyScreen(
                     )
                     Switch(
                         checked = uiState.isCollectionEnabled,
+                        modifier = Modifier.graphicsLayer(scaleX = 0.8f, scaleY = 0.8f),
                         // TODO Implement collection
                         onCheckedChange = { checked ->
                             privacyViewModel.updateCollectionState(
