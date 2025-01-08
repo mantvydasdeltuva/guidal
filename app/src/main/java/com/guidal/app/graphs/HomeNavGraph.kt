@@ -1,6 +1,5 @@
 package com.guidal.app.graphs
 
-import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -11,7 +10,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.guidal.feature.home.main.MainScreen
 import com.guidal.feature.home.post.PostScreen
-import com.guidal.feature.menu.profile.ProfileScreen
 
 // TODO KDoc
 // TODO Android test
@@ -104,18 +102,11 @@ internal fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
                     // TODO Implement
 //                    navController.navigate(Route.WEATHER)
                 },
-                toTransportation = {
+                toPost = { id ->
                     navController.navigate(
-                        Route.POST.replace("{type}", "transportation"))
-                },
-                toShops = {
-                    navController.navigate(
-                        Route.POST.replace("{type}", "shops"))
-                },
-                toTrails = {
-                    navController.navigate(
-                        Route.POST.replace("{type}", "trails"))
-                },
+                        Route.POST.replace("{id}", id.toString())
+                    )
+                }
             )
         }
         composable(
@@ -137,9 +128,8 @@ internal fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
                 )
             }
         ) { backStackEntry ->
-            val postType = backStackEntry.arguments?.getString("type") ?: ""
             PostScreen(
-                postType = postType,
+                id = backStackEntry.arguments?.getString("id")?.toInt() ?: 0,
                 toBack = {
                     navController.popBackStack()
                 },

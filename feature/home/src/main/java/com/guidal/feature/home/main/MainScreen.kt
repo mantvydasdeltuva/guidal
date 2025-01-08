@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -30,13 +31,15 @@ import com.guidal.feature.home.R
 @Composable
 fun MainScreen(
     toWeather: () -> Unit,
-    toTransportation: () -> Unit,
-    toShops: () -> Unit,
-    toTrails: () -> Unit,
+    toPost: (id: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val mainViewModel: MainViewModel = hiltViewModel()
     val uiState by mainViewModel.uiState.collectAsState()
+
+    LaunchedEffect(Unit) {
+        mainViewModel.resetState()
+    }
 
     Scaffold(
         topBar = {
@@ -106,11 +109,16 @@ fun MainScreen(
                                 HomeNavigationButton(
                                     label = category.name,
                                     type = category.type,
-                                    onClick = getNavigationType(
-                                        category.name,
-                                        toTransportation,
-                                        toShops,
-                                        toTrails),
+                                    onClick = {
+                                        mainViewModel.onNavigation()
+                                        when (category.type) {
+                                            "Post" -> {
+                                                toPost(category.id)
+                                            }
+                                            else -> {}
+                                        }
+                                    },
+                                    enabled = !uiState.isNavigating,
                                     sectionIcon = UiModelMenuButtonIcon(
                                         imageVector = getCategoryIcon(category.name)
                                     ),
@@ -139,18 +147,4 @@ private fun getCategoryIcon(name: String): ImageVector {
         "Favorites" to GuidalIcons.Category.Favorite
     )
     return categoryIconMap[name] ?: GuidalIcons.Default.Guidal
-}
-
-private fun getNavigationType(
-    name: String,
-    toTransportation: () -> Unit,
-    toShops: () -> Unit,
-    toTrails: () -> Unit
-): () -> Unit {
-    val navigationMap = mapOf(
-        "Transportation" to toTransportation,
-        "Shops" to toShops,
-        "Trails" to toTrails,
-    )
-    return navigationMap[name] ?: {}
 }

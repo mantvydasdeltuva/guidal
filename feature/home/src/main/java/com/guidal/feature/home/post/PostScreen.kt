@@ -34,7 +34,7 @@ import com.guidal.core.ui.theme.GuidalIcons
 
 @Composable
 fun PostScreen(
-    postType: String,
+    id: Int,
     toBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -56,10 +56,10 @@ fun PostScreen(
 
     // TODO: SWITCH TO FETCHING DATA FROM THE DATABASE
     // temporary
-    val splashImage = when (postType) {
-        "trails" -> R.drawable.trails
-        "shops" -> R.drawable.shops
-        "transportation" -> R.drawable.transporation
+    val splashImage = when (id) {
+        3 -> R.drawable.trails
+        2 -> R.drawable.shops
+        1 -> R.drawable.transporation
         else -> 0
     }
     val imagePainter = if (splashImage != 0) painterResource(id = splashImage) else null
@@ -110,7 +110,7 @@ fun PostScreen(
             }
 
             TopAppBar(
-                title = postType.replaceFirstChar { it.uppercase() },
+                title = id.toString(),
                 navigationIcon = UiModelTopAppBarIcon(
                     icon = GuidalIcons.Default.ArrowBack,
                     onClick = toBack,
