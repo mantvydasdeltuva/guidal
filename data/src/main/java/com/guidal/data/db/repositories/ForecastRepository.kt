@@ -34,21 +34,30 @@ internal class ForecastRepositoryImpl @Inject constructor(
                 return@safeDatabaseOperation forecastModelList
             }
 
-            // Fetch new data from API
-            val forecastEntityList = openWeatherMapService.getForecast().map {
-                ForecastEntity(
-                    day = it.day,
-                    temperature = it.temperature,
-                    type = it.type,
-                    timestamp = getCurrentDayStartTimestamp()
-                )
+            return@safeDatabaseOperation try {
+                // Fetch new data from API
+                val forecastEntityList = openWeatherMapService.getForecast().map {
+                    ForecastEntity(
+                        day = it.day,
+                        temperature = it.temperature,
+                        type = it.type,
+                        timestamp = getCurrentDayStartTimestamp()
+                    )
+                }
+
+                // Save data to database
+                forecastDao.insertAll(forecastEntityList)
+
+                // Return data from database
+                forecastDao.getForecastsModel()
+            } catch (e: Exception) {
+                forecastModelList.ifEmpty {
+                    throw RuntimeException(
+                        "No forecast data available and failed to fetch from API",
+                        e
+                    )
+                }
             }
-
-            // Save data to database
-            forecastDao.insertAll(forecastEntityList)
-
-            // Return data from database
-            forecastDao.getForecastsModel()
         }
     }
 

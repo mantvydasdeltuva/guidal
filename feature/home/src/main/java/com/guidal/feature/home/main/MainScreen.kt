@@ -81,14 +81,16 @@ fun MainScreen(
                     if (state.isSearchEnabled) {
                         // TODO Search category suggestions
                     } else {
-                        WeatherWidget(
-                            items = state.forecast,
-                            onClick = {
-                                mainViewModel.onNavigation()
-                                toWeather()
-                            },
-                            enabled = !uiState.isNavigating
-                        )
+                        if (state.forecast.isNotEmpty()) {
+                            WeatherWidget(
+                                items = state.forecast,
+                                onClick = {
+                                    mainViewModel.onNavigation()
+                                    toWeather()
+                                },
+                                enabled = !uiState.isNavigating
+                            )
+                        }
 
                         // Buttons Grid Section
                         LazyVerticalGrid(
