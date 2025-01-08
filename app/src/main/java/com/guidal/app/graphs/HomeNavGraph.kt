@@ -100,6 +100,10 @@ internal fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
             },
         ) {
             MainScreen(
+                toWeather = {
+                    // TODO Implement
+//                    navController.navigate(Route.WEATHER)
+                },
                 toTransportation = {
                     navController.navigate(
                         Route.POST.replace("{type}", "transportation"))
