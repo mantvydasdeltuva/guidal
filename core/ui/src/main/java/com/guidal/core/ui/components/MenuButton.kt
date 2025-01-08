@@ -63,7 +63,7 @@ fun MenuButton(
                 .fillMaxWidth()
                 .weight(1f)
                 .padding(horizontal = 28.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(15.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             leadingIcon?.let {

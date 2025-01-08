@@ -56,7 +56,8 @@ fun MainScreen(
                         icon = GuidalIcons.Default.Search,
                         onClick = { mainViewModel.updateSearchState() },
                         color = MaterialTheme.colorScheme.onSurface,
-                        isEnabled = !uiState.isNavigating
+                        isEnabled = !uiState.isNavigating,
+                        size = 20.dp
                     )
                 )
             )

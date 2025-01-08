@@ -21,6 +21,12 @@ internal val Typography = Typography(
         fontSize = 28.sp,
         lineHeight = 32.sp,
     ),
+    titleMedium = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 24.sp,
+        lineHeight = 28.sp,
+    ),
     bodyLarge = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
