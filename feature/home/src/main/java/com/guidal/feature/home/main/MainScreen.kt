@@ -51,7 +51,8 @@ fun MainScreen(
                     UiModelTopAppBarIcon(
                         icon = GuidalIcons.Default.Search,
                         onClick = { mainViewModel.updateSearchState() },
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = MaterialTheme.colorScheme.onSurface,
+                        size = 20.dp
                     )
                 )
             )

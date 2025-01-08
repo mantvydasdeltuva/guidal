@@ -22,7 +22,7 @@ fun HorizontalDivider(
 
         // Constant
         color = MaterialTheme.colorScheme.surfaceDim,
-        thickness = 2.dp
+        thickness = 1.dp
     )
 }
 
