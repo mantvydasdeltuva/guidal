@@ -42,6 +42,7 @@ fun BottomAppBar(
     Box(
         modifier = Modifier.fillMaxWidth()
     ) {
+        // Top border
         HorizontalDivider()
         NavigationBar(
             containerColor = MaterialTheme.colorScheme.surfaceBright,
