@@ -154,11 +154,12 @@ internal object Route {
     const val PROFILE = "menu/profile"
     const val ABOUT = "menu/about"
     const val PRIVACY = "menu/privacy"
+    const val SUPPORT = "menu/support"
 }
 
 internal object GraphRoutes {
     val AUTHENTICATION = listOf(Route.AUTHENTICATION, Route.LOGIN, Route.SIGNUP)
     val HOME = listOf(Route.HOME, Route.WEATHER, Route.POST)
     val DISCOVER = listOf(Route.DISCOVER)
-    val MENU = listOf(Route.MENU, Route.PROFILE, Route.ABOUT, Route.PRIVACY)
+    val MENU = listOf(Route.MENU, Route.PROFILE, Route.ABOUT, Route.PRIVACY, Route.SUPPORT)
 }
