@@ -23,13 +23,17 @@ internal class MainViewModel @Inject constructor(
     private val forecastRepository: ForecastRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<MainUiState>(
-        value = MainUiState.Loading()
+        value = MainUiState.Idle()
     )
 
     val uiState = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
+            _uiState.update {
+                it.transformTo<MainUiState.Loading>()
+            }
+
             var categoriesResult: Result<List<CategoryModel>>? = null
             var forecastResult: Result<List<ForecastModel>>? = null
 
@@ -121,9 +125,10 @@ internal class MainViewModel @Inject constructor(
 
     fun resetState() {
         _uiState.update {
-            it.transformTo<MainUiState.Idle>().copy(
-                isNavigating = false
-            )
+            when (it) {
+                is MainUiState.Loading -> it.transformTo<MainUiState.Loading>().copy( isNavigating = false)
+                else -> it.transformTo<MainUiState.Idle>().copy( isNavigating = false)
+            }
         }
     }
 
