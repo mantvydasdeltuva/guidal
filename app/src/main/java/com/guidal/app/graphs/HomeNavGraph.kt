@@ -110,7 +110,7 @@ internal fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
                 },
                 toLocation = { id ->
                     navController.navigate(
-                        Route.LOCATION.replace("{id}", id.toString())
+                        Route.LOCATIONS_LIST.replace("{id}", id.toString())
                     )
                 }
             )
@@ -120,7 +120,7 @@ internal fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
             enterTransition = {
                 fadeIn(
                     animationSpec = tween(
-                        durationMillis = 200,
+                        durationMillis = 250,
                         easing = LinearEasing
                     )
                 )
@@ -142,11 +142,11 @@ internal fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
             )
         }
         composable(
-            route = Route.LOCATION,
+            route = Route.LOCATIONS_LIST,
             enterTransition = {
                 fadeIn(
                     animationSpec = tween(
-                        durationMillis = 200,
+                        durationMillis = 250,
                         easing = LinearEasing
                     )
                 )
