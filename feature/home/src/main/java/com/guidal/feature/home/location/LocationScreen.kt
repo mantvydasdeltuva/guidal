@@ -1,6 +1,5 @@
 package com.guidal.feature.home.location
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -16,11 +15,9 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.imageResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.guidal.core.ui.R
-import com.guidal.core.ui.components.HomeNavigationButton
 import com.guidal.core.ui.components.LocationPreviewCard
 import com.guidal.core.ui.components.Scaffold
 import com.guidal.core.ui.components.TopAppBar
-import com.guidal.core.ui.models.UiModelMenuButtonIcon
 import com.guidal.core.ui.models.UiModelTopAppBarIcon
 import com.guidal.core.ui.theme.GuidalIcons
 
@@ -57,7 +54,7 @@ fun LocationScreen(
                         toBack()
                     },
                     color = MaterialTheme.colorScheme.onSurface,
-                    size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_16)
+                    size = dimensionResource(R.dimen.icon_size_16)
                 )
             )
         },
@@ -69,10 +66,11 @@ fun LocationScreen(
                 .padding(innerPadding)
                 .verticalScroll(scrollState)
         ) {
+            // TODO: TEMPORARY DATA, REMOVE AFTER IMPLEMENTATION
             LocationPreviewCard(
                 image = ImageBitmap.imageResource(id = R.drawable.transporation),
-                title = "Holy Church of Saint Andrew",
-                address = "Agiou Andreou 201, Patra 262 22",
+                title = "Bus Station",
+                address = "Agiou Andreou 201, Patras 262 22",
                 distance = "100 m",
                 rating = 4.6f,
                 isFavorite = true,
@@ -82,8 +80,8 @@ fun LocationScreen(
 
             LocationPreviewCard(
                 image = ImageBitmap.imageResource(id = R.drawable.shops),
-                title = "Holy Church of Saint Andrew",
-                address = "Agiou Andreou 201, Patra 262 22",
+                title = "Sklavenitis",
+                address = "Gerasimou Sklavou 7, Patras 242 21",
                 distance = "1000 km",
                 rating = 0.5f,
                 isFavorite = false,
@@ -93,8 +91,8 @@ fun LocationScreen(
 
             LocationPreviewCard(
                 image = ImageBitmap.imageResource(id = R.drawable.trails),
-                title = "Holy Church of Saint Andrew",
-                address = "Agiou Andreou 201, Patra 262 22",
+                title = "Ultimate Trail",
+                address = "Agiou 123, Patras 213 42",
                 distance = "0.6 km",
                 rating = 3.0f,
                 isFavorite = true,
