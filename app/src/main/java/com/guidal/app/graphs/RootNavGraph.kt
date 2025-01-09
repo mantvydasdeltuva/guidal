@@ -14,6 +14,9 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -29,6 +32,15 @@ import com.guidal.core.ui.theme.GuidalIcons
 internal fun RootNavigationGraph(navController: NavHostController) {
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
     val bottomAppBarRoutes = setOf(Route.HOME, Route.DISCOVER, Route.MENU)
+
+    var selectedItemIndex = remember { mutableIntStateOf(0) }
+
+    selectedItemIndex.intValue = when (currentDestination?.route) {
+        Route.HOME -> 0
+        Route.DISCOVER -> 1
+        Route.MENU -> 2
+        else -> selectedItemIndex.intValue
+    }
 
     Scaffold(
         bottomBar = {
@@ -101,19 +113,14 @@ internal fun RootNavigationGraph(navController: NavHostController) {
                             enabled = currentDestination?.route != Route.MENU
                         )
                     ),
-                    selectedItemIndex = when (currentDestination?.route) {
-                        Route.HOME -> 0
-                        Route.DISCOVER -> 1
-                        Route.MENU -> 2
-                        else -> -1
-                    },
+                    selectedItemIndex = selectedItemIndex.intValue,
                     onItemClick = { index ->
                         when (index) {
                             0 -> navController.navigate(Graph.HOME)
                             1 -> navController.navigate(Graph.DISCOVER)
                             2 -> navController.navigate(Graph.MENU)
                         }
-                    },
+                    }
                 )
             }
         },
