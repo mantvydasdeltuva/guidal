@@ -36,6 +36,11 @@ object GuidalIcons {
         val Search: ImageVector,
         val ArrowBack: ImageVector,
         val ArrowForward: ImageVector,
+        val Favorite: ImageVector,
+        val Star: ImageVector,
+        val StarHalf: ImageVector,
+        val Map: ImageVector,
+        val Location: ImageVector
     )
 
     data class OutlinedIcons(
@@ -52,7 +57,9 @@ object GuidalIcons {
         val Password: ImageVector,
         val Delete: ImageVector,
         val Edit: ImageVector,
-        val Redirect: ImageVector
+        val Redirect: ImageVector,
+        val Favorite: ImageVector,
+        val Star: ImageVector
     )
 
     data class CategoryIcons(
@@ -110,6 +117,11 @@ object GuidalIcons {
             ArrowBack = ImageVector.vectorResource(R.drawable.arrow_back_icon),
             ArrowForward = ImageVector.vectorResource(R.drawable.arrow_forward_icon),
 
+            Favorite = ImageVector.vectorResource(R.drawable.favorite_icon),
+            Star = ImageVector.vectorResource(R.drawable.star_icon),
+            StarHalf = ImageVector.vectorResource(R.drawable.star_half_icon),
+            Map = ImageVector.vectorResource(R.drawable.map_icon),
+            Location = ImageVector.vectorResource(R.drawable.location_icon),
         )
 
         Outlined = OutlinedIcons(
@@ -127,7 +139,10 @@ object GuidalIcons {
             Password = ImageVector.vectorResource(R.drawable.password_outlined_icon),
             Delete = ImageVector.vectorResource(R.drawable.delete_outlined_icon),
             Edit = ImageVector.vectorResource(R.drawable.edit_outlined_icon),
-            Redirect = ImageVector.vectorResource(R.drawable.redirect_outlined_icon)
+            Redirect = ImageVector.vectorResource(R.drawable.redirect_outlined_icon),
+
+            Favorite = ImageVector.vectorResource(R.drawable.favorite_outlined_icon),
+            Star = ImageVector.vectorResource(R.drawable.star_outlined_icon)
         )
 
         Category = CategoryIcons(

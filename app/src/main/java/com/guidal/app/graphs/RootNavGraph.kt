@@ -149,6 +149,7 @@ internal object Route {
     const val HOME = "home"
     const val WEATHER = "home/weather"
     const val POST = "home/post/{id}"
+    const val LOCATIONS_LIST = "home/locations_list/{id}"
     const val DISCOVER = "discover"
     const val MENU = "menu"
     const val PROFILE = "menu/profile"
@@ -160,7 +161,7 @@ internal object Route {
 
 internal object GraphRoutes {
     val AUTHENTICATION = listOf(Route.AUTHENTICATION, Route.LOGIN, Route.SIGNUP)
-    val HOME = listOf(Route.HOME, Route.WEATHER, Route.POST)
+    val HOME = listOf(Route.HOME, Route.WEATHER, Route.POST, Route.LOCATIONS_LIST)
     val DISCOVER = listOf(Route.DISCOVER)
     val MENU = listOf(Route.MENU, Route.PROFILE, Route.SETTINGS, Route.PRIVACY, Route.ABOUT, Route.SUPPORT)
 }
