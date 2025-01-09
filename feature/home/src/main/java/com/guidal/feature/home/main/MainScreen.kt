@@ -32,6 +32,7 @@ import com.guidal.feature.home.R
 fun MainScreen(
     toWeather: () -> Unit,
     toPost: (id: Int) -> Unit,
+    toLocation: (id: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val mainViewModel: MainViewModel = hiltViewModel()
@@ -115,6 +116,9 @@ fun MainScreen(
                                         when (category.type) {
                                             "Post" -> {
                                                 toPost(category.id)
+                                            }
+                                            "Location" -> {
+                                                toLocation(category.id)
                                             }
                                             else -> {}
                                         }
