@@ -63,6 +63,13 @@ fun PostScreen(
         else -> 0
     }
     val imagePainter = if (splashImage != 0) painterResource(id = splashImage) else null
+    // temporary
+    val postTitle = when (id) {
+        3 -> "Trails"
+        2 -> "Shops"
+        1 -> "Transportation"
+        else -> "Post"
+    }
 
     Scaffold(
         modifier = modifier
@@ -110,7 +117,7 @@ fun PostScreen(
             }
 
             TopAppBar(
-                title = id.toString(),
+                title = postTitle,
                 navigationIcon = UiModelTopAppBarIcon(
                     icon = GuidalIcons.Default.ArrowBack,
                     onClick = toBack,
