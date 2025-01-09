@@ -92,7 +92,8 @@ fun MainScreen(
                             WeatherWidget(
                                 items = state.forecast,
                                 onClick = {
-                                    mainViewModel.onNavigation()
+                                    // TODO: Uncomment once Weather screen is implemented
+                                    //mainViewModel.onNavigation()
                                     toWeather()
                                 },
                                 enabled = !uiState.isNavigating
