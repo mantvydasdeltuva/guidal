@@ -1,5 +1,6 @@
 package com.guidal.feature.home.main
 
+import android.content.Context
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -110,7 +112,9 @@ fun MainScreen(
                         ) {
                             items(state.categories) { category ->
                                 HomeNavigationButton(
-                                    label = category.name,
+                                    label = getCategoryName(
+                                        LocalContext.current, category.name
+                                    ),
                                     type = category.type,
                                     onClick = {
                                         mainViewModel.onNavigation()
@@ -153,4 +157,20 @@ private fun getCategoryIcon(name: String): ImageVector {
         "Favorites" to GuidalIcons.Category.Favorite
     )
     return categoryIconMap[name] ?: GuidalIcons.Default.Guidal
+}
+
+private fun getCategoryName(context: Context, name: String): String {
+    val categoryNameMap = mapOf(
+        "Transportation" to R.string.transportation_title,
+        "Shops" to R.string.shops_title,
+        "Trails" to R.string.trails_title,
+        "Must Visit" to R.string.must_visit_title,
+        "Sightseeing" to R.string.sightseeing_title,
+        "Restaurants" to R.string.restaurants_title,
+        "Beaches" to R.string.beaches_title,
+        "Night Life" to R.string.night_life_title,
+        "Favorites" to R.string.favorites_title
+    )
+    val stringResId = categoryNameMap[name]
+    return if (stringResId != null) context.getString(stringResId) else "Category"
 }

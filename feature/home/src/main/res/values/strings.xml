@@ -1,3 +1,13 @@
 <resources>
     <string name="home_city_name">Patras</string>
+
+    <string name="transportation_title">Transportation</string>
+    <string name="shops_title">Shops</string>
+    <string name="trails_title">Trails</string>
+    <string name="must_visit_title">Must Visit</string>
+    <string name="sightseeing_title">Sightseeing</string>
+    <string name="restaurants_title">Restaurants</string>
+    <string name="beaches_title">Beaches</string>
+    <string name="night_life_title">Night Life</string>
+    <string name="favorites_title">Favorites</string>
 </resources>
