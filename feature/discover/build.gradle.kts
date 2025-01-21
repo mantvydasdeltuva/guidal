@@ -60,7 +60,6 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
-    implementation(libs.play.services.location)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
@@ -86,5 +85,6 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.secrets.gradle.plugin)
     implementation(libs.maps.compose)
+    implementation(libs.play.services.location)
 }
 
