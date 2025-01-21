@@ -80,10 +80,9 @@ fun WeatherWidget(
                     )
                 } else {
                     WeatherIndicator(
-                        day = indicator.day,
+                        day = getDayShortTitle(indicator.day),
                         value = indicator.value,
                         type = indicator.type,
-                        getDayShortTitle = getDayShortTitle
                     )
                 }
             }
@@ -102,7 +101,6 @@ private fun WeatherIndicator(
     value: Int,
     type: WeatherType,
     modifier: Modifier = Modifier,
-    getDayShortTitle: (String) -> String
 ){
     Column(
         modifier = modifier
@@ -111,7 +109,7 @@ private fun WeatherIndicator(
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Text(
-            text = getDayShortTitle(day),
+            text = day,
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurface
         )
@@ -140,7 +138,6 @@ private fun PreviewWeatherIndicator() {
             day = "Mon",
             value = 15,
             type = WeatherType.Sunny,
-            getDayShortTitle = { _ -> "" }
         )
     }
 }
