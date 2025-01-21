@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="authentication_display_city_country">Patras, Greece</string>
+    <string name="authentication_button_log_in">Log in</string>
+    <string name="authentication_button_sign_up">Sign up</string>
+    <string name="authentication_button_guest">Continue as Guest</string>
+    <string name="authentication_button_sign_in_with_google">Sign in with Google</string>
     <string name="login_text_field_password_placeholder">••••••••••</string>
-    <string name="login_text_field_password_supporting_text">For your security, never share your password.</string>
+    <string name="login_text_field_password_supporting_text">Enter the password associated with your account.</string>
     <string name="login_text_field_password_label">Password</string>
-    <string name="login_text_field_email_placeholder">your.email@guidal.com</string>
+    <string name="login_text_field_email_placeholder">your.email@guidal.eu</string>
     <string name="login_text_field_email_label">Email</string>
+    <string name="login_text_field_email_supporting_text">Use the email associated with your account.</string>
     <string name="login_button_label">Log in</string>
     <string name="login_title">Log in</string>
     <string name="signup_title">Sign up</string>
     <string name="signup_text_field_name_label">Name*</string>
-    <string name="signup_text_field_name_placeholder">e.g., Joe</string>
+    <string name="signup_text_field_name_placeholder">Name</string>
     <string name="signup_text_field_surname_label">Surname</string>
-    <string name="signup_text_field_surname_placeholder">e.g., Doe</string>
+    <string name="signup_text_field_surname_placeholder">Surname</string>
     <string name="signup_text_field_email_label">Email*</string>
-    <string name="signup_text_field_email_placeholder">e.g., joedoe@guidal.eu</string>
+    <string name="signup_text_field_email_placeholder">your.email@guidal.eu</string>
     <string name="signup_text_field_password_label">Password*</string>
     <string name="signup_text_field_password_placeholder">••••••••••</string>
     <string name="signup_text_field_confirm_password_label">Confirm Password*</string>
@@ -21,8 +27,6 @@
     <string name="signup_text_field_email_supporting_text">A confirmation email will be sent to this address.</string>
     <string name="signup_text_field_confirm_password_supporting_text">Re-enter your new password to confirm it matches.</string>
     <string name="signup_text_field_password_supporting_text">Create a password with at least 8 characters, including a number and a special character.</string>
-    <string name="signup_text_field_surname_supporting_text">Provide your family name.</string>
+    <string name="signup_text_field_surname_supporting_text">Enter your last name.</string>
     <string name="signup_text_field_name_supporting_text">Enter your first name.</string>
-    <string name="login_text_field_email_supporting_text">Use the email associated with your account.</string>
-    <string name="authentication_display_city_country">Patras, Greece</string>
 </resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="authentication_display_city_country">Patras, Graikija</string>
+    <string name="authentication_button_log_in">Prisijungti</string>
+    <string name="authentication_button_sign_up">Registracija</string>
+    <string name="authentication_button_guest">Tęsti kaip Svečias</string>
+    <string name="authentication_button_sign_in_with_google">Prisijungti su Google</string>
+    <string name="login_text_field_password_placeholder">••••••••••</string>
+    <string name="login_text_field_password_supporting_text">Įveskite savo paskyros slaptažodį.</string>
+    <string name="login_text_field_password_label">Slaptažodis</string>
+    <string name="login_text_field_email_placeholder">jusu.pastas@guidal.eu</string>
+    <string name="login_text_field_email_label">El. paštas</string>
+    <string name="login_text_field_email_supporting_text">Įveskite savo paskyros el. paštą.</string>
+    <string name="login_button_label">Prisijungti</string>
+    <string name="login_title">Prisijungti</string>
+    <string name="signup_title">Registracija</string>
+    <string name="signup_text_field_name_label">Vardas*</string>
+    <string name="signup_text_field_name_placeholder">Vardenis</string>
+    <string name="signup_text_field_surname_label">Pavardė</string>
+    <string name="signup_text_field_surname_placeholder">Pavardenis</string>
+    <string name="signup_text_field_email_label">El. paštas*</string>
+    <string name="signup_text_field_email_placeholder">jusu.pastas@guidal.com</string>
+    <string name="signup_text_field_password_label">Slaptažodis*</string>
+    <string name="signup_text_field_password_placeholder">••••••••••</string>
+    <string name="signup_text_field_confirm_password_label">Patvirtinkite Slaptažodį*</string>
+    <string name="signup_button_label">Registracija</string>
+    <string name="signup_text_field_email_supporting_text">Paskyros patvirtinimo laiškas bus išsiųstas į jūsų el. paštą.</string>
+    <string name="signup_text_field_confirm_password_supporting_text">Pakartokite slaptažodį.</string>
+    <string name="signup_text_field_password_supporting_text">Sukurkite bent 8 simbolių slaptažodį, kuriame yra bent vienas skaičius ir specialus simbolis.</string>
+    <string name="signup_text_field_surname_supporting_text">Įveskite savo pavardę.</string>
+    <string name="signup_text_field_name_supporting_text">Įveskite savo vardą.</string>
+</resources>

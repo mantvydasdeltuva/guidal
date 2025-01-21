@@ -146,13 +146,13 @@ fun AuthenticationScreen(
                     ) {
                         Icon(
                             imageVector = GuidalIcons.Default.Google,
-                            contentDescription = "Sign in with Google",
+                            contentDescription = "",
                             tint = Color.Unspecified,
                             modifier = Modifier.size(dimensionResource(R.dimen.icon_size_24))
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Sign in with Google",
+                            text = stringResource(com.guidal.authentication.R.string.authentication_button_sign_in_with_google),
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.onSurface
                         )
@@ -162,7 +162,7 @@ fun AuthenticationScreen(
 
                     // Log in button
                     Button(
-                        label = "Log in",
+                        label = stringResource(com.guidal.authentication.R.string.authentication_button_log_in),
                         onClick = {
                             authenticationViewModel.onNavigation()
                             toLogin()
@@ -172,7 +172,7 @@ fun AuthenticationScreen(
 
                     // Sign up button
                     OutlinedButton(
-                        label = "Sign up",
+                        label = stringResource(com.guidal.authentication.R.string.authentication_button_sign_up),
                         onClick = {
                             authenticationViewModel.onNavigation()
                             toSignup()
@@ -217,13 +217,13 @@ fun AuthenticationScreen(
                         )
                     ) {
                         Text(
-                            text = "Continue as Guest",
+                            text = stringResource(com.guidal.authentication.R.string.authentication_button_guest),
                             style = MaterialTheme.typography.labelMedium
                         )
                         Spacer(modifier = Modifier.width(4.dp))
                         Icon(
                             imageVector = GuidalIcons.Default.ArrowForward,
-                            contentDescription = "Continue as guest",
+                            contentDescription = "",
                             modifier = Modifier.size(10.dp)
                         )
                     }

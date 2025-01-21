@@ -33,6 +33,7 @@ fun LocationScreen(
     val scrollState = rememberScrollState()
 
     // TODO: SWITCH TO FETCHING DATA FROM THE DATABASE
+    // TODO: ADD TRANSLATIONS AFTER DATABASE FETCHING
     // temporary
     val locationTitle = when (id) {
         4 -> "Must Visit"
