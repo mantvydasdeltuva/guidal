@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="main_menu_title">Meniu</string>
+    <string name="main_menu_button_label_profile">Profilis</string>
+    <string name="main_menu_button_label_settings">Nustatymai</string>
+    <string name="main_menu_button_label_privacy">Privatumas</string>
+    <string name="main_menu_button_label_about">Apie</string>
+    <string name="main_menu_button_label_support">Pagalba</string>
+
+    <string name="profile_menu_button_label_delete_account">Ištrinti Paskyrą</string>
+
+    <string name="settings_title">Nustatymai</string>
+    <string name="settings_menu_button_label_language">Kalba</string>
+    <string name="settings_menu_button_label_appearance">Išvaizda</string>
+
+    <string name="privacy_title">Privatumas</string>
+    <string name="privacy_location_permission_label">Vieta</string>
+    <string name="privacy_location_permission_description">Įjungdami vietos bendrinimą, sutinkate, kad būtų renkami, saugomi ir naudojami jūsų įrenginio vietos duomenys, kaip aprašyta mūsų privatumo politikoje. Tai gali apimti prieigą prie realiojo laiko arba istorinės vietos informacijos, kad būtų galima teikti su vieta susijusias funkcijas, suasmenintas rekomendacijas, navigacijos pagalbą ir pagerinti bendrą paslaugų našumą.</string>
+    <string name="privacy_collection_permission_label">Duomenys</string>
+    <string name="privacy_collection_permission_description">Sutikdami su duomenų rinkimu, sutinkate, kad būtų renkami, saugomi ir tvarkomi jūsų asmens ir naudojimo duomenys, kaip aprašyta mūsų privatumo politikoje. Tai gali apimti informaciją, pvz., jūsų vardą, kontaktinius duomenis, įrenginio informaciją ir programų sąveiką, kuri naudojama mūsų paslaugoms tobulinti, suasmenintoms funkcijoms teikti ir našumui analizuoti.</string>
+
+    <string name="about_title">Apie</string>
+    <string name="about_menu_button_label_social_media">Socialinės Medijos</string>
+    <string name="about_menu_button_label_privacy_policy">Privatumo Politika</string>
+    <string name="about_menu_button_label_tos">Naudojimosi Taisyklės</string>
+    <string name="about_menu_button_label_licenses">Licencijos</string>
+    <string name="about_menu_button_label_rate_app">Įvertinkite</string>
+    <string name="about_menu_button_label_guidal_version">Guidal versija</string>
+    <string name="about_menu_button_url_social_media">https://github.com/mantvydasdeltuva/guidal</string>
+    <string name="about_menu_button_url_privacy_policy">https://github.com/mantvydasdeltuva/guidal</string>
+    <string name="about_menu_button_url_tos">https://github.com/mantvydasdeltuva/guidal</string>
+    <string name="about_menu_button_url_licenses">https://github.com/mantvydasdeltuva/guidal</string>
+    <string name="about_menu_button_url_rate_app">https://github.com/mantvydasdeltuva/guidal</string>
+    <string name="about_chooser_title">Atidaryti su</string>
+
+    <string name="support_title">Pagalba</string>
+    <string name="support_menu_button_label_faq">DUK</string>
+    <string name="support_menu_button_label_report">Pranešti</string>
+</resources>

@@ -40,6 +40,8 @@ fun MainScreen(
     val mainViewModel: MainViewModel = hiltViewModel()
     val uiState by mainViewModel.uiState.collectAsState()
 
+    val context = LocalContext.current
+
     LaunchedEffect(Unit) {
         mainViewModel.resetState()
     }
@@ -99,7 +101,8 @@ fun MainScreen(
                                     //mainViewModel.onNavigation()
                                     toWeather()
                                 },
-                                enabled = !uiState.isNavigating
+                                enabled = !uiState.isNavigating,
+                                getDayShortTitle = { name -> getDayShortTitle(context, name) }
                             )
                         }
 
@@ -113,9 +116,11 @@ fun MainScreen(
                             items(state.categories) { category ->
                                 HomeNavigationButton(
                                     label = getCategoryName(
-                                        LocalContext.current, category.name
+                                        context, category.name
                                     ),
-                                    type = category.type,
+                                    type = getCategoryType(
+                                        context, category.type
+                                    ),
                                     onClick = {
                                         mainViewModel.onNavigation()
                                         when (category.type) {
@@ -173,4 +178,28 @@ private fun getCategoryName(context: Context, name: String): String {
     )
     val stringResId = categoryNameMap[name]
     return if (stringResId != null) context.getString(stringResId) else "Category"
+}
+
+private fun getCategoryType(context: Context, name: String): String {
+    val categoryTypeMap = mapOf(
+        "Post" to R.string.post_title,
+        "Location" to R.string.location_title,
+    )
+    val stringResId = categoryTypeMap[name]
+    return if (stringResId != null) context.getString(stringResId) else "Section"
+}
+
+fun getDayShortTitle(context: Context, name: String): String {
+    val categoryNameMap = mapOf(
+        "Mon" to R.string.monday_short_title,
+        "Tue" to R.string.tuesday_short_title,
+        "Wed" to R.string.wednesday_short_title,
+        "Thu" to R.string.thursday_short_title,
+        "Fri" to R.string.friday_short_title,
+        "Sat" to R.string.saturday_short_title,
+        "Sun" to R.string.sunday_short_title,
+    )
+
+    val stringResId = categoryNameMap[name]
+    return if (stringResId != null) context.getString(stringResId) else name
 }

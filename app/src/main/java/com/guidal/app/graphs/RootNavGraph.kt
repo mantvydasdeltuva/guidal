@@ -17,9 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.guidal.app.R
 import com.guidal.core.ui.components.BottomAppBar
 import com.guidal.core.ui.components.Scaffold
 import com.guidal.core.ui.models.UiModelBottomAppBarItem
@@ -94,19 +96,19 @@ internal fun RootNavigationGraph(navController: NavHostController) {
                 BottomAppBar(
                     items = listOf(
                         UiModelBottomAppBarItem(
-                            label = "Home",
+                            label = stringResource(R.string.home_bottom_bar_label),
                             selectedIcon = GuidalIcons.Default.Home,
                             unselectedIcon = GuidalIcons.Outlined.Home,
                             enabled = currentDestination?.route != Route.HOME
                         ),
                         UiModelBottomAppBarItem(
-                            label = "Discover",
+                            label = stringResource(R.string.discover_bottom_bar_label),
                             selectedIcon = GuidalIcons.Default.Discover,
                             unselectedIcon = GuidalIcons.Outlined.Discover,
                             enabled = currentDestination?.route != Route.DISCOVER
                         ),
                         UiModelBottomAppBarItem(
-                            label = "Menu",
+                            label = stringResource(R.string.menu_bottom_bar_label),
                             selectedIcon = GuidalIcons.Default.Menu,
                             unselectedIcon = GuidalIcons.Outlined.Menu,
                             enabled = currentDestination?.route != Route.MENU

@@ -34,7 +34,8 @@ fun WeatherWidget(
     items: List<UiModelWeatherWidgetItem>,
     onClick: () -> Unit,
     enabled: Boolean = true,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    getDayShortTitle: (String) -> String
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -81,7 +82,8 @@ fun WeatherWidget(
                     WeatherIndicator(
                         day = indicator.day,
                         value = indicator.value,
-                        type = indicator.type
+                        type = indicator.type,
+                        getDayShortTitle = getDayShortTitle
                     )
                 }
             }
@@ -99,7 +101,8 @@ private fun WeatherIndicator(
     day: String,
     value: Int,
     type: WeatherType,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    getDayShortTitle: (String) -> String
 ){
     Column(
         modifier = modifier
@@ -108,7 +111,7 @@ private fun WeatherIndicator(
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Text(
-            text = day,
+            text = getDayShortTitle(day),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurface
         )
@@ -136,7 +139,8 @@ private fun PreviewWeatherIndicator() {
         WeatherIndicator(
             day = "Mon",
             value = 15,
-            type = WeatherType.Sunny
+            type = WeatherType.Sunny,
+            getDayShortTitle = { _ -> "" }
         )
     }
 }
@@ -182,6 +186,7 @@ private fun PreviewWeatherWidget() {
                 type = WeatherType.Thunder
             )
         ),
-        onClick = {}
+        onClick = {},
+        getDayShortTitle = { _ -> "" }
     )
 }

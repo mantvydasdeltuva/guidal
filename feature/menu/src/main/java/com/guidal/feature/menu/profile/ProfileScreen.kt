@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -23,6 +24,7 @@ import com.guidal.core.ui.models.UiModelTopAppBarIcon
 import com.guidal.core.ui.theme.GuidalIcons
 import com.guidal.core.ui.theme.GuidalTheme
 import com.guidal.core.utils.orDefault
+import com.guidal.feature.menu.R
 
 @Composable
 fun ProfileScreen(
@@ -165,7 +167,7 @@ fun ProfileScreen(
 
                     // Delete Account
                     MenuButton(
-                        label = "Delete Account",
+                        label = stringResource(R.string.profile_menu_button_label_delete_account),
                         onClick = {
                             // TODO: Implement prompt for account deletion
                         },

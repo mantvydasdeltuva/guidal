@@ -1,5 +1,5 @@
 <resources>
-    <string name="home_city_name">Patras</string>
+    <string name="home_city_name" translatable="false">Patras</string>
 
     <string name="transportation_title">Transportation</string>
     <string name="shops_title">Shops</string>
@@ -10,4 +10,14 @@
     <string name="beaches_title">Beaches</string>
     <string name="night_life_title">Night Life</string>
     <string name="favorites_title">Favorites</string>
+    <string name="post_title">Post</string>
+    <string name="location_title">Location</string>
+
+    <string name="monday_short_title">Mon</string>
+    <string name="tuesday_short_title">Tue</string>
+    <string name="wednesday_short_title">Wed</string>
+    <string name="thursday_short_title">Thu</string>
+    <string name="friday_short_title">Fri</string>
+    <string name="saturday_short_title">Sat</string>
+    <string name="sunday_short_title">Sun</string>
 </resources>

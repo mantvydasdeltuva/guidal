@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_bottom_bar_label">Pradžia</string>
+    <string name="discover_bottom_bar_label">Atrasti</string>
+    <string name="menu_bottom_bar_label">Meniu</string>
+</resources>

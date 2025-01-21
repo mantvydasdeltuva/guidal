@@ -1,5 +1,7 @@
 package com.guidal.feature.home.main
 
+import android.content.Context
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.guidal.core.ui.models.UiModelWeatherWidgetItem
@@ -8,6 +10,7 @@ import com.guidal.data.db.models.CategoryModel
 import com.guidal.data.db.models.ForecastModel
 import com.guidal.data.db.repositories.CategoryRepository
 import com.guidal.data.db.repositories.ForecastRepository
+import com.guidal.feature.home.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
