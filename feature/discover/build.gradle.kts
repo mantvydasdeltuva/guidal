@@ -80,4 +80,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Maps
+    implementation(libs.play.services.maps)
+    implementation(libs.secrets.gradle.plugin)
+    implementation(libs.maps.compose)
+    implementation(libs.play.services.location)
 }
+
