@@ -48,7 +48,7 @@ fun MainScreen(
             TopAppBar(
                 // TODO: Fix me! Use UserModel in uiState and DataStoreUtils in viewModel
 //                title = "Welcome, ${user.value?.name}${user.value?.surname?.takeIf { it.isNotEmpty() }?.let { " $it" } ?: ""}!",
-                title = "Menu",
+                title = stringResource(R.string.main_menu_title),
                 navigationIcon = UiModelTopAppBarIcon(
                     icon = GuidalIcons.Default.Guidal,
                     onClick = { },

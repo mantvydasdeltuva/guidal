@@ -1,5 +1,6 @@
 package com.guidal.feature.home.main
 
+import android.content.Context
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -37,6 +39,8 @@ fun MainScreen(
 ) {
     val mainViewModel: MainViewModel = hiltViewModel()
     val uiState by mainViewModel.uiState.collectAsState()
+
+    val context = LocalContext.current
 
     LaunchedEffect(Unit) {
         mainViewModel.resetState()
@@ -97,7 +101,8 @@ fun MainScreen(
                                     //mainViewModel.onNavigation()
                                     toWeather()
                                 },
-                                enabled = !uiState.isNavigating
+                                enabled = !uiState.isNavigating,
+                                getDayShortTitle = { name -> getDayShortTitle(context, name) }
                             )
                         }
 
@@ -110,8 +115,12 @@ fun MainScreen(
                         ) {
                             items(state.categories) { category ->
                                 HomeNavigationButton(
-                                    label = category.name,
-                                    type = category.type,
+                                    label = getCategoryName(
+                                        context, category.name
+                                    ),
+                                    type = getCategoryType(
+                                        context, category.type
+                                    ),
                                     onClick = {
                                         mainViewModel.onNavigation()
                                         when (category.type) {
@@ -153,4 +162,44 @@ private fun getCategoryIcon(name: String): ImageVector {
         "Favorites" to GuidalIcons.Category.Favorite
     )
     return categoryIconMap[name] ?: GuidalIcons.Default.Guidal
+}
+
+private fun getCategoryName(context: Context, name: String): String {
+    val categoryNameMap = mapOf(
+        "Transportation" to R.string.transportation_title,
+        "Shops" to R.string.shops_title,
+        "Trails" to R.string.trails_title,
+        "Must Visit" to R.string.must_visit_title,
+        "Sightseeing" to R.string.sightseeing_title,
+        "Restaurants" to R.string.restaurants_title,
+        "Beaches" to R.string.beaches_title,
+        "Night Life" to R.string.night_life_title,
+        "Favorites" to R.string.favorites_title
+    )
+    val stringResId = categoryNameMap[name]
+    return if (stringResId != null) context.getString(stringResId) else "Category"
+}
+
+private fun getCategoryType(context: Context, name: String): String {
+    val categoryTypeMap = mapOf(
+        "Post" to R.string.post_title,
+        "Location" to R.string.location_title,
+    )
+    val stringResId = categoryTypeMap[name]
+    return if (stringResId != null) context.getString(stringResId) else "Section"
+}
+
+fun getDayShortTitle(context: Context, name: String): String {
+    val categoryNameMap = mapOf(
+        "Mon" to R.string.monday_short_title,
+        "Tue" to R.string.tuesday_short_title,
+        "Wed" to R.string.wednesday_short_title,
+        "Thu" to R.string.thursday_short_title,
+        "Fri" to R.string.friday_short_title,
+        "Sat" to R.string.saturday_short_title,
+        "Sun" to R.string.sunday_short_title,
+    )
+
+    val stringResId = categoryNameMap[name]
+    return if (stringResId != null) context.getString(stringResId) else name
 }

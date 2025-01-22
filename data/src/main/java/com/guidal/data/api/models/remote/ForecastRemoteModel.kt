@@ -45,7 +45,7 @@ internal data class ForecastRemoteModel(
 
     private fun Long.toDayOfWeek(): String {
         val date = Date(this * 1000)
-        val dateFormat = SimpleDateFormat("EEE", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("EEE", Locale.US)
         return dateFormat.format(date)
     }
 

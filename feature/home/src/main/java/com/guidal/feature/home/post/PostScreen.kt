@@ -55,6 +55,7 @@ fun PostScreen(
     val dynamicRadius = (maxRadius.value * (1 - scrollProgress)).coerceAtLeast(minRadius.value)
 
     // TODO: SWITCH TO FETCHING DATA FROM THE DATABASE
+    // TODO: ADD TRANSLATIONS AFTER DATABASE FETCHING
     // temporary
     val splashImage = when (id) {
         3 -> R.drawable.trails
