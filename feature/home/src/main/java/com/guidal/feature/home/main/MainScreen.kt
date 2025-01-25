@@ -190,7 +190,7 @@ private fun getCategoryType(context: Context, name: String): String {
 }
 
 fun getDayShortTitle(context: Context, name: String): String {
-    val categoryNameMap = mapOf(
+    val dayShortTitleMap = mapOf(
         "Mon" to R.string.monday_short_title,
         "Tue" to R.string.tuesday_short_title,
         "Wed" to R.string.wednesday_short_title,
@@ -200,6 +200,6 @@ fun getDayShortTitle(context: Context, name: String): String {
         "Sun" to R.string.sunday_short_title,
     )
 
-    val stringResId = categoryNameMap[name]
+    val stringResId = dayShortTitleMap[name]
     return if (stringResId != null) context.getString(stringResId) else name
 }

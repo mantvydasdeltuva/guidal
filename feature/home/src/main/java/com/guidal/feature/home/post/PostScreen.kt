@@ -1,5 +1,6 @@
 package com.guidal.feature.home.post
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -21,16 +22,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.guidal.core.ui.R
 import com.guidal.core.ui.components.Scaffold
 import com.guidal.core.ui.components.TopAppBar
 import com.guidal.core.ui.models.UiModelTopAppBarIcon
 import com.guidal.core.ui.theme.GuidalIcons
+import com.guidal.core.ui.R
 
 @Composable
 fun PostScreen(
@@ -64,13 +66,6 @@ fun PostScreen(
         else -> 0
     }
     val imagePainter = if (splashImage != 0) painterResource(id = splashImage) else null
-    // temporary
-    val postTitle = when (id) {
-        3 -> "Trails"
-        2 -> "Shops"
-        1 -> "Transportation"
-        else -> "Post"
-    }
 
     Scaffold(
         modifier = modifier
@@ -118,7 +113,7 @@ fun PostScreen(
             }
 
             TopAppBar(
-                title = postTitle,
+                title = getPostTitle(LocalContext.current, id),
                 navigationIcon = UiModelTopAppBarIcon(
                     icon = GuidalIcons.Default.ArrowBack,
                     onClick = toBack,
@@ -141,4 +136,15 @@ fun PostScreen(
             )
         }
     }
+}
+
+fun getPostTitle(context: Context, id: Int): String {
+    val titleMap = mapOf(
+        3 to com.guidal.feature.home.R.string.trails_title,
+        2 to com.guidal.feature.home.R.string.shops_title,
+        1 to com.guidal.feature.home.R.string.transportation_title
+    )
+
+    val stringResId = titleMap[id] ?: com.guidal.feature.home.R.string.post_title
+    return context.getString(stringResId)
 }
