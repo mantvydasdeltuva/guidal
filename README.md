@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="repository assets/guidal_inline_logo.svg" alt="Guidal" style="width: 600px; height: auto;">
+  <img src="repository assets/guidal_inline_logo.svg" alt="Guidal" style="width: 400px; height: auto;">
 </div>
 
 ## About Guidal
