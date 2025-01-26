@@ -33,6 +33,7 @@ import com.guidal.core.ui.components.TopAppBar
 import com.guidal.core.ui.models.UiModelTopAppBarIcon
 import com.guidal.core.ui.theme.GuidalIcons
 import com.guidal.core.ui.R
+import com.guidal.core.ui.skeletons.TextBlockSkeleton
 import com.guidal.feature.home.post.shops.ShopsScreen
 import com.guidal.feature.home.post.trails.TrailsScreen
 import com.guidal.feature.home.post.transportation.TransportationScreen
@@ -102,6 +103,12 @@ fun PostScreen(
                     .padding(20.dp) // Padding for contents
             ) {
                 Spacer(modifier = Modifier.height(topBarHeight/2))
+
+                repeat(8) {
+                    TextBlockSkeleton()
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
+
                 when (id) {
                     1 -> TransportationScreen()
                     2 -> ShopsScreen()
