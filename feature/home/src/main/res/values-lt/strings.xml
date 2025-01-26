@@ -28,6 +28,7 @@
     <string name="transportation_bus_system_text">Patros KTEL autobusai yra patogus ir nebrangus būdas keliauti po miestą ir susisiekti su netoliese esančiais miestais. Bilietus galima įsigyti kioskuose arba tiesiogiai autobuse.</string>
     <string name="transportation_bus_system_text_zones"><![CDATA[Miestas padalintas į dvi zonas: Zona A (žalia) ir Zona B (mėlyna). Bilieto kaina priklauso nuo to, kurioje zonoje keliaujate.]]></string>
     <string name="transportation_railway_title">Miesto geležinkelis (Hellenic Train)</string>
+    <string name="transportation_railway_text">Patras priemiestinis geležinkelis sujungia Agios Vassilios ir Kato Achaia rajonus su kasdieniais maršrutais, prisidedant prie greitesnio ir patogesnio platesnės zonos keleivių judėjimo su Patros centru, aplenkiant miesto eismą.</string>
     <string name="transportation_taxis_title">Taksi</string>
     <string name="transportation_taxis_text">Taksi yra lengvai pasiekiami visoje Patroje ir suteikia lankstų bei privatų keliavimo būdą. Jie yra palyginti nebrangūs lyginant su kitais Europos miestais, tačiau visada įsitikinkite, kad skaitiklis veikia tiksliai apskaičiuoti kainą.</string>
     <string name="transportation_cycling_title">Dviračiai</string>
@@ -52,5 +53,4 @@
     <string name="trails_patras_kalavryta_text">Apytiksliai 50,9 mylių ilgio šis taškas į tašką maršrutas laikomas sudėtingu ir vidutiniškai užtrunka apie 21 valandą ir 39 minutes. Maršrutas suteikia žygeiviams galimybę tyrinėti įvairią reljefą ir grožėtis Agios Taxiarchis krioklių grožiu. Geriausias laikas šiai trasai yra nuo balandžio iki gruodžio.</string>
     <string name="trails_national031_title">Nacionalinis kelias O31</string>
     <string name="trails_national031_text">Jungdamas Patrą su Senovės Olimpija, Nacionalinis kelias O31 praeina pro kelis vaizdingus kaimus, tokius kaip Petroto, Agia Paraskevi, Kalanistra ir Ano Vlasia. Ši trasa siūlo žygeiviams kelionę per Graikijos turtingą istoriją ir įvairius kraštovaizdžius.</string>
-
 </resources>

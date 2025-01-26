@@ -1,6 +1,8 @@
 package com.guidal.feature.home.post.shops
 
-
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -8,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -20,11 +23,16 @@ import com.guidal.feature.home.R
 fun ShopsScreen(
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
 
-    val urlSklavenitisWebsite = ""
+    val urlSklavenitisWebsite = "https://www.sklavenitis.gr/"
+    val urlABWebsite = "https://www.ab.gr/"
+    val urlLidlWebsite = "https://www.lidl-hellas.gr/"
+    val urlMyMarketWebsite = "https://www.mymarket.gr/"
+    val urlMasoutisWebsite = "https://www.masoutis.gr/"
 
-    Column(
-    ) {
+    Column()
+    {
         Text(
             text = stringResource(R.string.shops_introduction),
             modifier = Modifier
@@ -50,6 +58,7 @@ fun ShopsScreen(
         MenuButton(
             label = stringResource(R.string.title_official_website),
             onClick = {
+                openLink(context, urlSklavenitisWebsite)
             },
             trailingIcon = UiModelMenuButtonIcon(
                 imageVector = GuidalIcons.Outlined.Redirect,
@@ -76,6 +85,7 @@ fun ShopsScreen(
         MenuButton(
             label = stringResource(R.string.title_official_website),
             onClick = {
+                openLink(context, urlABWebsite)
             },
             trailingIcon = UiModelMenuButtonIcon(
                 imageVector = GuidalIcons.Outlined.Redirect,
@@ -101,6 +111,7 @@ fun ShopsScreen(
         MenuButton(
             label = stringResource(R.string.title_official_website),
             onClick = {
+                openLink(context, urlLidlWebsite)
             },
             trailingIcon = UiModelMenuButtonIcon(
                 imageVector = GuidalIcons.Outlined.Redirect,
@@ -126,6 +137,7 @@ fun ShopsScreen(
         MenuButton(
             label = stringResource(R.string.title_official_website),
             onClick = {
+                openLink(context, urlMyMarketWebsite)
             },
             trailingIcon = UiModelMenuButtonIcon(
                 imageVector = GuidalIcons.Outlined.Redirect,
@@ -151,13 +163,17 @@ fun ShopsScreen(
         MenuButton(
             label = stringResource(R.string.title_official_website),
             onClick = {
+                openLink(context, urlMasoutisWebsite)
             },
             trailingIcon = UiModelMenuButtonIcon(
                 imageVector = GuidalIcons.Outlined.Redirect,
                 size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_20)
             )
         )
-
     }
+}
 
+fun openLink(context: Context, url: String) {
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    context.startActivity(intent)
 }
