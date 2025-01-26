@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.guidal.feature.home.location.LocationScreen
 import com.guidal.feature.home.main.MainScreen
-import com.guidal.feature.home.post.PostScreen
+import com.guidal.feature.home.post.main.PostScreen
 
 // TODO KDoc
 // TODO Android test

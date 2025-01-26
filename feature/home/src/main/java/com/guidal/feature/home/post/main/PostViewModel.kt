@@ -1,4 +1,4 @@
-package com.guidal.feature.home.post
+package com.guidal.feature.home.post.main
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
-// PostViewModel.kt
 @HiltViewModel
 internal class PostViewModel @Inject constructor(
 ) : ViewModel() {

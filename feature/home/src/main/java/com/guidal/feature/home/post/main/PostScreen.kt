@@ -1,4 +1,4 @@
-package com.guidal.feature.home.post
+package com.guidal.feature.home.post.main
 
 import android.content.Context
 import androidx.compose.foundation.Image
@@ -33,6 +33,9 @@ import com.guidal.core.ui.components.TopAppBar
 import com.guidal.core.ui.models.UiModelTopAppBarIcon
 import com.guidal.core.ui.theme.GuidalIcons
 import com.guidal.core.ui.R
+import com.guidal.feature.home.post.shops.ShopsScreen
+import com.guidal.feature.home.post.trails.TrailsScreen
+import com.guidal.feature.home.post.transportation.TransportationScreen
 
 @Composable
 fun PostScreen(
@@ -41,7 +44,6 @@ fun PostScreen(
     modifier: Modifier = Modifier
 ) {
     val postViewModel: PostViewModel = viewModel()
-    val uiState by postViewModel.uiState.collectAsState()
 
     val scrollState = rememberScrollState()
 
@@ -95,20 +97,22 @@ fun PostScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .verticalScroll(scrollState)
-                    .padding(top = imageHeight)
+                    .padding(top = imageHeight) // Padding for whole component
                     .background(color = MaterialTheme.colorScheme.surfaceBright)
+                    .padding(20.dp) // Padding for contents
             ) {
-                // Spacer to push content down (size of TopBar covering the content)
                 Spacer(modifier = Modifier.height(topBarHeight/2))
-
-                // TODO: SAMPLE DATA, REPLACE WITH DATA FROM DATABASE
-                repeat(10) {
-                    Text(
-                        text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp)
-                    )
+                when (id) {
+                    1 -> TransportationScreen()
+                    2 -> ShopsScreen()
+                    3 -> TrailsScreen()
+                    else -> {
+                        Text(
+                            text = "Empty",
+                            modifier = Modifier.fillMaxSize(),
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                    }
                 }
             }
 
