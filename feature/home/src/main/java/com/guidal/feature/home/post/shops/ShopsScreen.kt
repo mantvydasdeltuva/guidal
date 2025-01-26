@@ -11,12 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.guidal.core.ui.components.MenuButton
-import com.guidal.core.ui.models.UiModelMenuButtonIcon
-import com.guidal.core.ui.theme.GuidalIcons
+import com.guidal.core.ui.components.HorizontalDivider
+import com.guidal.core.ui.components.InTextButton
 import com.guidal.feature.home.R
 
 @Composable
@@ -55,16 +53,13 @@ fun ShopsScreen(
                 .padding(bottom = 10.dp),
             style = MaterialTheme.typography.bodyLarge
         )
-        MenuButton(
+        InTextButton(
             label = stringResource(R.string.title_official_website),
             onClick = {
                 openLink(context, urlSklavenitisWebsite)
             },
-            trailingIcon = UiModelMenuButtonIcon(
-                imageVector = GuidalIcons.Outlined.Redirect,
-                size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_20)
-            )
         )
+        HorizontalDivider()
 
         // Alfa-Beta Vassilopoulos (AB)
         Text(
@@ -82,16 +77,13 @@ fun ShopsScreen(
             style = MaterialTheme.typography.bodyLarge
         )
 
-        MenuButton(
+        InTextButton(
             label = stringResource(R.string.title_official_website),
             onClick = {
                 openLink(context, urlABWebsite)
             },
-            trailingIcon = UiModelMenuButtonIcon(
-                imageVector = GuidalIcons.Outlined.Redirect,
-                size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_20)
-            )
         )
+        HorizontalDivider()
 
         // Lidl
         Text(
@@ -108,16 +100,13 @@ fun ShopsScreen(
                 .padding(bottom = 10.dp),
             style = MaterialTheme.typography.bodyLarge
         )
-        MenuButton(
+        InTextButton(
             label = stringResource(R.string.title_official_website),
             onClick = {
                 openLink(context, urlLidlWebsite)
             },
-            trailingIcon = UiModelMenuButtonIcon(
-                imageVector = GuidalIcons.Outlined.Redirect,
-                size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_20)
-            )
         )
+        HorizontalDivider()
 
         // My Market
         Text(
@@ -134,16 +123,13 @@ fun ShopsScreen(
                 .padding(bottom = 10.dp),
             style = MaterialTheme.typography.bodyLarge
         )
-        MenuButton(
+        InTextButton(
             label = stringResource(R.string.title_official_website),
             onClick = {
                 openLink(context, urlMyMarketWebsite)
             },
-            trailingIcon = UiModelMenuButtonIcon(
-                imageVector = GuidalIcons.Outlined.Redirect,
-                size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_20)
-            )
         )
+        HorizontalDivider()
 
         // Masoutis
         Text(
@@ -160,16 +146,13 @@ fun ShopsScreen(
                 .padding(bottom = 10.dp),
             style = MaterialTheme.typography.bodyLarge
         )
-        MenuButton(
+        InTextButton(
             label = stringResource(R.string.title_official_website),
             onClick = {
                 openLink(context, urlMasoutisWebsite)
             },
-            trailingIcon = UiModelMenuButtonIcon(
-                imageVector = GuidalIcons.Outlined.Redirect,
-                size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_20)
-            )
         )
+        HorizontalDivider()
     }
 }
 

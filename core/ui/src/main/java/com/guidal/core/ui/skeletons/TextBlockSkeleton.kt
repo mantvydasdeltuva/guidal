@@ -13,7 +13,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.guidal.core.ui.modifiers.shimmerModifier
 import com.guidal.core.ui.theme.GuidalTheme
-import kotlin.random.Random
 
 @Composable
 fun TextBlockSkeleton(

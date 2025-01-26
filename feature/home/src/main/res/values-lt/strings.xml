@@ -24,8 +24,8 @@
     <string name="title_learn_more">Sužinoti Daugiau</string>
 
     <string name="transportation_introduction">Patras siūlo įvairias transporto galimybes, leidžiančias vietiniams gyventojams ir lankytojams tyrinėti gražiausias vietoves ir apylinkes.</string>
-    <string name="transportation_bus_system_title">Viešasis autobusų tinklas (KTEL)</string>
-    <string name="transportation_bus_system_text">Patros KTEL autobusai yra patogus ir nebrangus būdas keliauti po miestą ir susisiekti su netoliese esančiais miestais. Bilietus galima įsigyti kioskuose arba tiesiogiai autobuse.</string>
+    <string name="transportation_bus_system_title">Viešasis autobusų tinklas (Astiko Patras)</string>
+    <string name="transportation_bus_system_text">Patros Astiko Patras autobusai yra patogus ir nebrangus būdas keliauti po miestą ir susisiekti su netoliese esančiais miestais. Bilietus galima įsigyti kioskuose arba tiesiogiai autobuse.</string>
     <string name="transportation_bus_system_text_zones"><![CDATA[Miestas padalintas į dvi zonas: Zona A (žalia) ir Zona B (mėlyna). Bilieto kaina priklauso nuo to, kurioje zonoje keliaujate.]]></string>
     <string name="transportation_railway_title">Miesto geležinkelis (Hellenic Train)</string>
     <string name="transportation_railway_text">Patras priemiestinis geležinkelis sujungia Agios Vassilios ir Kato Achaia rajonus su kasdieniais maršrutais, prisidedant prie greitesnio ir patogesnio platesnės zonos keleivių judėjimo su Patros centru, aplenkiant miesto eismą.</string>
@@ -34,7 +34,7 @@
     <string name="transportation_cycling_title">Dviračiai</string>
     <string name="transportation_cycling_text">Patras tampa vis draugiškesnis dviračiams, kai kuriose miesto vietose yra dviračių takai. Dviračio nuoma – puikus būdas iš arti pažinti miestą, ypač palei pajūrį ir pėsčiųjų zonas. Kai kurios parduotuvės ir viešbučiai taip pat siūlo dviračių nuomą už nedidelį mokestį.</string>
 
-    <string name="shops_introduction">Patros prekybos centrų įvairovė yra plati, o kiekvienas pagrindinis tinklas siūlo unikalų produktų pasirinkimą ir kainodaros strategijas, kurios atitinka įvairius vartotojų poreikius. Štai pagrindinių prekybos centrų apžvalga Patroje.</string>
+    <string name="shops_introduction">Patro prekybos centrų įvairovė yra plati, o kiekvienas pagrindinis tinklas siūlo unikalų produktų pasirinkimą ir kainodaros strategijas, kurios atitinka įvairius vartotojų poreikius. Štai pagrindinių prekybos centrų apžvalga Patroje.</string>
     <string name="shops_sklavenitis_title">Sklavenitis</string>
     <string name="shops_sklavenitis_text">Vienas iš pirmaujančių Graikijos prekybos tinklų, „Sklavenitis“, veikia keliose parduotuvėse Patroje. Tinklas garsėja plačiu produktų asortimentu, įskaitant šviežius vaisius, daržoves, mėsą, pieno produktus ir buities reikmenis. „Sklavenitis“ pabrėžia kokybę ir įvairovę, siūlydamas tiek vietinius, tiek tarptautinius prekės ženklus.</string>
     <string name="shops_ab_title">Alfa-Beta Vassilopoulos (AB)</string>

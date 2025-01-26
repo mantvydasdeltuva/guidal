@@ -25,8 +25,8 @@
     <string name="title_learn_more">Learn More</string>
 
     <string name="transportation_introduction">Patras offers a variety of transportation options for locals and visitors to explore its beautiful sites and surrounding areas.</string>
-    <string name="transportation_bus_system_title">Public Bus System (KTEL)</string>
-    <string name="transportation_bus_system_text">The KTEL buses in Patras are a convenient and affordable way to move around the city and connect to nearby towns. Tickets can be purchased at kiosks or directly on the bus.</string>
+    <string name="transportation_bus_system_title">Public Bus System (Astiko Patras)</string>
+    <string name="transportation_bus_system_text">The Astiko Patras buses in Patras are a convenient and affordable way to move around the city and connect to nearby towns. Tickets can be purchased at kiosks or directly on the bus.</string>
     <string name="transportation_bus_system_text_zones"><![CDATA[The city is divided into to zones: Zone A (green) & Zone B (blue). Ticket price depends in which zone you’re travelling.]]></string>
     <string name="transportation_railway_title">Suburban Railway (Hellenic Train)</string>
     <string name="transportation_railway_text">The Patras Suburban Railway connects the areas of Agios Vassilios and Kato Achaia with daily itineraries, contributing to the faster and comfortable movement of the passenger public of the wider area with the center of Patras, bypassing the city\'s traffic.</string>

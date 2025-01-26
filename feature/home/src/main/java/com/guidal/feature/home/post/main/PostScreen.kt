@@ -45,6 +45,7 @@ fun PostScreen(
     modifier: Modifier = Modifier
 ) {
     val postViewModel: PostViewModel = viewModel()
+    val uiState by postViewModel.uiState.collectAsState()
 
     val scrollState = rememberScrollState()
 
@@ -102,23 +103,30 @@ fun PostScreen(
                     .background(color = MaterialTheme.colorScheme.surfaceBright)
                     .padding(20.dp) // Padding for contents
             ) {
-                Spacer(modifier = Modifier.height(topBarHeight/2))
+                Spacer(modifier = Modifier.height(topBarHeight / 2))
 
-                repeat(8) {
-                    TextBlockSkeleton()
-                    Spacer(modifier = Modifier.height(10.dp))
-                }
+                when (val state = uiState) {
+                    is PostUiState.Loading -> {
+                        repeat(8) {
+                            TextBlockSkeleton()
+                            Spacer(modifier = Modifier.height(10.dp))
+                        }
+                    }
 
-                when (id) {
-                    1 -> TransportationScreen()
-                    2 -> ShopsScreen()
-                    3 -> TrailsScreen()
                     else -> {
-                        Text(
-                            text = "Empty",
-                            modifier = Modifier.fillMaxSize(),
-                            style = MaterialTheme.typography.bodyLarge
-                        )
+                        // TODO: SWITCH TO DATABASE
+                        when (id) {
+                            1 -> TransportationScreen()
+                            2 -> ShopsScreen()
+                            3 -> TrailsScreen()
+                            else -> {
+                                Text(
+                                    text = "Empty",
+                                    modifier = Modifier.fillMaxSize(),
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -136,7 +144,7 @@ fun PostScreen(
                     .padding(horizontal = 0.dp)
                     .offset {
                         val scroll = scrollState.value
-                        val originalOffset = (imageHeight-topBarHeight/2).toPx()
+                        val originalOffset = (imageHeight - topBarHeight / 2).toPx()
                         val offset = (originalOffset - scroll).coerceAtLeast(0f)
                         IntOffset(x = 0, y = offset.toInt())
                     }
@@ -148,6 +156,7 @@ fun PostScreen(
         }
     }
 }
+
 
 fun getPostTitle(context: Context, id: Int): String {
     val titleMap = mapOf(
