@@ -1,4 +1,4 @@
-package com.guidal.feature.home.post
+package com.guidal.feature.home.post.main
 
 // PostUiState.kt
 internal sealed interface PostUiState {

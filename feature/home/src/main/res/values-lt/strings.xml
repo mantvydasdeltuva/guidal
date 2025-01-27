@@ -19,4 +19,38 @@
     <string name="friday_short_title">Pn</string>
     <string name="saturday_short_title">Št</string>
     <string name="sunday_short_title">Sk</string>
+
+    <string name="title_official_website">Oficialus Puslapis</string>
+    <string name="title_learn_more">Sužinoti Daugiau</string>
+
+    <string name="transportation_introduction">Patras siūlo įvairias transporto galimybes, leidžiančias vietiniams gyventojams ir lankytojams tyrinėti gražiausias vietoves ir apylinkes.</string>
+    <string name="transportation_bus_system_title">Viešasis autobusų tinklas (Astiko Patras)</string>
+    <string name="transportation_bus_system_text">Patros Astiko Patras autobusai yra patogus ir nebrangus būdas keliauti po miestą ir susisiekti su netoliese esančiais miestais. Bilietus galima įsigyti kioskuose arba tiesiogiai autobuse.</string>
+    <string name="transportation_bus_system_text_zones"><![CDATA[Miestas padalintas į dvi zonas: Zona A (žalia) ir Zona B (mėlyna). Bilieto kaina priklauso nuo to, kurioje zonoje keliaujate.]]></string>
+    <string name="transportation_railway_title">Miesto geležinkelis (Hellenic Train)</string>
+    <string name="transportation_railway_text">Patras priemiestinis geležinkelis sujungia Agios Vassilios ir Kato Achaia rajonus su kasdieniais maršrutais, prisidedant prie greitesnio ir patogesnio platesnės zonos keleivių judėjimo su Patros centru, aplenkiant miesto eismą.</string>
+    <string name="transportation_taxis_title">Taksi</string>
+    <string name="transportation_taxis_text">Taksi yra lengvai pasiekiami visoje Patroje ir suteikia lankstų bei privatų keliavimo būdą. Jie yra palyginti nebrangūs lyginant su kitais Europos miestais, tačiau visada įsitikinkite, kad skaitiklis veikia tiksliai apskaičiuoti kainą.</string>
+    <string name="transportation_cycling_title">Dviračiai</string>
+    <string name="transportation_cycling_text">Patras tampa vis draugiškesnis dviračiams, kai kuriose miesto vietose yra dviračių takai. Dviračio nuoma – puikus būdas iš arti pažinti miestą, ypač palei pajūrį ir pėsčiųjų zonas. Kai kurios parduotuvės ir viešbučiai taip pat siūlo dviračių nuomą už nedidelį mokestį.</string>
+
+    <string name="shops_introduction">Patro prekybos centrų įvairovė yra plati, o kiekvienas pagrindinis tinklas siūlo unikalų produktų pasirinkimą ir kainodaros strategijas, kurios atitinka įvairius vartotojų poreikius. Štai pagrindinių prekybos centrų apžvalga Patroje.</string>
+    <string name="shops_sklavenitis_title">Sklavenitis</string>
+    <string name="shops_sklavenitis_text">Vienas iš pirmaujančių Graikijos prekybos tinklų, „Sklavenitis“, veikia keliose parduotuvėse Patroje. Tinklas garsėja plačiu produktų asortimentu, įskaitant šviežius vaisius, daržoves, mėsą, pieno produktus ir buities reikmenis. „Sklavenitis“ pabrėžia kokybę ir įvairovę, siūlydamas tiek vietinius, tiek tarptautinius prekės ženklus.</string>
+    <string name="shops_ab_title">Alfa-Beta Vassilopoulos (AB)</string>
+    <string name="shops_ab_text">Turėdamas reikšmingą buvimą Patroje, „AB“ siūlo platų produktų asortimentą, įskaitant šviežius vaisius, daržoves, mėsą, pieno produktus ir tarptautines prekes. Tinklas garsėja aukštos kokybės pasiūlymais ir buvo pirmasis prekybos centras Graikijoje, įdiegęs lojalumo programą.</string>
+    <string name="shops_lidl_title">Lidl</string>
+    <string name="shops_lidl_text">Šis vokiečių nuolaidų tinklas įsitvirtino Patroje, siūlydamas produktus, įskaitant šviežius vaisius, daržoves, mėsą, pieno produktus ir buities reikmenis. „Lidl“ garsėja savo ekonomiška kainodaros strategija ir dažnai rengia temines savaites, tokias kaip „Graikų savaitė“, pristatydamas vietines specialybes.</string>
+    <string name="shops_mymarket_title">My Market</string>
+    <string name="shops_mymarket_text">„My Market“ veikia keliose parduotuvėse Patroje, siūlydamas platų produktų pasirinkimą, įskaitant šviežius vaisius, daržoves, mėsą, pieno produktus ir būtiniausias prekes. Tinklas orientuojasi į kokybiškus produktus už konkurencingą kainą.</string>
+    <string name="shops_masoutis_title">Masoutis</string>
+    <string name="shops_masoutis_text">Pirmiausia aptarnaujantis šiaurinę Graikiją, „Masoutis“ išplėtė savo veiklą į Patrą, pabrėždamas šviežius, vietinius produktus, įskaitant vaisius, daržoves, mėsą ir pieno produktus. Tinklas siekia palaikyti vietos gamintojus, o tai atsispindi jų produktų pasiūloje.</string>
+
+    <string name="trails_introduction">Patras siūlo įvairias žygių trasas, kurios atitinka skirtingus įgūdžių lygius ir atskleidžia regiono gamtos grožį. Štai keletas žymių trasų Patroje ir jos apylinkėse.</string>
+    <string name="trails_girokomeio_psarthi_title">Girokomeio Patras - Psarthi prieglauda</string>
+    <string name="trails_girokomeio_psarthi_text">Ši trasa garsėja savo vaizdingais vaizdais ir laikoma vidutinio sunkumo. Žygeiviai gali mėgautis gamtos kraštovaizdžiais ir šios vietovės ramybe. Tai mėgstamas maršrutas tarp vietos žygių entuziastų.</string>
+    <string name="trails_patras_kalavryta_title">Patras - Ano Vlasia - Agios Taxiarchis kriokliai - Kalavryta</string>
+    <string name="trails_patras_kalavryta_text">Apytiksliai 50,9 mylių ilgio šis taškas į tašką maršrutas laikomas sudėtingu ir vidutiniškai užtrunka apie 21 valandą ir 39 minutes. Maršrutas suteikia žygeiviams galimybę tyrinėti įvairią reljefą ir grožėtis Agios Taxiarchis krioklių grožiu. Geriausias laikas šiai trasai yra nuo balandžio iki gruodžio.</string>
+    <string name="trails_national031_title">Nacionalinis kelias O31</string>
+    <string name="trails_national031_text">Jungdamas Patrą su Senovės Olimpija, Nacionalinis kelias O31 praeina pro kelis vaizdingus kaimus, tokius kaip Petroto, Agia Paraskevi, Kalanistra ir Ano Vlasia. Ši trasa siūlo žygeiviams kelionę per Graikijos turtingą istoriją ir įvairius kraštovaizdžius.</string>
 </resources>

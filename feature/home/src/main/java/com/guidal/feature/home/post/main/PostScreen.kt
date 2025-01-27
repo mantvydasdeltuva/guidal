@@ -1,5 +1,6 @@
-package com.guidal.feature.home.post
+package com.guidal.feature.home.post.main
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -21,16 +22,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.guidal.core.ui.R
 import com.guidal.core.ui.components.Scaffold
 import com.guidal.core.ui.components.TopAppBar
 import com.guidal.core.ui.models.UiModelTopAppBarIcon
 import com.guidal.core.ui.theme.GuidalIcons
+import com.guidal.core.ui.R
+import com.guidal.core.ui.skeletons.TextBlockSkeleton
+import com.guidal.feature.home.post.shops.ShopsScreen
+import com.guidal.feature.home.post.trails.TrailsScreen
+import com.guidal.feature.home.post.transportation.TransportationScreen
 
 @Composable
 fun PostScreen(
@@ -64,13 +70,6 @@ fun PostScreen(
         else -> 0
     }
     val imagePainter = if (splashImage != 0) painterResource(id = splashImage) else null
-    // temporary
-    val postTitle = when (id) {
-        3 -> "Trails"
-        2 -> "Shops"
-        1 -> "Transportation"
-        else -> "Post"
-    }
 
     Scaffold(
         modifier = modifier
@@ -100,25 +99,40 @@ fun PostScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .verticalScroll(scrollState)
-                    .padding(top = imageHeight)
+                    .padding(top = imageHeight) // Padding for whole component
                     .background(color = MaterialTheme.colorScheme.surfaceBright)
+                    .padding(20.dp) // Padding for contents
             ) {
-                // Spacer to push content down (size of TopBar covering the content)
-                Spacer(modifier = Modifier.height(topBarHeight/2))
+                Spacer(modifier = Modifier.height(topBarHeight / 2))
 
-                // TODO: SAMPLE DATA, REPLACE WITH DATA FROM DATABASE
-                repeat(10) {
-                    Text(
-                        text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp)
-                    )
+                when (val state = uiState) {
+                    is PostUiState.Loading -> {
+                        repeat(8) {
+                            TextBlockSkeleton()
+                            Spacer(modifier = Modifier.height(10.dp))
+                        }
+                    }
+
+                    else -> {
+                        // TODO: SWITCH TO DATABASE
+                        when (id) {
+                            1 -> TransportationScreen()
+                            2 -> ShopsScreen()
+                            3 -> TrailsScreen()
+                            else -> {
+                                Text(
+                                    text = "Empty",
+                                    modifier = Modifier.fillMaxSize(),
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
+                            }
+                        }
+                    }
                 }
             }
 
             TopAppBar(
-                title = postTitle,
+                title = getPostTitle(LocalContext.current, id),
                 navigationIcon = UiModelTopAppBarIcon(
                     icon = GuidalIcons.Default.ArrowBack,
                     onClick = toBack,
@@ -130,7 +144,7 @@ fun PostScreen(
                     .padding(horizontal = 0.dp)
                     .offset {
                         val scroll = scrollState.value
-                        val originalOffset = (imageHeight-topBarHeight/2).toPx()
+                        val originalOffset = (imageHeight - topBarHeight / 2).toPx()
                         val offset = (originalOffset - scroll).coerceAtLeast(0f)
                         IntOffset(x = 0, y = offset.toInt())
                     }
@@ -141,4 +155,16 @@ fun PostScreen(
             )
         }
     }
+}
+
+
+fun getPostTitle(context: Context, id: Int): String {
+    val titleMap = mapOf(
+        3 to com.guidal.feature.home.R.string.trails_title,
+        2 to com.guidal.feature.home.R.string.shops_title,
+        1 to com.guidal.feature.home.R.string.transportation_title
+    )
+
+    val stringResId = titleMap[id] ?: com.guidal.feature.home.R.string.post_title
+    return context.getString(stringResId)
 }

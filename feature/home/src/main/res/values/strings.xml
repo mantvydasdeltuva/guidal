@@ -20,4 +20,38 @@
     <string name="friday_short_title">Fri</string>
     <string name="saturday_short_title">Sat</string>
     <string name="sunday_short_title">Sun</string>
+
+    <string name="title_official_website">Official Website</string>
+    <string name="title_learn_more">Learn More</string>
+
+    <string name="transportation_introduction">Patras offers a variety of transportation options for locals and visitors to explore its beautiful sites and surrounding areas.</string>
+    <string name="transportation_bus_system_title">Public Bus System (Astiko Patras)</string>
+    <string name="transportation_bus_system_text">The Astiko Patras buses in Patras are a convenient and affordable way to move around the city and connect to nearby towns. Tickets can be purchased at kiosks or directly on the bus.</string>
+    <string name="transportation_bus_system_text_zones"><![CDATA[The city is divided into to zones: Zone A (green) & Zone B (blue). Ticket price depends in which zone you’re travelling.]]></string>
+    <string name="transportation_railway_title">Suburban Railway (Hellenic Train)</string>
+    <string name="transportation_railway_text">The Patras Suburban Railway connects the areas of Agios Vassilios and Kato Achaia with daily itineraries, contributing to the faster and comfortable movement of the passenger public of the wider area with the center of Patras, bypassing the city\'s traffic.</string>
+    <string name="transportation_taxis_title">Taxis</string>
+    <string name="transportation_taxis_text">Taxis are readily available throughout Patras and provide a flexible and private way to travel. They are relatively affordable compared to other European cities, but always check that the meter is running for accurate fare calculation.</string>
+    <string name="transportation_cycling_title">Cycling</string>
+    <string name="transportation_cycling_text">Patras is becoming more bike-friendly, with cycling lanes in some parts of the city. Renting a bike is a fantastic way to see the city up close, especially along the seafront and pedestrianized areas. Some shops and hotels also offer bike rentals for a small fee.</string>
+
+    <string name="shops_introduction">Patras supermarket landscape is diverse, with each major chain offering unique product selections and pricing strategies to cater to various consumer preferences. Here\'s an overview of some of the leading supermarket chains in Patras.</string>
+    <string name="shops_sklavenitis_title">Sklavenitis</string>
+    <string name="shops_sklavenitis_text">As one of Greece\'s leading supermarket chains, Sklavenitis operates multiple stores in Patras. The chain is known for its extensive range of products, including fresh produce, meats, dairy, and household items. Sklavenitis emphasizes quality and variety, offering both local and international brands to meet diverse consumer needs.</string>
+    <string name="shops_ab_title">Alfa-Beta Vassilopoulos (AB)</string>
+    <string name="shops_ab_text">With a significant presence in Patras, AB offers a wide array of products, including fresh produce, meats, dairy, and international items. The chain is known for its high-quality offerings and was the first supermarket in Greece to introduce a customer loyalty program.</string>
+    <string name="shops_lidl_title">Lidl</string>
+    <string name="shops_lidl_text">This German discount retailer has established a strong presence in Patras, offering a range of products, including fresh produce, meats, dairy, and household items. Lidl is known for its cost-effective pricing strategy and frequently features themed weeks, such as \"Greek Week,\" highlighting local specialties.</string>
+    <string name="shops_mymarket_title">My Market</string>
+    <string name="shops_mymarket_text">My Market operates several stores in Patras, offering a comprehensive selection of products, including fresh produce, meats, dairy, and household essentials. The chain focuses on delivering quality products at competitive prices.</string>
+    <string name="shops_masoutis_title">Masoutis</string>
+    <string name="shops_masoutis_text">Primarily serving Northern Greece, Masoutis has expanded its presence to Patras, emphasizing fresh, locally sourced products, including produce, meats, and dairy. The chain is committed to supporting local producers, which is reflected in their product offerings.</string>
+
+    <string name="trails_introduction">Patras offers a variety of hiking trails that cater to different skill levels and showcase the region\'s natural beauty. Here are some notable trails in and around Patras.</string>
+    <string name="trails_girokomeio_psarthi_title">Girokomeio Patras - Psarthi Refuge</string>
+    <string name="trails_girokomeio_psarthi_text">This trail is known for its scenic views and is considered moderately challenging. Hikers can enjoy the natural landscapes and the tranquility of the area. It\'s a favored route among local hiking enthusiasts.</string>
+    <string name="trails_patras_kalavryta_title">Patras - Ano Vlasia - Agios Taxiarchis Waterfalls - Kalavryta</string>
+    <string name="trails_patras_kalavryta_text">Spanning approximately 50.9 miles, this point-to-point trail is considered challenging and takes an average of 21 hours and 39 minutes to complete. The route offers hikers the opportunity to explore diverse terrains and witness the beauty of the Agios Taxiarchis Waterfalls. The best times to embark on this trail are from April through December.</string>
+    <string name="trails_national031_title">National Path O31</string>
+    <string name="trails_national031_text">Connecting Patras to Ancient Olympia, the National Path O31 passes through several picturesque villages, including Petroto, Agia Paraskevi, Kalanistra, and Ano Vlasia. This trail offers hikers a journey through Greece\'s rich history and diverse landscapes.</string>
 </resources>
