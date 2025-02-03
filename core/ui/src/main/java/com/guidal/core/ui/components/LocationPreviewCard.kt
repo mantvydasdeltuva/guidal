@@ -172,26 +172,6 @@ fun LocationPreviewCard(
     }
 }
 
-@Composable
-fun RatingBar(rating: Float, maxRating: Int = 5) {
-    Row {
-        for (i in 1..maxRating) {
-            val icon = when {
-                i <= rating -> GuidalIcons.Default.Star
-                i - 0.5f <= rating -> GuidalIcons.Default.StarHalf
-                else -> GuidalIcons.Outlined.Star
-            }
-
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(dimensionResource(R.dimen.icon_size_20))
-            )
-        }
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
 fun PreviewLocationPreviewCard() {

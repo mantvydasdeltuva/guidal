@@ -8,7 +8,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.guidal.feature.home.location.LocationScreen
+import com.guidal.feature.home.location.list.LocationListScreen
+import com.guidal.feature.home.location.view.LocationViewScreen
 import com.guidal.feature.home.main.MainScreen
 import com.guidal.feature.home.post.main.PostScreen
 
@@ -108,11 +109,11 @@ internal fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
                         Route.POST.replace("{id}", id.toString())
                     )
                 },
-                toLocation = { id ->
+                toLocationList = { id ->
                     navController.navigate(
                         Route.LOCATIONS_LIST.replace("{id}", id.toString())
                     )
-                }
+                },
             )
         }
         composable(
@@ -160,7 +161,38 @@ internal fun NavGraphBuilder.homeNavigationGraph(navController: NavController) {
                 )
             }
         ) { backStackEntry ->
-            LocationScreen(
+            LocationListScreen(
+                id = backStackEntry.arguments?.getString("id")?.toInt() ?: 0,
+                toLocationView = { id ->
+                    navController.navigate(
+                        Route.LOCATION_VIEW.replace("{id}", id.toString())
+                    )
+                },
+                toBack = {
+                    navController.popBackStack()
+                },
+            )
+        }
+        composable(
+            route = Route.LOCATION_VIEW,
+            enterTransition = {
+                fadeIn(
+                    animationSpec = tween(
+                        durationMillis = 250,
+                        easing = LinearEasing
+                    )
+                )
+            },
+            popExitTransition = {
+                fadeOut(
+                    animationSpec = tween(
+                        durationMillis = 200,
+                        easing = LinearEasing
+                    )
+                )
+            }
+        ) { backStackEntry ->
+            LocationViewScreen(
                 id = backStackEntry.arguments?.getString("id")?.toInt() ?: 0,
                 toBack = {
                     navController.popBackStack()

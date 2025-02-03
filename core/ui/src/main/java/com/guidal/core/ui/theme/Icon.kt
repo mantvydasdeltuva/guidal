@@ -59,7 +59,8 @@ object GuidalIcons {
         val Edit: ImageVector,
         val Redirect: ImageVector,
         val Favorite: ImageVector,
-        val Star: ImageVector
+        val Star: ImageVector,
+        val PriceTag: ImageVector
     )
 
     data class CategoryIcons(
@@ -142,7 +143,8 @@ object GuidalIcons {
             Redirect = ImageVector.vectorResource(R.drawable.redirect_outlined_icon),
 
             Favorite = ImageVector.vectorResource(R.drawable.favorite_outlined_icon),
-            Star = ImageVector.vectorResource(R.drawable.star_outlined_icon)
+            Star = ImageVector.vectorResource(R.drawable.star_outlined_icon),
+            PriceTag = ImageVector.vectorResource(R.drawable.price_tag_outlined_icon)
         )
 
         Category = CategoryIcons(
