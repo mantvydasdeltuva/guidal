@@ -17,6 +17,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -30,6 +31,7 @@ import com.guidal.core.ui.models.UiModelMenuButtonIcon
 import com.guidal.core.ui.models.UiModelTopAppBarIcon
 import com.guidal.core.ui.theme.GuidalIcons
 import com.guidal.core.ui.theme.GuidalTheme
+import com.guidal.data.api.services.NotificationService
 import com.guidal.feature.menu.R
 
 @Composable
@@ -50,6 +52,13 @@ fun AboutScreen(
     val urlToS = stringResource(R.string.about_menu_button_url_tos)
     val urlLicenses = stringResource(R.string.about_menu_button_url_licenses)
     val urlRateApp = stringResource(R.string.about_menu_button_url_rate_app)
+
+    val context = LocalContext.current
+    val notificationService = NotificationService(context)
+    notificationService.showNotification(
+        title = "Rate Our App",
+        text = "We would appreciate it if you could rate our application."
+    )
 
     Scaffold(
         topBar = {

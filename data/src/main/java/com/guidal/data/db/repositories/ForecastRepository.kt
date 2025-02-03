@@ -1,5 +1,7 @@
 package com.guidal.data.db.repositories
 
+import android.app.Application
+import com.guidal.data.api.services.NotificationService
 import com.guidal.data.api.services.OpenWeatherMapService
 import com.guidal.data.db.daos.ForecastDao
 import com.guidal.data.db.entities.ForecastEntity
@@ -21,7 +23,8 @@ interface ForecastRepository {
 internal class ForecastRepositoryImpl @Inject constructor(
     private val forecastDao: ForecastDao,
     private val openWeatherMapService: OpenWeatherMapService,
-    private val databaseOperationUtils: DatabaseOperationUtils
+    private val databaseOperationUtils: DatabaseOperationUtils,
+    private val app: Application,
 ) : ForecastRepository {
     override suspend fun getForecasts(): DatabaseOperation<List<ForecastModel>> {
         return databaseOperationUtils.safeDatabaseOperation {
@@ -44,6 +47,23 @@ internal class ForecastRepositoryImpl @Inject constructor(
                         timestamp = getCurrentDayStartTimestamp()
                     )
                 }
+
+                val notificationService = NotificationService(app.applicationContext)
+                val title = "Today's Weather"
+                val textMap = mapOf(
+                    "Thunder" to "A thunderstorm is expected today. Stay safe!",
+                    "Rainy" to "Expect heavy rain today. Don't forget your umbrella!",
+                    "Snowy" to "Snowfall is expected today. Drive carefully!",
+                    "Partly Cloudy" to "Partly cloudy skies today. Enjoy the mild weather.",
+                    "Sunny" to "Expect clear skies and sunshine all day!",
+                    "Cloudy" to "Cloudy weather today, but no rain expected.",
+                    "Unknown" to "Weather data is unavailable. Please check again later."
+                )
+
+                notificationService.showNotification(
+                    title = title,
+                    text = textMap[forecastEntityList[0].type] ?: "Weather data is unavailable. Please check again later."
+                )
 
                 // Save data to database
                 forecastDao.insertAll(forecastEntityList)
