@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
@@ -20,10 +21,9 @@ fun MainScreen(
             ), 12f
         )
     }
-
     GoogleMap(
         modifier = Modifier.fillMaxSize(),
         cameraPositionState = cameraPositionState,
-    ) {
-    }
+        properties = MapProperties(isMyLocationEnabled = true)
+    )
 }
