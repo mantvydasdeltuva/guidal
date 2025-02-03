@@ -1,6 +1,11 @@
 package com.guidal.feature.home.post.main
 
 import android.content.Context
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -14,13 +19,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
@@ -37,6 +46,7 @@ import com.guidal.core.ui.skeletons.TextBlockSkeleton
 import com.guidal.feature.home.post.shops.ShopsScreen
 import com.guidal.feature.home.post.trails.TrailsScreen
 import com.guidal.feature.home.post.transportation.TransportationScreen
+import kotlinx.coroutines.launch
 
 @Composable
 fun PostScreen(
@@ -48,6 +58,7 @@ fun PostScreen(
     val uiState by postViewModel.uiState.collectAsState()
 
     val scrollState = rememberScrollState()
+    val coroutineScope = rememberCoroutineScope()
 
     // Values, used for display and calculations
     val imageHeight = 250.dp
@@ -72,6 +83,29 @@ fun PostScreen(
     val imagePainter = if (splashImage != 0) painterResource(id = splashImage) else null
 
     Scaffold(
+        floatingActionButton = {
+            AnimatedVisibility(
+                visible = scrollState.value.toFloat() >= 550f,
+                enter = fadeIn() + scaleIn(),
+                exit = fadeOut() + scaleOut()
+            ) {
+                FloatingActionButton(
+                    onClick = {
+                        coroutineScope.launch {
+                            scrollState.animateScrollTo(0)
+                        }
+                    },
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onSurface,
+                ) {
+                    Icon(
+                        imageVector = GuidalIcons.Default.ChevronForward,
+                        contentDescription = "Scroll to Top",
+                        modifier = Modifier.rotate(-90f)
+                    )
+                }
+            }
+        },
         modifier = modifier
     ) { innerPadding ->
         Box(
