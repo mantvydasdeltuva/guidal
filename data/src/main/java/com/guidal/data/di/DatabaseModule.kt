@@ -141,9 +141,10 @@ internal object DatabaseModule {
     fun provideForecastRepository(
         forecastDao: ForecastDao,
         openWeatherMapService: OpenWeatherMapService,
-        databaseOperationUtils: DatabaseOperationUtils
+        databaseOperationUtils: DatabaseOperationUtils,
+        app: Application
     ): ForecastRepository {
-        return ForecastRepositoryImpl(forecastDao, openWeatherMapService, databaseOperationUtils)
+        return ForecastRepositoryImpl(forecastDao, openWeatherMapService, databaseOperationUtils, app)
     }
 
     @Provides
