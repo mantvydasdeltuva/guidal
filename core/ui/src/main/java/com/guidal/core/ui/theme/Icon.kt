@@ -40,7 +40,8 @@ object GuidalIcons {
         val Star: ImageVector,
         val StarHalf: ImageVector,
         val Map: ImageVector,
-        val Location: ImageVector
+        val Location: ImageVector,
+        val MapPoint: ImageVector
     )
 
     data class OutlinedIcons(
@@ -123,6 +124,8 @@ object GuidalIcons {
             StarHalf = ImageVector.vectorResource(R.drawable.star_half_icon),
             Map = ImageVector.vectorResource(R.drawable.map_icon),
             Location = ImageVector.vectorResource(R.drawable.location_icon),
+
+            MapPoint = ImageVector.vectorResource(R.drawable.location_map_point_icon),
         )
 
         Outlined = OutlinedIcons(

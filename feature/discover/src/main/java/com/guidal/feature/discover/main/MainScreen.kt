@@ -1,6 +1,9 @@
 package com.guidal.feature.discover.main
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -36,8 +39,11 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -47,6 +53,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import com.guidal.core.ui.components.OutlinedButton
 import com.guidal.core.ui.components.Button
+import com.guidal.core.ui.theme.GuidalIcons
 import com.guidal.data.db.models.LocationModel
 import com.guidal.feature.discover.R
 import kotlinx.coroutines.delay
@@ -101,6 +108,7 @@ fun MainScreen(
             Marker(
                 state = rememberMarkerState(position = latLng),
                 title = location.title,
+                icon = bitmapDescriptorFromVector(LocalContext.current, com.guidal.core.ui.R.drawable.location_map_point_icon, 1.4f),
                 alpha = if (selectedLocation == null || isSelected) 1f else 0.2f, // Dim non-selected markers
                 onClick = {
                     cameraPositionState.move(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
@@ -119,7 +127,7 @@ fun MainScreen(
 }
 
 @Composable
-fun LocationPopup(
+private fun LocationPopup(
     selectedLocation: LocationModel?,
     onDismiss: () -> Unit,
     toLocationView: (Int) -> Unit
@@ -204,4 +212,23 @@ fun LocationPopup(
             }
         }
     }
+}
+
+private fun bitmapDescriptorFromVector(
+    context: Context,
+    vectorResId: Int,
+    scaleFactor: Float = 1f
+): BitmapDescriptor {
+    val vectorDrawable = ContextCompat.getDrawable(context, vectorResId) ?: return BitmapDescriptorFactory.defaultMarker()
+
+    val width = (vectorDrawable.intrinsicWidth * scaleFactor).toInt()
+    val height = (vectorDrawable.intrinsicHeight * scaleFactor).toInt()
+
+    val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(bitmap)
+
+    vectorDrawable.setBounds(0, 0, width, height)
+    vectorDrawable.draw(canvas)
+
+    return BitmapDescriptorFactory.fromBitmap(bitmap)
 }
