@@ -19,7 +19,8 @@ internal interface LocationDao {
             location.price as price,
             location.schedule as schedule,
             location.latitude as latitude,
-            location.longitude as longitude
+            location.longitude as longitude,
+            location.image as image
         FROM location
         INNER JOIN category ON location.category_id = category.id
         WHERE location.category_id = :categoryId

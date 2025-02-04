@@ -42,4 +42,6 @@ internal data class LocationEntity(
     val lat: Float,
     @ColumnInfo(name = "longitude")
     val long: Float,
+    @ColumnInfo(name = "image")
+    val image: String?,
 )

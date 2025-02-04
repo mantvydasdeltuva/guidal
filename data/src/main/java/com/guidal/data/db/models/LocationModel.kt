@@ -11,4 +11,5 @@ data class LocationModel(
     val schedule: String,
     val latitude: Float,
     val longitude: Float,
+    val image: String? = null,
 )
