@@ -1,10 +1,14 @@
 package com.guidal.feature.discover.main
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -22,6 +26,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -38,6 +44,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -53,7 +60,6 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import com.guidal.core.ui.components.OutlinedButton
 import com.guidal.core.ui.components.Button
-import com.guidal.core.ui.theme.GuidalIcons
 import com.guidal.data.db.models.LocationModel
 import com.guidal.feature.discover.R
 import kotlinx.coroutines.delay
@@ -61,10 +67,44 @@ import kotlinx.coroutines.delay
 @Composable
 fun MainScreen(
     toLocationView: (id: Int) -> Unit,
+    toLocationSettingsPage: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val mainViewModel: MainViewModel = hiltViewModel()
     val uiState by mainViewModel.uiState.collectAsState()
+
+    // Check if the location permission is granted
+    val isLocationPermissionGranted = ContextCompat.checkSelfPermission(
+        LocalContext.current,
+        Manifest.permission.ACCESS_FINE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED
+
+
+    if (!isLocationPermissionGranted) {
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Column(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .wrapContentSize(Alignment.Center)
+                    .padding(50.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.location_view_location_permission_message),
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    textAlign = TextAlign.Center
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(
+                    onClick = { toLocationSettingsPage() },
+                    label = stringResource(R.string.location_view_location_permission_button_label),
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+            }
+        }
+        return
+    }
 
     // Extract locations from UI state
     val locations = remember(uiState) {
@@ -79,7 +119,6 @@ fun MainScreen(
     }
 
     val cameraPositionState = rememberCameraPositionState {
-        // Start with a null position, will update after locations load
         position = CameraPosition.fromLatLngZoom(
             LatLng(0.0, 0.0),
             1f
@@ -108,7 +147,7 @@ fun MainScreen(
             Marker(
                 state = rememberMarkerState(position = latLng),
                 title = location.title,
-                icon = bitmapDescriptorFromVector(LocalContext.current, com.guidal.core.ui.R.drawable.location_map_point_icon, 1.4f),
+                icon = bitmapDescriptorFromVector(LocalContext.current, com.guidal.core.ui.R.drawable.location_map_point_icon, 1.2f),
                 alpha = if (selectedLocation == null || isSelected) 1f else 0.2f, // Dim non-selected markers
                 onClick = {
                     cameraPositionState.move(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
@@ -214,7 +253,7 @@ private fun LocationPopup(
     }
 }
 
-private fun bitmapDescriptorFromVector(
+fun bitmapDescriptorFromVector(
     context: Context,
     vectorResId: Int,
     scaleFactor: Float = 1f

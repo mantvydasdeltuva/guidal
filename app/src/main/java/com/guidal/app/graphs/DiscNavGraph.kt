@@ -1,5 +1,6 @@
 package com.guidal.app.graphs
 
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -10,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.guidal.feature.discover.main.MainScreen
 import com.guidal.feature.home.location.view.LocationViewScreen
+import com.guidal.feature.menu.privacy.PrivacyScreen
 
 // TODO KDoc
 // TODO Android test
@@ -103,6 +105,11 @@ internal fun NavGraphBuilder.discoverNavigationGraph(navController: NavControlle
                         Route.LOCATION_VIEW.replace("{id}", id.toString())
                     )
                 },
+                toLocationSettingsPage =  {
+                    navController.navigate(
+                        Route.PRIVACY
+                    )
+                }
             )
         }
         composable(
@@ -129,6 +136,35 @@ internal fun NavGraphBuilder.discoverNavigationGraph(navController: NavControlle
                 toBack = {
                     navController.popBackStack()
                 },
+            )
+        }
+        composable(
+            route = Route.PRIVACY,
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Start,
+                    animationSpec = tween(
+                        delayMillis = 100,
+                        durationMillis = 300,
+                        easing = LinearEasing
+                    )
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.End,
+                    animationSpec = tween(
+                        delayMillis = 100,
+                        durationMillis = 300,
+                        easing = LinearEasing
+                    )
+                )
+            }
+        ) {
+            PrivacyScreen(
+                toBack = {
+                    navController.popBackStack()
+                }
             )
         }
     }
