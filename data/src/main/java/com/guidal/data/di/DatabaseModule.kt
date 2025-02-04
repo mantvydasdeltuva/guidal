@@ -1,6 +1,7 @@
 package com.guidal.data.di
 
 import android.app.Application
+import android.location.Location
 import androidx.room.Room
 import androidx.room.migration.Migration
 import com.guidal.data.api.services.OpenWeatherMapService
@@ -12,11 +13,14 @@ import com.guidal.data.db.daos.UserDao
 import com.guidal.data.db.Database
 import com.guidal.data.db.daos.CategoryDao
 import com.guidal.data.db.daos.ForecastDao
+import com.guidal.data.db.daos.LocationDao
 import com.guidal.data.db.migrations.MigrationsRegistry
 import com.guidal.data.db.repositories.CategoryRepository
 import com.guidal.data.db.repositories.CategoryRepositoryImpl
 import com.guidal.data.db.repositories.ForecastRepository
 import com.guidal.data.db.repositories.ForecastRepositoryImpl
+import com.guidal.data.db.repositories.LocationRepository
+import com.guidal.data.db.repositories.LocationRepositoryImpl
 import com.guidal.data.db.repositories.UserRepository
 import com.guidal.data.db.repositories.UserRepositoryImpl
 import com.guidal.data.utils.DatabaseOperationUtils
@@ -151,5 +155,24 @@ internal object DatabaseModule {
     @Singleton
     fun provideForecastDao(database: Database): ForecastDao {
         return database.forecastDao()
+    }
+
+    /*
+     * Location table
+     */
+
+    @Provides
+    @Singleton
+    fun provideLocationRepository(
+        locationDao: LocationDao,
+        databaseOperationUtils: DatabaseOperationUtils
+    ): LocationRepository {
+        return LocationRepositoryImpl(locationDao, databaseOperationUtils)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocationDao(database: Database): LocationDao {
+        return database.locationDao()
     }
 }

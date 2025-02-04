@@ -25,6 +25,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -37,7 +38,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.guidal.core.ui.components.Scaffold
 import com.guidal.core.ui.components.TopAppBar
 import com.guidal.core.ui.models.UiModelTopAppBarIcon
@@ -56,8 +57,8 @@ fun LocationViewScreen(
     toBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val viewViewModel: LocationViewViewModel = viewModel()
-    val uiState by viewViewModel.uiState.collectAsState()
+    val locationViewViewModel: LocationViewViewModel = hiltViewModel()
+    val uiState by locationViewViewModel.uiState.collectAsState()
 
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
@@ -74,6 +75,10 @@ fun LocationViewScreen(
     val dynamicRadius = (maxRadius.value * (1 - scrollProgress)).coerceAtLeast(minRadius.value)
 
     val imagePainter = painterResource(R.drawable.sample_image)
+
+    LaunchedEffect(Unit) {
+        locationViewViewModel.fetch(id)
+    }
 
     Scaffold(
         floatingActionButton = {
@@ -149,7 +154,7 @@ fun LocationViewScreen(
                             style = MaterialTheme.typography.labelLarge
                         )
                         Text(
-                            text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                            text = uiState.location?.description ?: "",
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(bottom = 10.dp),
@@ -161,15 +166,15 @@ fun LocationViewScreen(
                             modifier = Modifier.padding(vertical = 10.dp)
                         ) {
                             Text(
-                                text = "3.2",
+                                text = uiState.location?.rating.toString(),
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
-                            RatingBar(rating = 3.2F)
+                            RatingBar(rating = uiState.location?.rating ?: 0f)
                         }
                         HorizontalDivider()
                         InTextButton(
-                            label = "Address goes here",
+                            label = uiState.location?.address ?: "",
                             onClick = {
                                 // Navigate to Google Maps link, it should automatically open Google Maps app
                             },
@@ -179,7 +184,7 @@ fun LocationViewScreen(
                         )
                         HorizontalDivider()
                         InTextButton(
-                            label = "Free",
+                            label = uiState.location?.price?.takeIf { it > 0 }?.toString() ?: "Free",
                             leadingIcon = UiModelInTextButtonIcon(
                                 imageVector = GuidalIcons.Outlined.PriceTag,
                             ),
@@ -212,7 +217,7 @@ fun LocationViewScreen(
             }
 
             TopAppBar(
-                title = "Location Title",
+                title = uiState.location?.title ?: "Unknown" ,
                 navigationIcon = UiModelTopAppBarIcon(
                     icon = GuidalIcons.Default.ArrowBack,
                     onClick = toBack,

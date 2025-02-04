@@ -2,17 +2,18 @@ package com.guidal.feature.home.location.view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.guidal.data.db.models.LocationModel
+import com.guidal.data.db.repositories.LocationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.random.Random
 
 @HiltViewModel
 internal class LocationViewViewModel @Inject constructor(
+    private val locationRepository: LocationRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<LocationViewUiState>(
         value = LocationViewUiState.Idle()
@@ -20,20 +21,43 @@ internal class LocationViewViewModel @Inject constructor(
 
     val uiState = _uiState.asStateFlow()
 
-    init {
-        simulateLoading()
-    }
-
-    private fun simulateLoading() {
+    fun fetch(locationId: Int) {
         viewModelScope.launch {
             _uiState.update {
                 it.transformTo<LocationViewUiState.Loading>()
             }
 
-            delay(Random.nextLong(1000, 2001))
+            var locationResult: Result<LocationModel>? = null
 
+            val locationJob = launch {
+                locationRepository.getLocationById(locationId)
+                    .onSuccess { location ->
+                        locationResult = Result.success(location)
+                    }
+                    .onFailure { exception ->
+                        locationResult = Result.failure(exception)
+                    }
+            }
+
+            // Wait for tasks to complete
+            locationJob.join()
+
+            // Update UI state
             _uiState.update {
-                it.transformTo<LocationViewUiState.Idle>()
+                when {
+                    locationResult?.isSuccess == true -> {
+                        it.transformTo<LocationViewUiState.Idle>().copy(
+                            location = locationResult?.getOrNull()?.copy(),
+                        )
+                    }
+                    else -> {
+                        it.transformTo<LocationViewUiState.Error>(
+                            message = "Failed to load location."
+                        ).copy(
+                            location = null
+                        )
+                    }
+                }
             }
         }
     }
