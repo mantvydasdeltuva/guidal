@@ -1,64 +1,63 @@
-package com.guidal.feature.home.location
+package com.guidal.feature.home.location.list
 
 import com.guidal.data.db.models.LocationModel
 
-// LocationUiState.kt
-internal sealed interface LocationUiState {
+// LocationListUiState.kt
+internal sealed interface LocationListUiState {
     val isLoading: Boolean
     val locations: List<LocationModel>
 
     data class Idle(
         override val isLoading: Boolean = false,
         override val locations: List<LocationModel> = emptyList()
-    ) : LocationUiState
+    ) : LocationListUiState
 
     data class Loading(
         override val isLoading: Boolean = true,
         override val locations: List<LocationModel> = emptyList()
-    ) : LocationUiState
+    ) : LocationListUiState
 
     data class Error(
         val message: String,
         override val isLoading: Boolean = false,
         override val locations: List<LocationModel> = emptyList()
-    ) : LocationUiState
+    ) : LocationListUiState
 
     data class Success(
         override val isLoading: Boolean = false,
         override val locations: List<LocationModel> = emptyList()
-    ) : LocationUiState
+    ) : LocationListUiState
 }
 
-internal inline fun <reified T : LocationUiState> LocationUiState.transformTo(
+internal inline fun <reified T : LocationListUiState> LocationListUiState.transformTo(
     message: String? = null,
 ) : T {
     return when (T::class) {
-        LocationUiState.Idle::class -> LocationUiState.Idle(
+        LocationListUiState.Idle::class -> LocationListUiState.Idle(
             isLoading = this.isLoading,
             locations = this.locations.toList()
         ) as T
-        LocationUiState.Loading::class -> LocationUiState.Loading(
+        LocationListUiState.Loading::class -> LocationListUiState.Loading(
             isLoading = this.isLoading,
             locations = this.locations.toList()
         ) as T
-        LocationUiState.Error::class -> {
-            if (this is LocationUiState.Error) {
-                LocationUiState.Error(
+        LocationListUiState.Error::class -> {
+            if (this is LocationListUiState.Error) {
+                LocationListUiState.Error(
                     message = message ?: this.message,
                     isLoading = this.isLoading,
                     locations = this.locations.toList()
-
                 ) as T
             } else {
                 requireNotNull(message) { "`message` required for state type ${T::class}" }
-                LocationUiState.Error(
+                LocationListUiState.Error(
                     message = message,
                     isLoading = this.isLoading,
                     locations = this.locations.toList()
                 ) as T
             }
         }
-        LocationUiState.Success::class -> LocationUiState.Success(
+        LocationListUiState.Success::class -> LocationListUiState.Success(
             isLoading = this.isLoading,
             locations = this.locations.toList()
         ) as T

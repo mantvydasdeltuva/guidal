@@ -17,9 +17,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.guidal.core.ui.R
+import com.guidal.core.ui.models.UiModelInTextButtonIcon
+import com.guidal.core.ui.models.UiModelMenuButtonIcon
 import com.guidal.core.ui.theme.GuidalIcons
 import com.guidal.core.ui.theme.GuidalTheme
 
@@ -29,6 +33,8 @@ fun InTextButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    leadingIcon: UiModelInTextButtonIcon? = null,
+    showNavigationIcon: Boolean? = true,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -55,21 +61,31 @@ fun InTextButton(
             horizontalArrangement = Arrangement.spacedBy(15.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            leadingIcon?.let {
+                Icon(
+                    imageVector = it.imageVector,
+                    contentDescription = it.contentDescription,
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier
+                        .size(it.size ?: 20.dp)
+                )
+            }
 
             Text(
                 text = label,
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier
-                    .weight(1f)
+                modifier = Modifier.weight(1f)
             )
 
-            Icon(
-                imageVector = GuidalIcons.Outlined.Redirect,
-                tint = MaterialTheme.colorScheme.onSurface,
-                contentDescription = null,
-                modifier = Modifier.size(20.dp)
-            )
+            if (showNavigationIcon == true) {
+                Icon(
+                    imageVector = GuidalIcons.Outlined.Redirect,
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
         }
     }
 }

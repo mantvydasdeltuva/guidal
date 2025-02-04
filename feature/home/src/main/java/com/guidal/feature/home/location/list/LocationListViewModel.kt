@@ -1,4 +1,4 @@
-package com.guidal.feature.home.location
+package com.guidal.feature.home.location.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,13 +11,13 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-// LocationViewModel.kt
+// LocationListViewModel.kt
 @HiltViewModel
-internal class LocationViewModel @Inject constructor(
+internal class LocationListViewModel @Inject constructor(
     private val locationRepository: LocationRepository
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow<LocationUiState>(
-        value = LocationUiState.Idle()
+    private val _uiState = MutableStateFlow<LocationListUiState>(
+        value = LocationListUiState.Idle()
     )
 
     val uiState = _uiState.asStateFlow()
@@ -25,7 +25,7 @@ internal class LocationViewModel @Inject constructor(
     fun fetch(categoryId: Int) {
         viewModelScope.launch {
             _uiState.update {
-                it.transformTo<LocationUiState.Loading>()
+                it.transformTo<LocationListUiState.Loading>()
             }
 
             var locationsResult: Result<List<LocationModel>>? = null
@@ -47,14 +47,14 @@ internal class LocationViewModel @Inject constructor(
             _uiState.update {
                 when {
                     locationsResult?.isSuccess == true -> {
-                        it.transformTo<LocationUiState.Idle>().copy(
+                        it.transformTo<LocationListUiState.Idle>().copy(
                             locations = locationsResult?.getOrNull()?.map { location ->
                                 location.copy()
                             } ?: emptyList()
                         )
                     }
                     else -> {
-                        it.transformTo<LocationUiState.Error>(
+                        it.transformTo<LocationListUiState.Error>(
                             message = "Failed to load locations."
                         ).copy(
                             locations = emptyList()
@@ -65,10 +65,9 @@ internal class LocationViewModel @Inject constructor(
         }
     }
 
-
     fun resetState() {
         _uiState.update {
-            LocationUiState.Idle()
+            LocationListUiState.Idle()
         }
     }
 }

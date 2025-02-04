@@ -1,4 +1,4 @@
-package com.guidal.feature.home.location
+package com.guidal.feature.home.location.list
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -33,13 +33,14 @@ import com.guidal.core.ui.theme.GuidalIcons
 import kotlinx.coroutines.launch
 
 @Composable
-fun LocationScreen(
+fun LocationListScreen(
     id: Int,
     toBack: () -> Unit,
+    toLocationView: (id: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val locationViewModel: LocationViewModel = hiltViewModel()
-    val uiState by locationViewModel.uiState.collectAsState()
+    val locationListViewModel: LocationListViewModel = hiltViewModel()
+    val uiState by locationListViewModel.uiState.collectAsState()
 
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
@@ -58,7 +59,7 @@ fun LocationScreen(
     }
 
     LaunchedEffect(Unit) {
-        locationViewModel.fetch(id)
+        locationListViewModel.fetch(id)
     }
 
     Scaffold(
@@ -114,7 +115,7 @@ fun LocationScreen(
                     distance = "100 m",
                     rating = it.rating,
                     isFavorite = false,
-                    onClick = {},
+                    onClick = { toLocationView(it.id) },
                     onFavoriteClick = {}
                 )
             }
