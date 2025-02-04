@@ -185,12 +185,10 @@ private fun LocationPopup(
         }
     }
 
-    // Set visibility when selectedLocation changes
     LaunchedEffect(selectedLocation) {
         visible = selectedLocation != null
     }
 
-    // Delay dismissal to prevent flicker
     LaunchedEffect(visible) {
         if (!visible) {
             delay(300)
@@ -253,7 +251,7 @@ private fun LocationPopup(
     }
 }
 
-fun bitmapDescriptorFromVector(
+private fun bitmapDescriptorFromVector(
     context: Context,
     vectorResId: Int,
     scaleFactor: Float = 1f
