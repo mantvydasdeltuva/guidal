@@ -14,6 +14,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -22,7 +23,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.imageResource
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.guidal.core.ui.R
 import com.guidal.core.ui.components.LocationPreviewCard
 import com.guidal.core.ui.components.Scaffold
@@ -37,7 +38,7 @@ fun LocationScreen(
     toBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val locationViewModel: LocationViewModel = viewModel()
+    val locationViewModel: LocationViewModel = hiltViewModel()
     val uiState by locationViewModel.uiState.collectAsState()
 
     val scrollState = rememberScrollState()
@@ -54,6 +55,10 @@ fun LocationScreen(
         8 -> "Night Life"
         9 -> "Favorites"
         else -> "Location"
+    }
+
+    LaunchedEffect(Unit) {
+        locationViewModel.fetch(id)
     }
 
     Scaffold(
@@ -101,39 +106,18 @@ fun LocationScreen(
                 .padding(innerPadding)
                 .verticalScroll(scrollState)
         ) {
-            // TODO: TEMPORARY DATA, REMOVE AFTER IMPLEMENTATION
-            LocationPreviewCard(
-                image = ImageBitmap.imageResource(id = R.drawable.transporation),
-                title = "Bus Station",
-                address = "Agiou Andreou 201, Patras 262 22",
-                distance = "100 m",
-                rating = 4.6f,
-                isFavorite = true,
-                onClick = { /* Handle card click */ },
-                onFavoriteClick = { /* Handle favorite click */ }
-            )
-
-            LocationPreviewCard(
-                image = ImageBitmap.imageResource(id = R.drawable.shops),
-                title = "Sklavenitis",
-                address = "Gerasimou Sklavou 7, Patras 242 21",
-                distance = "1000 km",
-                rating = 0.5f,
-                isFavorite = false,
-                onClick = { /* Handle card click */ },
-                onFavoriteClick = { /* Handle favorite click */ }
-            )
-
-            LocationPreviewCard(
-                image = ImageBitmap.imageResource(id = R.drawable.trails),
-                title = "Ultimate Trail",
-                address = "Agiou 123, Patras 213 42",
-                distance = "0.6 km",
-                rating = 3.0f,
-                isFavorite = true,
-                onClick = { /* Handle card click */ },
-                onFavoriteClick = { /* Handle favorite click */ }
-            )
+            uiState.locations.forEach {
+                LocationPreviewCard(
+                    image = ImageBitmap.imageResource(id = R.drawable.transporation),
+                    title = it.title,
+                    address = it.address,
+                    distance = "100 m",
+                    rating = it.rating,
+                    isFavorite = false,
+                    onClick = {},
+                    onFavoriteClick = {}
+                )
+            }
         }
     }
 }
