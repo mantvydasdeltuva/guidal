@@ -9,6 +9,7 @@ import javax.inject.Inject
 interface LocationRepository {
     suspend fun getLocationsByCategory(categoryId: Int): DatabaseOperation<List<LocationModel>>
     suspend fun getLocationById(locationId: Int): DatabaseOperation<LocationModel>
+    suspend fun getAllLocations(): DatabaseOperation<List<LocationModel>>
 }
 
 internal class LocationRepositoryImpl @Inject constructor(
@@ -25,6 +26,12 @@ internal class LocationRepositoryImpl @Inject constructor(
     override suspend fun getLocationById(locationId: Int): DatabaseOperation<LocationModel> {
         return databaseOperationUtils.safeDatabaseOperation {
             locationDao.getLocationByIdModel(locationId)
+        }
+    }
+
+    override suspend fun getAllLocations(): DatabaseOperation<List<LocationModel>> {
+        return databaseOperationUtils.safeDatabaseOperation {
+            locationDao.getAllLocationsModel()
         }
     }
 }

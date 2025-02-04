@@ -109,7 +109,7 @@ fun LocationListScreen(
         ) {
             uiState.locations.forEach {
                 LocationPreviewCard(
-                    image = ImageBitmap.imageResource(id = R.drawable.transporation),
+                    image = ImageBitmap.imageResource(id = R.drawable.sample_image),
                     title = it.title,
                     address = it.address,
                     distance = "100 m",

@@ -24,6 +24,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,6 +36,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -45,6 +47,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import com.guidal.core.ui.components.OutlinedButton
 import com.guidal.core.ui.components.Button
+import com.guidal.data.db.models.LocationModel
 import com.guidal.feature.discover.R
 import kotlinx.coroutines.delay
 
@@ -53,32 +56,55 @@ fun MainScreen(
     toLocationView: (id: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val markerPositions = listOf(
-        LatLng(38.2466, 21.7346), // Example Marker 1
-        LatLng(38.2500, 21.7350), // Example Marker 2
-        LatLng(38.2400, 21.7300)  // Example Marker 3
-    )
+    val mainViewModel: MainViewModel = hiltViewModel()
+    val uiState by mainViewModel.uiState.collectAsState()
 
-    val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(markerPositions.firstOrNull() ?: LatLng(37.7749, -122.4194), 14f)
+    // Extract locations from UI state
+    val locations = remember(uiState) {
+        (uiState as? MainUiState.Idle)?.locations ?: emptyList()
     }
 
-    var selectedMarker by remember { mutableStateOf<LatLng?>(null) }
+    // Convert to marker positions
+    val markerPositions = remember(locations) {
+        locations.map { location ->
+            LatLng(location.latitude.toDouble(), location.longitude.toDouble()) to location
+        }
+    }
+
+    val cameraPositionState = rememberCameraPositionState {
+        // Start with a null position, will update after locations load
+        position = CameraPosition.fromLatLngZoom(
+            LatLng(0.0, 0.0),
+            1f
+        )
+    }
+
+    var selectedLocation by remember { mutableStateOf<LocationModel?>(null) }
+
+    LaunchedEffect(Unit) {
+        mainViewModel.fetch()
+    }
+
+    LaunchedEffect(markerPositions) {
+        markerPositions.firstOrNull()?.first?.let { firstLatLng ->
+            cameraPositionState.move(CameraUpdateFactory.newLatLngZoom(firstLatLng, 14f))
+        }
+    }
 
     GoogleMap(
         modifier = Modifier.fillMaxSize(),
         cameraPositionState = cameraPositionState,
         properties = MapProperties(isMyLocationEnabled = true)
     ) {
-        markerPositions.forEach { latLng ->
+        markerPositions.forEach { (latLng, location) ->
+            val isSelected = location.id == selectedLocation?.id
             Marker(
                 state = rememberMarkerState(position = latLng),
-                title = "Location",
+                title = location.title,
+                alpha = if (selectedLocation == null || isSelected) 1f else 0.2f, // Dim non-selected markers
                 onClick = {
-                    cameraPositionState.move(
-                        CameraUpdateFactory.newLatLngZoom(latLng, 15f) // Zoom in on click
-                    )
-                    selectedMarker = latLng
+                    cameraPositionState.move(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                    selectedLocation = location
                     true
                 }
             )
@@ -86,21 +112,25 @@ fun MainScreen(
     }
 
     LocationPopup(
-        selectedMarker = selectedMarker,
-        onDismiss = { selectedMarker = null },
-        toLocationView = { toLocationView(0) }
+        selectedLocation = selectedLocation,
+        onDismiss = { selectedLocation = null },
+        toLocationView = toLocationView
     )
 }
 
 @Composable
-fun LocationPopup(selectedMarker: LatLng?, onDismiss: () -> Unit, toLocationView: (Int) -> Unit) {
+fun LocationPopup(
+    selectedLocation: LocationModel?,
+    onDismiss: () -> Unit,
+    toLocationView: (Int) -> Unit
+) {
+    val context = LocalContext.current
     var visible by remember { mutableStateOf(false) }
 
-    val context = LocalContext.current
-
     fun navigateToGoogleMaps() {
-        selectedMarker?.let { latLng ->
-            val gmmIntentUri = Uri.parse("google.navigation:q=${latLng.latitude},${latLng.longitude}")
+        selectedLocation?.let { location ->
+            val gmmIntentUri =
+                Uri.parse("google.navigation:q=${location.latitude},${location.longitude}")
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri).apply {
                 setPackage("com.google.android.apps.maps")
             }
@@ -108,12 +138,12 @@ fun LocationPopup(selectedMarker: LatLng?, onDismiss: () -> Unit, toLocationView
         }
     }
 
-    // Set visibility when selectedMarker changes
-    LaunchedEffect(selectedMarker) {
-        visible = selectedMarker != null
+    // Set visibility when selectedLocation changes
+    LaunchedEffect(selectedLocation) {
+        visible = selectedLocation != null
     }
 
-    // Delay disappearance of information, otherwise 'nulls' are visible to the user
+    // Delay dismissal to prevent flicker
     LaunchedEffect(visible) {
         if (!visible) {
             delay(300)
@@ -130,11 +160,7 @@ fun LocationPopup(selectedMarker: LatLng?, onDismiss: () -> Unit, toLocationView
             modifier = Modifier
                 .fillMaxSize()
                 .pointerInput(Unit) {
-                    detectTapGestures(
-                        onTap = {
-                            visible = false
-                        }
-                    )
+                    detectTapGestures(onTap = { visible = false })
                 },
             contentAlignment = Alignment.BottomCenter
         ) {
@@ -148,30 +174,33 @@ fun LocationPopup(selectedMarker: LatLng?, onDismiss: () -> Unit, toLocationView
                     .padding(24.dp)
                     .pointerInput(Unit) { detectTapGestures { } }
             ) {
-                // TODO: CHANGE TO MARKER DETAILS MAPPING
-                Text(text = "Location Title", style = MaterialTheme.typography.titleMedium)
-                Text(text = "Category", color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Spacer(modifier = Modifier.height(10.dp))
-                Text(text = "Address")
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Button(
-                        label = stringResource(R.string.location_view_title_learn_more),
-                        modifier = Modifier.weight(1f),
-                        onClick = { toLocationView(0) },
+                selectedLocation?.let { location ->
+                    Text(text = location.title, style = MaterialTheme.typography.titleMedium)
+                    Text(
+                        text = location.category,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(text = location.address)
+                    Spacer(modifier = Modifier.height(20.dp))
 
-                    OutlinedButton(
-                        onClick = { navigateToGoogleMaps() },
-                        modifier = Modifier.weight(1f),
-                        label = stringResource(R.string.location_view_title_navigate)
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Button(
+                            label = stringResource(R.string.location_view_title_learn_more),
+                            onClick = { toLocationView(location.id) },
+                            modifier = Modifier.weight(1f)
+                        )
+
+                        OutlinedButton(
+                            label = stringResource(R.string.location_view_title_navigate),
+                            onClick = { navigateToGoogleMaps() },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
                 }
-
             }
         }
     }
