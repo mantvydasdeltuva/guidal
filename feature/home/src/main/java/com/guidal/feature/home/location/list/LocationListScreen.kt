@@ -110,7 +110,7 @@ fun LocationListScreen(
                 distance = "100 m",
                 rating = 4.6f,
                 isFavorite = true,
-                onClick = { toLocationView(0) },
+                onClick = { toLocationView(0) }, // TODO: FIX NAVIGATION TO PROPER ID
                 onFavoriteClick = { /* Handle favorite click */ }
             )
 

@@ -9,6 +9,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.guidal.feature.discover.main.MainScreen
+import com.guidal.feature.home.location.view.LocationViewScreen
 
 // TODO KDoc
 // TODO Android test
@@ -96,7 +97,39 @@ internal fun NavGraphBuilder.discoverNavigationGraph(navController: NavControlle
                 }
             },
         ) {
-            MainScreen()
+            MainScreen(
+                toLocationView = { id ->
+                    navController.navigate(
+                        Route.LOCATION_VIEW.replace("{id}", id.toString())
+                    )
+                },
+            )
+        }
+        composable(
+            route = Route.LOCATION_VIEW,
+            enterTransition = {
+                fadeIn(
+                    animationSpec = tween(
+                        durationMillis = 250,
+                        easing = LinearEasing
+                    )
+                )
+            },
+            popExitTransition = {
+                fadeOut(
+                    animationSpec = tween(
+                        durationMillis = 200,
+                        easing = LinearEasing
+                    )
+                )
+            }
+        ) { backStackEntry ->
+            LocationViewScreen(
+                id = backStackEntry.arguments?.getString("id")?.toInt() ?: 0,
+                toBack = {
+                    navController.popBackStack()
+                },
+            )
         }
     }
 }
