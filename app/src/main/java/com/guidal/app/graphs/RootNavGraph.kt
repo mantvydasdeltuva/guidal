@@ -158,6 +158,7 @@ internal object Route {
     const val WEATHER = "home/weather"
     const val POST = "home/post/{id}"
     const val LOCATIONS_LIST = "home/locations_list/{id}"
+    const val LOCATION_VIEW = "home/location_view/{id}"
     const val DISCOVER = "discover"
     const val MENU = "menu"
     const val PROFILE = "menu/profile"

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="location_view_title_learn_more">Daugiau</string>
+    <string name="location_view_title_navigate">Navigacija</string>
+</resources>
