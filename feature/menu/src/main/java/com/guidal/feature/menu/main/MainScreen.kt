@@ -135,21 +135,21 @@ fun MainScreen(
             )
 
             // Support
-            MenuButton(
-                label = stringResource(R.string.main_menu_button_label_support),
-                onClick = {
-                    mainViewModel.onNavigation()
-                    toSupport()
-                },
-                enabled = !uiState.isNavigating,
-                leadingIcon = UiModelMenuButtonIcon(
-                    imageVector = GuidalIcons.Outlined.Support,
-                ),
-                trailingIcon = UiModelMenuButtonIcon(
-                    imageVector = GuidalIcons.Default.ChevronForward,
-                    size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_12)
-                )
-            )
+//            MenuButton(
+//                label = stringResource(R.string.main_menu_button_label_support),
+//                onClick = {
+//                    mainViewModel.onNavigation()
+//                    toSupport()
+//                },
+//                enabled = !uiState.isNavigating,
+//                leadingIcon = UiModelMenuButtonIcon(
+//                    imageVector = GuidalIcons.Outlined.Support,
+//                ),
+//                trailingIcon = UiModelMenuButtonIcon(
+//                    imageVector = GuidalIcons.Default.ChevronForward,
+//                    size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_12)
+//                )
+//            )
         }
     }
 }
