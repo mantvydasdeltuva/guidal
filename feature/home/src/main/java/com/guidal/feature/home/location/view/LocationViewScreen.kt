@@ -1,6 +1,8 @@
 package com.guidal.feature.home.location.view
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -76,6 +78,8 @@ fun LocationViewScreen(
 
     val scrollProgress = scrollState.value.toFloat() / 550f
     val dynamicRadius = (maxRadius.value * (1 - scrollProgress)).coerceAtLeast(minRadius.value)
+
+    val context = LocalContext.current
 
     LaunchedEffect(Unit) {
         locationViewViewModel.fetch(id)
@@ -177,9 +181,15 @@ fun LocationViewScreen(
                         }
                         HorizontalDivider()
                         InTextButton(
-                            label = uiState.location?.address ?: "",
+                            label = uiState.location?.address ?: "Unknown Address",
                             onClick = {
                                 // Navigate to Google Maps link, it should automatically open Google Maps app
+                                val gmmIntentUri =
+                                    Uri.parse("google.navigation:q=${uiState.location?.latitude},${uiState.location?.longitude}")
+                                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri).apply {
+                                    setPackage("com.google.android.apps.maps")
+                                }
+                                context.startActivity(mapIntent)
                             },
                             leadingIcon = UiModelInTextButtonIcon(
                                 imageVector = GuidalIcons.Default.Location,

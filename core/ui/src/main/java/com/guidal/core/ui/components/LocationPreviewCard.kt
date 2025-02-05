@@ -71,33 +71,34 @@ fun LocationPreviewCard(
             )
 
             // Distance Box
-            Box(
-                modifier = Modifier
-                    .align(Alignment.BottomStart)
-                    .padding(12.dp) // Padding around the box
-                    .background(
-                        color = MaterialTheme.colorScheme.surface,
-                        shape = RoundedCornerShape(8.dp)
-                    )
-                    .padding(horizontal = 12.dp, vertical = 8.dp) // Padding inside the box
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                ) {
-                    Icon(
-                        imageVector = GuidalIcons.Default.Map,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.size(dimensionResource(R.dimen.icon_size_20))
-                    )
-                    Text(
-                        text = distance,
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                }
-            }
+            // TODO: Uncomment once implemented
+//            Box(
+//                modifier = Modifier
+//                    .align(Alignment.BottomStart)
+//                    .padding(12.dp) // Padding around the box
+//                    .background(
+//                        color = MaterialTheme.colorScheme.surface,
+//                        shape = RoundedCornerShape(8.dp)
+//                    )
+//                    .padding(horizontal = 12.dp, vertical = 8.dp) // Padding inside the box
+//            ) {
+//                Row(
+//                    verticalAlignment = Alignment.CenterVertically,
+//                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+//                ) {
+//                    Icon(
+//                        imageVector = GuidalIcons.Default.Map,
+//                        contentDescription = null,
+//                        tint = MaterialTheme.colorScheme.onSurface,
+//                        modifier = Modifier.size(dimensionResource(R.dimen.icon_size_20))
+//                    )
+//                    Text(
+//                        text = distance,
+//                        style = MaterialTheme.typography.bodyLarge,
+//                        color = MaterialTheme.colorScheme.onSurface
+//                    )
+//                }
+//            }
 
             // Favorite Button {
             IconButton(
