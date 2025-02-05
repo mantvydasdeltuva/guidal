@@ -39,6 +39,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -58,6 +59,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import com.guidal.core.ui.components.OutlinedButton
 import com.guidal.core.ui.components.Button
+import com.guidal.core.ui.components.RatingBar
 import com.guidal.core.ui.theme.GuidalIcons
 import com.guidal.data.db.models.LocationModel
 import com.guidal.feature.discover.R
@@ -164,6 +166,7 @@ fun MainScreen(
     )
 }
 
+// TODO: Refactor this function and supporting functions to a new file
 @Composable
 private fun LocationPopup(
     selectedLocation: LocationModel?,
@@ -219,13 +222,49 @@ private fun LocationPopup(
                     .pointerInput(Unit) { detectTapGestures { } }
             ) {
                 selectedLocation?.let { location ->
-                    Text(text = location.title, style = MaterialTheme.typography.titleMedium)
-                    Text(
-                        text = location.category,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                    Spacer(modifier = Modifier.height(10.dp))
 
+                    // Category
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(5.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = getCategoryIcon(location.category),
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier
+                                .size(14.dp)
+                        )
+                        Text(
+                            text = getCategoryName(LocalContext.current, location.category),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(5.dp))
+
+                    // Location Title
+                    Text(text = location.title, style = MaterialTheme.typography.titleMedium)
+
+                    Spacer(modifier = Modifier.height(5.dp))
+
+                    // Rating
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        Text(
+                            text = location.rating.toString(),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        RatingBar(rating = location.rating)
+                    }
+
+                    Spacer(modifier = Modifier.height(15.dp))
+
+                    // Location
                     Row(
                         horizontalArrangement = Arrangement.spacedBy(2.dp),
                     ) {
@@ -233,7 +272,9 @@ private fun LocationPopup(
                             imageVector = GuidalIcons.Default.Location,
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier.size(16.dp).padding(top = 2.dp)
+                            modifier = Modifier
+                                .size(16.dp)
+                                .padding(top = 2.dp)
                         )
                         Text(
                             text = location.address,
@@ -283,4 +324,35 @@ private fun bitmapDescriptorFromVector(
     vectorDrawable.draw(canvas)
 
     return BitmapDescriptorFactory.fromBitmap(bitmap)
+}
+
+private fun getCategoryIcon(name: String): ImageVector {
+    val categoryIconMap = mapOf(
+        "Transportation" to GuidalIcons.Category.Commute,
+        "Shops" to GuidalIcons.Category.Shop,
+        "Trails" to GuidalIcons.Category.Hiking,
+        "Must Visit" to GuidalIcons.Category.CircledStar,
+        "Sightseeing" to GuidalIcons.Category.Museum,
+        "Restaurants" to GuidalIcons.Category.Restaurant,
+        "Beaches" to GuidalIcons.Category.Beach,
+        "Night Life" to GuidalIcons.Category.NightLife,
+        "Favorites" to GuidalIcons.Category.Favorite
+    )
+    return categoryIconMap[name] ?: GuidalIcons.Default.Guidal
+}
+
+private fun getCategoryName(context: Context, name: String): String {
+    val categoryNameMap = mapOf(
+        "Transportation" to R.string.transportation_title,
+        "Shops" to R.string.shops_title,
+        "Trails" to R.string.trails_title,
+        "Must Visit" to R.string.must_visit_title,
+        "Sightseeing" to R.string.sightseeing_title,
+        "Restaurants" to R.string.restaurants_title,
+        "Beaches" to R.string.beaches_title,
+        "Night Life" to R.string.night_life_title,
+        "Favorites" to R.string.favorites_title
+    )
+    val stringResId = categoryNameMap[name]
+    return if (stringResId != null) context.getString(stringResId) else "Category"
 }
