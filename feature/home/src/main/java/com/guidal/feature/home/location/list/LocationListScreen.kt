@@ -25,8 +25,9 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.guidal.core.ui.R
+import com.guidal.feature.home.R
 import com.guidal.core.ui.components.LocationPreviewCard
 import com.guidal.core.ui.components.Scaffold
 import com.guidal.core.ui.components.TopAppBar
@@ -51,13 +52,13 @@ fun LocationListScreen(
     // TODO: ADD TRANSLATIONS AFTER DATABASE FETCHING
     // temporary
     val locationTitle = when (id) {
-        4 -> "Must Visit"
-        5 -> "Sightseeing"
-        6 -> "Restaurants"
-        7 -> "Beaches"
-        8 -> "Night Life"
-        9 -> "Favorites"
-        else -> "Location"
+        4 -> R.string.must_visit_title
+        5 -> R.string.sightseeing_title
+        6 -> R.string.restaurants_title
+        7 -> R.string.beaches_title
+        8 -> R.string.night_life_title
+        9 -> R.string.favorites_title
+        else -> R.string.location_title
     }
 
     LaunchedEffect(Unit) {
@@ -67,14 +68,14 @@ fun LocationListScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = locationTitle,
+                title = stringResource(locationTitle),
                 navigationIcon = UiModelTopAppBarIcon(
                     icon = GuidalIcons.Default.ArrowBack,
                     onClick = {
                         toBack()
                     },
                     color = MaterialTheme.colorScheme.onSurface,
-                    size = dimensionResource(R.dimen.icon_size_16)
+                    size = dimensionResource(com.guidal.core.ui.R.dimen.icon_size_16)
                 )
             )
         },
@@ -132,7 +133,6 @@ fun LocationListScreen(
 
 private fun getLocationImageResId(context: Context, locationId: Int?): Int {
     // Dynamically set images to locations
-    // Usage: painter = painterResource(id = locationImageResId)
     return locationId?.let { id ->
         context.resources.getIdentifier(
             "image_location_$id", // Example: image_location_5.jpg

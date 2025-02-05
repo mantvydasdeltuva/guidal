@@ -183,7 +183,7 @@ fun LocationViewScreen(
                         InTextButton(
                             label = uiState.location?.address ?: "Unknown Address",
                             onClick = {
-                                // Navigate to Google Maps link, it should automatically open Google Maps app
+                                // Open coordinates in Google Maps
                                 val gmmIntentUri =
                                     Uri.parse("google.navigation:q=${uiState.location?.latitude},${uiState.location?.longitude}")
                                 val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri).apply {
@@ -258,7 +258,6 @@ fun LocationViewScreen(
 
 private fun getLocationImageResId(context: Context, locationId: Int?): Int {
     // Dynamically set images to locations
-    // Usage: painter = painterResource(id = locationImageResId)
     return locationId?.let { id ->
         context.resources.getIdentifier(
             "image_location_$id", // Example: image_location_5.jpg
