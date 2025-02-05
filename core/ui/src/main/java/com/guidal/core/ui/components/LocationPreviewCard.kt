@@ -131,7 +131,7 @@ fun LocationPreviewCard(
             }
         }
 
-        Column(modifier = Modifier.padding(8.dp)) {
+        Column(modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 12.dp)) {
             // Location title
             Text(text = title, style = MaterialTheme.typography.titleMedium)
 
