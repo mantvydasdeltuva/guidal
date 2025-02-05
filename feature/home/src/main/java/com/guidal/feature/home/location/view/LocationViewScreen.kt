@@ -40,6 +40,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -230,9 +231,21 @@ fun LocationViewScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(bottom = 15.dp),
-                            style = MaterialTheme.typography.bodyLarge
+                            style = MaterialTheme.typography.bodyLarge.copy(fontStyle = FontStyle.Italic)
                         )
                         HorizontalDivider()
+
+                        // Temporary, more for the purposes of filling empty space and making component scrollable
+                        Text(
+                            text = "Please note that the information provided for each location is for general reference purposes only.\n\nWhile we strive to ensure accuracy, details such as opening hours, prices, and other specifics may change without prior notice. We do not guarantee the completeness or reliability of the data and recommend confirming details directly with the location before planning your visit. We reserve the right to update, modify, or remove any information at our discretion, without obligation or notice.\n\nBy using this service, you acknowledge and agree to these terms and understand that information may be subject to change.",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 20.dp, bottom = 10.dp),
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                fontStyle = FontStyle.Italic
+                            ),
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
                     }
                 }
             }
