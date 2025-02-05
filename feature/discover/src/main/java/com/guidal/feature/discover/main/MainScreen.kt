@@ -24,8 +24,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -56,6 +58,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import com.guidal.core.ui.components.OutlinedButton
 import com.guidal.core.ui.components.Button
+import com.guidal.core.ui.theme.GuidalIcons
 import com.guidal.data.db.models.LocationModel
 import com.guidal.feature.discover.R
 import kotlinx.coroutines.delay
@@ -222,7 +225,23 @@ private fun LocationPopup(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Spacer(modifier = Modifier.height(10.dp))
-                    Text(text = location.address)
+
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(2.dp),
+                    ) {
+                        Icon(
+                            imageVector = GuidalIcons.Default.Location,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.size(16.dp).padding(top = 2.dp)
+                        )
+                        Text(
+                            text = location.address,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+
                     Spacer(modifier = Modifier.height(20.dp))
 
                     Row(

@@ -139,14 +139,13 @@ fun LocationPreviewCard(
 
             // Location address
             Row(
-                verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(2.dp),
             ) {
                 Icon(
                     imageVector = GuidalIcons.Default.Location,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.size(12.dp)
+                    modifier = Modifier.size(16.dp).padding(top = 2.dp)
                 )
                 Text(
                     text = address,
