@@ -2,4 +2,6 @@
 <resources>
     <string name="location_view_title_learn_more">Daugiau</string>
     <string name="location_view_title_navigate">Navigacija</string>
+    <string name="location_view_location_permission_message">Norėdami pamatyti žemėlapį, turite suteikti Vietos leidimą</string>
+    <string name="location_view_location_permission_button_label">Suteikti Vietos leidimą</string>
 </resources>

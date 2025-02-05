@@ -1,5 +1,7 @@
 package com.guidal.feature.menu.settings
 
+import android.content.Intent
+import android.provider.Settings
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -10,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,6 +35,8 @@ fun SettingsScreen(
 ) {
     val supportViewModel: SettingsViewModel = hiltViewModel()
     val uiState by supportViewModel.uiState.collectAsState()
+
+    val context = LocalContext.current
 
     // Component related
     val scrollState = rememberScrollState()
@@ -64,9 +69,12 @@ fun SettingsScreen(
             MenuButton(
                 label = stringResource(R.string.settings_menu_button_label_language),
                 onClick = {
-                    // TODO: Uncomment once navigation implemented
+                    val intent = Intent(Settings.ACTION_LOCALE_SETTINGS) // Opens Display settings
+                    context.startActivity(intent)
+
+                    // TODO: Uncomment once better navigation implemented
                     //supportViewModel.onNavigation()
-                    toLanguage()
+                    //toLanguage()
                 },
                 enabled = !uiState.isNavigating && uiState !is SettingsUiState.Loading,
                 trailingIcon = UiModelMenuButtonIcon(
@@ -79,9 +87,12 @@ fun SettingsScreen(
             MenuButton(
                 label = stringResource(R.string.settings_menu_button_label_appearance),
                 onClick = {
-                    // TODO: Uncomment once navigation implemented
+                    val intent = Intent(Settings.ACTION_DISPLAY_SETTINGS) // Opens Display settings
+                    context.startActivity(intent)
+
+                    // TODO: Uncomment once better navigation implemented
                     //supportViewModel.onNavigation()
-                    toAppearance()
+                    //toAppearance()
                 },
                 enabled = !uiState.isNavigating && uiState !is SettingsUiState.Loading,
                 trailingIcon = UiModelMenuButtonIcon(
