@@ -1,5 +1,6 @@
 package com.guidal.feature.home.location.list
 
+import android.content.Context
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -21,6 +22,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.imageResource
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -109,7 +111,12 @@ fun LocationListScreen(
         ) {
             uiState.locations.forEach {
                 LocationPreviewCard(
-                    image = ImageBitmap.imageResource(id = R.drawable.sample_image),
+                    image = ImageBitmap.imageResource(
+                        id = getLocationImageResId(
+                            LocalContext.current,
+                            it.id
+                        )
+                    ),
                     title = it.title,
                     address = it.address,
                     distance = "100 m",
@@ -121,4 +128,16 @@ fun LocationListScreen(
             }
         }
     }
+}
+
+private fun getLocationImageResId(context: Context, locationId: Int?): Int {
+    // Dynamically set images to locations
+    // Usage: painter = painterResource(id = locationImageResId)
+    return locationId?.let { id ->
+        context.resources.getIdentifier(
+            "image_location_$id", // Example: image_location_5.jpg
+            "drawable",
+            context.packageName
+        )
+    }.takeIf { it != 0 } ?: R.drawable.sample_image
 }

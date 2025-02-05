@@ -1,5 +1,6 @@
 package com.guidal.feature.home.location.view
 
+import android.content.Context
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -33,7 +34,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntOffset
@@ -74,8 +77,6 @@ fun LocationViewScreen(
     val scrollProgress = scrollState.value.toFloat() / 550f
     val dynamicRadius = (maxRadius.value * (1 - scrollProgress)).coerceAtLeast(minRadius.value)
 
-    val imagePainter = painterResource(R.drawable.sample_image)
-
     LaunchedEffect(Unit) {
         locationViewViewModel.fetch(id)
     }
@@ -111,20 +112,22 @@ fun LocationViewScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            // TODO: REPLACE WITH IMAGES FROM THE FETCHED DATABASE
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(imageHeight)
             ) {
-                imagePainter?.let {
-                    Image(
-                        painter = it,
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxSize(),
-                        contentScale = ContentScale.Crop
-                    )
-                }
+                Image(
+                    painter = painterResource(
+                        id = getLocationImageResId(
+                            LocalContext.current,
+                            uiState.location?.id
+                        )
+                    ),
+                    contentDescription = "Location Image",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
             }
 
             Column(
@@ -184,7 +187,8 @@ fun LocationViewScreen(
                         )
                         HorizontalDivider()
                         InTextButton(
-                            label = uiState.location?.price?.takeIf { it > 0 }?.toString() ?: "Free",
+                            label = uiState.location?.price?.takeIf { it > 0 }?.toString()
+                                ?: "Free",
                             leadingIcon = UiModelInTextButtonIcon(
                                 imageVector = GuidalIcons.Outlined.PriceTag,
                             ),
@@ -217,7 +221,7 @@ fun LocationViewScreen(
             }
 
             TopAppBar(
-                title = uiState.location?.title ?: "Unknown" ,
+                title = uiState.location?.title ?: "Unknown",
                 navigationIcon = UiModelTopAppBarIcon(
                     icon = GuidalIcons.Default.ArrowBack,
                     onClick = toBack,
@@ -240,4 +244,16 @@ fun LocationViewScreen(
             )
         }
     }
+}
+
+private fun getLocationImageResId(context: Context, locationId: Int?): Int {
+    // Dynamically set images to locations
+    // Usage: painter = painterResource(id = locationImageResId)
+    return locationId?.let { id ->
+        context.resources.getIdentifier(
+            "image_location_$id", // Example: image_location_5.jpg
+            "drawable",
+            context.packageName
+        )
+    }.takeIf { it != 0 } ?: R.drawable.sample_image
 }
